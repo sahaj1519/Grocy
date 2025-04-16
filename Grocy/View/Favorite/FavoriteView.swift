@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavoriteView: View {
     @Binding var favoriteProducts: Favorite
-    @Binding var cart: Cart
+   @Bindable var cart: Cart
     let columns = [
             GridItem(.adaptive(minimum: 150))
         ]
@@ -34,7 +34,7 @@ struct FavoriteView: View {
                     
                     ForEach(favoriteProducts.products, id: \.id) { product in
                         
-                        SingleProductView(product: product, cart: $cart, favoriteProducts: $favoriteProducts)
+                        SingleProductView(product: product, cart: cart, favoriteProducts: $favoriteProducts)
                             .shadow(radius: 1)
                             .transition(.asymmetric(insertion: .identity, removal: .scale(scale: 0.8).combined(with: .opacity)))
                             .id(product.id)
@@ -53,5 +53,5 @@ struct FavoriteView: View {
 }
 
 #Preview {
-    FavoriteView(favoriteProducts: .constant(.example), cart: .constant(.example))
+    FavoriteView(favoriteProducts: .constant(.example), cart: .example)
 }

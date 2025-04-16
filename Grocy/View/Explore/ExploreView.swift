@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ExploreView: View {
-   
+    
     @State private var searchText = ""
     @Binding var products: [Product]
-    @Binding var cart: Cart
+    @Bindable var cart: Cart
     @Binding var favoriteProducts: Favorite
     
+    @State private var path = NavigationPath()
+   
     let columns = [
         GridItem(.adaptive(minimum: 200, maximum: .infinity), spacing: 15),
         GridItem(.adaptive(minimum: 200, maximum: .infinity), spacing: 15)
@@ -27,11 +29,13 @@ struct ExploreView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 15) {
                     ForEach(filterProducts) { product in
-                        SingleProductView(product: product, cart: $cart, favoriteProducts: $favoriteProducts)
+
+                        SingleProductView(product: product, cart: cart, favoriteProducts: $favoriteProducts)
+                                               
                     }
                 }
                 .padding(.horizontal)
@@ -41,6 +45,9 @@ struct ExploreView: View {
                 .navigationTitle("Find Products")
                 .navigationBarTitleDisplayMode(.inline)
             }
+            .navigationDestination(for: Product.self) { product in
+                ExploreView(products: $products , cart: cart, favoriteProducts: $favoriteProducts)
+            }
         }
         
     }
@@ -48,5 +55,5 @@ struct ExploreView: View {
 
 
 #Preview {
-    ExploreView(products: .constant([.example]) , cart: .constant(.example), favoriteProducts: .constant(.example))
+    ExploreView(products: .constant([.example]) , cart: .example, favoriteProducts: .constant(.example))
 }

@@ -9,17 +9,21 @@ import SwiftUI
 
 struct SingleProductView: View {
     var product: Product
-    @Binding var cart: Cart
-    @State private var viewModel = SingleProductViewModel()
+    @Bindable var cart: Cart
     @Binding var favoriteProducts: Favorite
-    @State private var showQuantityBadge = false
+    
+    @State private var isPressed = false
+    @State private var addedProductID: UUID?
+    
     @State private var showAddedOverlay = false
     
     private var quantityInCart: Int {
-        cart.products.first { $0.id == product.id }?.quantity ?? 0
+        cart.quantity(for: product)
     }
     
+    
     var body: some View {
+        
         ZStack(alignment: .topLeading) {
             VStack {
                 ProductImage(imageURL: product.thumbnail)
@@ -27,38 +31,12 @@ struct SingleProductView: View {
                     .frame(minWidth: 150, maxHeight: 150)
                     .clipShape(.rect(cornerRadius: 10))
                 ProductInfoView(product: product)
-                ProductPriceAndAddButtonView(product: product) {
-                    withAnimation(.easeInOut(duration: 0.1)) {
-                        viewModel.isPressed = true
-                    }
-                    viewModel.addProductToCart(product: product, cart: cart) { updateCart in
-                        cart = updateCart
-                        showAddedOverlay = true
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            withAnimation {
-                                showAddedOverlay = false 
-                            }
-                        }
-                        
-                    }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
-                        withAnimation {
-                            self.showQuantityBadge = true
-                        }
-                    }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        withAnimation(.easeOut(duration: 0.15)) {
-                            viewModel.isPressed = false
-                        }
-                    }
-                }
+                ProductPriceAndCartButtonView(product: product, cart: cart, showOverlay: $showAddedOverlay, isPressed: $isPressed)
+                
             }
-            .scaleEffect(viewModel.isPressed ? 0.97 : 1.0)
-            .opacity(viewModel.isPressed ? 0.95 : 1.0)
-            .animation(.easeInOut(duration: 0.15), value: viewModel.isPressed)
+            .scaleEffect(isPressed ? 0.97 : 1.0)
+            .opacity(isPressed ? 0.95 : 1.0)
+            .animation(.easeInOut(duration: 0.15), value: isPressed)
             .padding(.vertical, 9)
             .padding(.horizontal, 5)
             .background(.green.opacity(0.09))
@@ -69,23 +47,13 @@ struct SingleProductView: View {
             )
             .overlay(
                 ZStack(alignment: .topTrailing) {
-                    
-                    if quantityInCart > 0 && showQuantityBadge {
-                        ZStack {
-                            Circle()
-                                .fill(Color.green)
-                                .frame(width: 30, height: 30)
-                            Text("\(quantityInCart)")
-                                .foregroundColor(.white)
-                                .font(.system(size: 15, weight: .bold))
-                        }
-                        .padding(4)
-                        .transition(.scale)
-                        .zIndex(1)
-                        .offset(x: +1.8, y: -3.5)
+                    if quantityInCart > 0 {
+                        QuantityBadgeView(quantity: quantityInCart)
+                            .padding(4)
+                            .transition(.scale)
+                            .zIndex(1)
+                            .offset(x: +1.8, y: -3.5)
                     }
-                    
-                    
                     AddedOverlayView(added: showAddedOverlay)
                 },
                 alignment: .topTrailing
@@ -97,9 +65,10 @@ struct SingleProductView: View {
             
         }
         
+        
     }
 }
 
 #Preview {
-    SingleProductView(product: .example, cart: .constant(.example), favoriteProducts: .constant(.example))
+    SingleProductView(product: .example, cart: .example, favoriteProducts: .constant(.example))
 }

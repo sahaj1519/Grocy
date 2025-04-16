@@ -18,26 +18,26 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            ShopView(products: $products, cart: $cart, favoriteProducts: $favoriteProducts)
+            ShopView(products: $products, cart: cart, favoriteProducts: $favoriteProducts)
                 .tabItem {
                     Label("Shop", systemImage: "storefront")
                 }
                
             
-            ExploreView(products: $products, cart: $cart, favoriteProducts: $favoriteProducts)
+            ExploreView(products: $products, cart: cart, favoriteProducts: $favoriteProducts)
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")
                 }
                 
             
             
-            CartView(cartProducts: $cart)
+            CartView(cartProducts: cart)
             
                 .tabItem {
                     Label("Cart", systemImage: "cart")
                 }
                 
-            FavoriteView(favoriteProducts: $favoriteProducts, cart: $cart)
+            FavoriteView(favoriteProducts: $favoriteProducts, cart: cart)
                 .tabItem {
                     Label("Favorite", systemImage: "heart")
                 }

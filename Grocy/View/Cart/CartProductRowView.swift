@@ -9,7 +9,7 @@ import SwiftUI
 struct CartProductRow: View {
     var product: Product
     @Binding var animateChange: Set<UUID>
-    @Binding var cartProducts: Cart
+    @Bindable var cartProducts: Cart
     
     func updateQuantity(for product: Product, by amount: Int) {
         if let index = cartProducts.products.firstIndex(where: { $0.id == product.id }) {
@@ -42,49 +42,7 @@ struct CartProductRow: View {
                     .foregroundStyle(.secondary)
                 
                 Spacer()
-                HStack {
-                    Button(action: {
-                        withAnimation {
-                            animateChange.insert(product.id)
-                            if product.quantity > 1 {
-                                updateQuantity(for: product, by: -1)
-                            } else {
-                                removeProductFromCart(product: product)
-                            }
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                            animateChange.remove(product.id)
-                        }
-                    }) {
-                        Image(systemName: "minus.circle.fill")
-                            .foregroundColor(.red)
-                            .font(.title3)
-                    }
-                    
-                    Text("\(product.unit) x ")
-                        .font(.subheadline.bold())
-                        
-                    +
-                    Text("\(product.quantity)")
-                        .fontWeight(.bold)
-                        
-                    
-                    Button(action: {
-                        withAnimation {
-                            animateChange.insert(product.id)
-                            updateQuantity(for: product, by: 1)
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                            animateChange.remove(product.id)
-                        }
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.green)
-                            .font(.title3)
-                    }
-                }
+                CartQuantityControlview(product: product, animateChange: $animateChange, cartProducts: cartProducts)
             }
             .padding(.leading, 10)
             Spacer()
@@ -100,5 +58,5 @@ struct CartProductRow: View {
 }
 
 #Preview {
-    CartProductRow(product: .example, animateChange: .constant([UUID()]), cartProducts: .constant(.example))
+    CartProductRow(product: .example, animateChange: .constant([UUID()]), cartProducts: .example)
 }

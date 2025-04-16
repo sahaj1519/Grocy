@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CartFooter: View {
-    var totalPrice: Int
+    var totalPrice: Decimal
     
     var body: some View {
         VStack {
