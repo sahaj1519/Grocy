@@ -3,7 +3,7 @@
         "id": "e2f3b589-9ed8-44b1-8c4d-2b3527d5a2f5",
         "name": "Bananas",
         "category": "Fruits",
-        "price": 30,
+        "price": 60,
         "unit": "12 pcs",
         "quantity": 1,
         "thumbnail": "https://i.imgur.com/d7dzK2xt.jpg",
@@ -15,18 +15,24 @@
         ],
         "exclusiveOffer": {
             "id": "e2f3b589-9ed8-44b1-8c4d-2b3527d5a2f5",
-            "discountedPrice": 25,
+            "discountedPrice": 35,
             "expiresAt": "2025-05-01T00:00:00Z",
             "offerType": "Discount",
             "offerDetails": "Save 5 on Bananas"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "Fresh and ripe bananas, perfect for a healthy snack or smoothies.",
+        "source": "Sourced from Kerala, India",
+        "seasonal": true,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": false
     },
     {
         "id": "944f5779-bd9a-4ec8-8a63-e2059ae5a63d",
         "name": "Milk",
         "category": "Dairy",
-        "price": 45,
+        "price": 75,
         "unit": "1 litre",
         "quantity": 1,
         "thumbnail": "https://i.imgur.com/LR9wrUPt.jpg",
@@ -38,18 +44,24 @@
         ],
         "exclusiveOffer": {
             "id": "944f5779-bd9a-4ec8-8a63-e2059ae5a63d",
-            "discountedPrice": 40,
+            "discountedPrice": 60,
             "expiresAt": "2025-05-10T00:00:00Z",
             "offerType": "Discount",
             "offerDetails": "Save 5 on Milk"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "Fresh and creamy milk, perfect for daily use in tea, coffee, or baking.",
+        "source": "Produced locally in Punjab, India",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": false
     },
     {
         "id": "d2f6d0e4-0f79-4c6e-86fa-2dc5b296fa91",
         "name": "Bread",
         "category": "Bakery",
-        "price": 25,
+        "price": 35,
         "unit": "1 loaf",
         "quantity": 1,
         "thumbnail": "https://i.imgur.com/y4r8YfJt.jpg",
@@ -66,7 +78,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 5 on Bread"
         },
-        "isOffer": false
+        "isOffer": false,
+        "description": "Soft and fresh white bread, ideal for sandwiches or toast.",
+        "source": "Baked fresh locally in Mumbai, India",
+        "seasonal": false,
+        "organic": false,
+        "newArrival": true,
+        "bestSeller": false
     },
     {
         "id": "0ec52d31-fcd6-4d8a-b3f8-87d43fef03d0",
@@ -89,7 +107,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 10 on Eggs"
         },
-        "isOffer": false
+        "isOffer": false,
+        "description": "Farm fresh eggs, perfect for cooking, baking, and breakfast.",
+        "source": "Sourced from organic farms in Tamil Nadu, India",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": true
     },
     {
         "id": "bd0b826a-f139-4082-bb90-77c83e94a7e8",
@@ -112,7 +136,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 5 on Tomatoes"
         },
-        "isOffer": false
+        "isOffer": false,
+        "description": "Juicy and ripe tomatoes, perfect for salads, sauces, and cooking.",
+        "source": "Sourced from local farms in Himachal Pradesh, India",
+        "seasonal": true,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": false
     },
     {
         "id": "a734f13a-1c0c-4d7c-88fd-44a4f3cf4222",
@@ -135,7 +165,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 20 on Apples"
         },
-        "isOffer": false
+        "isOffer": false,
+        "description": "Fresh and crunchy apples, great for snacking, baking, or juicing.",
+        "source": "Sourced from orchards in Jammu & Kashmir, India",
+        "seasonal": true,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": true
     },
     {
         "id": "e270d5b7-9e3e-4a3d-8416-d26e7bd70951",
@@ -158,8 +194,15 @@
             "offerType": "Discount",
             "offerDetails": "Save 5 on Butter"
         },
-        "isOffer": true
+        "isOffer": false,
+        "description": "Rich and creamy butter, perfect for spreading on toast or baking.",
+        "source": "Made from fresh cream sourced from dairy farms in Maharashtra, India",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": true,
+        "bestSeller": false
     },
+    
     {
         "id": "7c58b540-4f6d-45a5-b790-94e63c7ccae1",
         "name": "Orange Juice",
@@ -176,12 +219,18 @@
         ],
         "exclusiveOffer": {
             "id": "7c58b540-4f6d-45a5-b790-94e63c7ccae1",
-            "discountedPrice": 70,
+            "discountedPrice": 75,
             "expiresAt": "2025-06-10T00:00:00Z",
             "offerType": "Discount",
             "offerDetails": "Save 10 on Orange Juice"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "Fresh and tangy orange juice, packed with vitamins.",
+        "source": "Made from handpicked oranges grown in the orchards of Maharashtra, India",
+        "seasonal": true,
+        "organic": false,
+        "newArrival": false,
+        "bestSeller": false
     },
     {
         "id": "a7f4723b-6b4a-4ae2-9f86-6215dbecc346",
@@ -204,7 +253,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 5 on Potatoes"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "Fresh and starchy potatoes, perfect for any meal.",
+        "source": "Sourced from local farms in Maharashtra, India",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": false
     },
     {
         "id": "b2737992-9ef3-4c3a-a679-234e56d2a0ae",
@@ -222,12 +277,18 @@
         ],
         "exclusiveOffer": {
             "id": "b2737992-9ef3-4c3a-a679-234e56d2a0ae",
-            "discountedPrice": 60,
+            "discountedPrice": 55,
             "expiresAt": "2025-06-20T00:00:00Z",
             "offerType": "Discount",
             "offerDetails": "Save 10 on Rice"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "Premium quality rice, ideal for cooking a variety of dishes.",
+        "source": "Grown in the fertile lands of Punjab, India",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": true
     },
     {
         "id": "01e00c4a-71b3-4cf8-8882-7c67cf169a1b",
@@ -250,7 +311,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 5 on Onions"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "Fresh onions, perfect for adding flavor to your dishes.",
+        "source": "Harvested from local farms in Maharashtra, India",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": true,
+        "bestSeller": false
     },
     {
         "id": "4e24b6c3-20e5-4e7c-a74a-d2cbf301be2d",
@@ -273,7 +340,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 5 on Cheese"
         },
-        "isOffer": false
+        "isOffer": false,
+        "description": "Creamy and flavorful cheese, perfect for sandwiches or pizzas.",
+        "source": "Made from milk sourced from local dairy farms in Maharashtra, India",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": false
     },
     {
         "id": "c3260012-1699-4e69-b19e-8e23c20487a3",
@@ -296,7 +369,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 30 on Peanut Butter"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "Creamy and delicious peanut butter, perfect for spreading or making sandwiches.",
+        "source": "Made from high-quality peanuts sourced from farms in Gujarat, India",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": true
     },
     {
         "id": "2cc93380-bc27-43c3-97dc-c1b88d0d777d",
@@ -319,7 +398,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 15 on Green Tea"
         },
-        "isOffer": false
+        "isOffer": false,
+        "description": "Refreshing and healthy green tea, rich in antioxidants.",
+        "source": "Sourced from the tea gardens of Darjeeling, India",
+        "seasonal": true,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": false
     },
     {
         "id": "64df9315-0cd1-49a0-b8b5-7bc1099179f6",
@@ -342,7 +427,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 3 on Cucumber"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "Fresh and crisp cucumber, ideal for salads and snacks.",
+        "source": "Grown locally in organic farms",
+        "seasonal": true,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": true
     },
     {
         "id": "042bf95a-c86e-45ef-9309-08b3a7fa62b2",
@@ -365,7 +456,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 5 on Yogurt"
         },
-        "isOffer": false
+        "isOffer": false,
+        "description": "Creamy and smooth yogurt, perfect for breakfasts or smoothies.",
+        "source": "Made from fresh cow's milk",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": true,
+        "bestSeller": false
     },
     {
         "id": "94c7b4b3-d8e2-44ad-88ce-6b652c4c6df4",
@@ -388,7 +485,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 10 on Pasta"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "High-quality pasta, ideal for various Italian dishes.",
+        "source": "Imported from Italy",
+        "seasonal": false,
+        "organic": false,
+        "newArrival": false,
+        "bestSeller": true
     },
     {
         "id": "a9dcab48-32f7-41a8-b267-050832ed0107",
@@ -411,7 +514,13 @@
             "offerType": "Discount",
             "offerDetails": "Save 20 on Strawberries"
         },
-        "isOffer": false
+        "isOffer": false,
+        "description": "Sweet and juicy strawberries, a great addition to desserts.",
+        "source": "Locally grown in organic farms",
+        "seasonal": true,
+        "organic": true,
+        "newArrival": false,
+        "bestSeller": false
     },
     {
         "id": "a3b6e65e-5098-41c4-8608-1df4a3e37d8c",
@@ -434,13 +543,19 @@
             "offerType": "Discount",
             "offerDetails": "Save 15 on Cereal"
         },
-        "isOffer": true
+        "isOffer": true,
+        "description": "Crunchy and nutritious cereal, a perfect breakfast option.",
+        "source": "Produced with whole grains",
+        "seasonal": false,
+        "organic": true,
+        "newArrival": true,
+        "bestSeller": true
     },
     {
         "id": "71fbc39a-4b45-4096-b0e9-6a6de05cf0f0",
         "name": "Water Bottle",
         "category": "Beverages",
-        "price": 20,
+        "price": 50,
         "unit": "1 litre",
         "quantity": 1,
         "thumbnail": "https://i.imgur.com/vZkymszt.jpg",
@@ -452,12 +567,18 @@
         ],
         "exclusiveOffer": {
             "id": "944f5779-bd9a-4ec8-8a63-e2059ae5a63d",
-            "discountedPrice": 15,
+            "discountedPrice": 25,
             "expiresAt": "2025-05-10T00:00:00Z",
             "offerType": "Discount",
             "offerDetails": "Save 5 on Water Bottle"
         },
-        "isOffer": false
+        "isOffer": false,
+        "description": "Refreshing and hydrating water, perfect for daily consumption.",
+        "source": "Purified and sourced from natural springs",
+        "seasonal": false,
+        "organic": false,
+        "newArrival": true,
+        "bestSeller": false
     }
 
 ]

@@ -8,50 +8,57 @@
 import SwiftUI
 
 struct FavoriteView: View {
-    @Binding var favoriteProducts: Favorite
+    var favoriteProducts: Favorite
    @Bindable var cart: Cart
     let columns = [
-            GridItem(.adaptive(minimum: 150))
+            GridItem(.adaptive(minimum: 150), spacing: 10)
         ]
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            
-            if favoriteProducts.products.isEmpty {
-                ContentUnavailableView(
-                    "No Favorites Yet",
-                    systemImage: "heart.slash",
-                    description: Text("You can tap the heart icon on any product to add it to your favorites.")
-                )
-                .padding(.top, 100)
-                .multilineTextAlignment(.center)
-                .transition(.opacity.combined(with: .move(edge: .top)))
+        NavigationStack {
+            ScrollView(showsIndicators: false) {
                 
-            } else {
-                
-                LazyVGrid(columns: columns) {
+                if favoriteProducts.products.isEmpty {
+                    ContentUnavailableView(
+                        "No Favorites Yet",
+                        systemImage: "heart.slash",
+                        description: Text("You can tap the heart icon on any product to add it to your favorites.")
+                    )
+                    .padding(.top, 100)
+                    .multilineTextAlignment(.center)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
                     
+                } else {
                     
-                    ForEach(favoriteProducts.products, id: \.id) { product in
+                    LazyVGrid(columns: columns, spacing: 10) {
                         
-                        SingleProductView(product: product, cart: cart, favoriteProducts: $favoriteProducts)
-                            .shadow(radius: 1)
-                            .transition(.asymmetric(insertion: .identity, removal: .scale(scale: 0.8).combined(with: .opacity)))
-                            .id(product.id)
-                    }
-                    .onDelete { indexSet in
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            favoriteProducts.products.remove(atOffsets: indexSet)
+                        
+                        ForEach(favoriteProducts.products, id: \.id) { product in
+                            NavigationLink(value: product) {
+                                SingleProductView(product: product, cart: cart, favoriteProducts: favoriteProducts)
+                                    .transition(.asymmetric(insertion: .identity, removal: .scale(scale: 0.8).combined(with: .opacity)))
+                                    .id(product.id)
+                            }
+                        }
+                        .onDelete { indexSet in
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                favoriteProducts.products.remove(atOffsets: indexSet)
+                            }
                         }
                     }
+                    .tint(.primary)
                 }
+                
             }
-            
+            .padding(20)
+            .background(.green.opacity(0.05))
+            .navigationDestination(for: Product.self) { product in
+                ProductDetailView(product: product, cart: cart)
+            }
         }
-        .padding(20)
     }
 }
 
 #Preview {
-    FavoriteView(favoriteProducts: .constant(.example), cart: .example)
+    FavoriteView(favoriteProducts: .example, cart: .example)
 }

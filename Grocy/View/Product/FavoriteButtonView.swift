@@ -10,24 +10,13 @@ import SwiftUI
 struct FavoriteButtonView: View {
   
     @State private var isAnimate = false
-    @Binding var favoriteProducts: Favorite
+    var favoriteProducts: Favorite
     @State private var isTappingDisabled = false
     @State private var isTapped = false
     var product: Product
     
     
-    func addToFavorite(product: Product) {
-        guard !favoriteProducts.products.contains(where: { $0.id == product.id }) else { return }
-        favoriteProducts.products.append(product)
-    }
     
-    func removeFromFavorite(product: Product) {
-        favoriteProducts.products.removeAll { $0.id == product.id}
-    }
-    
-    func isFavorite(_ product: Product) -> Bool {
-        return favoriteProducts.products.contains { $0.id == product.id }
-    }
     
     var body: some View {
         Button {
@@ -40,10 +29,10 @@ struct FavoriteButtonView: View {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                if isFavorite(product) {
-                    removeFromFavorite(product: product)
+                if  favoriteProducts.isFavorite(product) {
+                    favoriteProducts.removeFromFavorite(product: product)
                 } else {
-                    addToFavorite(product: product)
+                    favoriteProducts.addToFavorite(product: product)
                 }
             }
             
@@ -58,13 +47,13 @@ struct FavoriteButtonView: View {
         } label: {
             ZStack {
                 Circle()
-                    .fill(isFavorite(product) ? Color.red.opacity(0.35) : Color.white.opacity(0.9))
+                    .fill( favoriteProducts.isFavorite(product) ? Color.red.opacity(0.35) : Color.gray.opacity(0.8))
                     .frame(width: 35, height: 35)
                     .scaleEffect(isAnimate ? 1.25 : 1.0)
                     .opacity(isAnimate ? 0.75 : 1.0)
                 
-                Image(systemName: isFavorite(product) ? "heart.fill" : "heart")
-                    .foregroundStyle(isFavorite(product) ? .red : .primary)
+                Image(systemName:  favoriteProducts.isFavorite(product) ? "heart.fill" : "heart")
+                    .foregroundStyle( favoriteProducts.isFavorite(product) ? .red : .white)
                     .font(.title2)
                     .scaleEffect(isAnimate ? 1.2 : 1.0)
                     .opacity(isTapped ? 1.0 : 0.85)
@@ -79,5 +68,5 @@ struct FavoriteButtonView: View {
 
 
 #Preview {
-    FavoriteButtonView(favoriteProducts: .constant(.example), product: .example)
+    FavoriteButtonView(favoriteProducts: .example, product: .example)
 }

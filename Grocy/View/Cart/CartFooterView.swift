@@ -12,35 +12,35 @@ struct CartFooter: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            if totalPrice > 0 {
-                HStack {
-                    Text(" \(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
-                        .font(.title.bold())
-                        .foregroundColor(.green)
-                        .padding(.top, 10)
-                        .transition(.scale.combined(with: .opacity))
-                        .animation(.easeInOut(duration: 0.3), value: totalPrice) 
-                    
-                    Spacer()
-                    
-                    NavigationLink(destination: CheckoutView.init) {
-                        Label("Checkout", systemImage: "creditcard")
-                            .font(.headline)
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(Color.green)
-                            .clipShape(Capsule())
-                    }
-                    .transition(.move(edge: .trailing).combined(with: .opacity))
+            HStack(spacing: 1) {
+                Text("Total: ")
+                    .font(.title.bold())
+                    .lineLimit(1)
+                
+                Text(" \(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
+                    .font(.title.bold())
+                    .foregroundColor(.green)
+                    .frame(minWidth: 70)
                     .animation(.easeInOut(duration: 0.3), value: totalPrice)
-                }
-                .padding(.horizontal)
-                .padding(.vertical)
-                .background(.regularMaterial)
-                .clipShape(.rect(cornerRadius: 10))
+                    
             }
+            .padding()
+           
+            
+            NavigationLink(destination: CheckoutView.init) {
+                Label("Checkout", systemImage: "creditcard")
+                    .font(.headline)
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.green)
+                    .clipShape(Capsule())
+            }
+            
+            .disabled(totalPrice <= 0)
+            .animation(.easeInOut(duration: 0.3), value: totalPrice)
         }
+        .opacity(totalPrice > 0 ? 1 : 0)
+        
     }
 }
 

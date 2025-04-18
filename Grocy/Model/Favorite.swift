@@ -7,11 +7,28 @@
 
 import Foundation
 
-
-struct Favorite {
-    let id = UUID()
+@Observable
+class Favorite {
+   
     var products: [Product] = []
     
-    static let products: [Product] =  Bundle.main.decode(file: "products.json")
-    static let example = Favorite(products: [products[0]])
+    func addToFavorite(product: Product) {
+        guard !products.contains(where: { $0.id == product.id }) else { return }
+       products.append(product)
+    }
+    
+    func removeFromFavorite(product: Product) {
+       products.removeAll { $0.id == product.id}
+    }
+    
+    func isFavorite(_ product: Product) -> Bool {
+        return products.contains { $0.id == product.id }
+    }
+    
+    
+    static var example: Favorite {
+        let favorite = Favorite()
+        favorite.products = [Product.example]
+        return favorite
+    }
 }

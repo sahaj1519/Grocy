@@ -11,7 +11,8 @@ struct ShopView: View {
     @Binding var products: [Product]
    
     @Bindable var cart: Cart
-    @Binding var favoriteProducts: Favorite
+    var favoriteProducts: Favorite
+    
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
@@ -20,18 +21,28 @@ struct ShopView: View {
                 
                 BannersView(images: ["banner_top"])
                 
-                ExclusiveOffers(products: $products, cart: cart, favoriteProducts: $favoriteProducts)
+                ExclusiveOffers(products: $products, cart: cart, favoriteProducts: favoriteProducts)
                 
+                BestSellerView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+                
+                OrganicView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+                
+                NewArrivalView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+                
+                SeasonalView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
                 
             }
-            .padding(.horizontal, 8)
+            .padding(0)
+            .frame(width: .infinity, alignment: .leading)
             .scrollBounceBehavior(.basedOnSize)
-            
+            .background(.green.opacity(0.05))
+        
         }
+       
     }
 }
 
 #Preview {
-    ShopView(products: .constant([.example]),cart: .example, favoriteProducts: .constant(.example))
+    ShopView(products: .constant([.example]),cart: .example, favoriteProducts: .example)
         
 }

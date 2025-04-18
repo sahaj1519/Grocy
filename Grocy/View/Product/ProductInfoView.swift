@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct ProductInfoView: View {
-    let product: Product
+    var product: Product
 
     var body: some View {
-        VStack(spacing: 2) {
+        VStack {
             Text(product.name)
-                .font(.subheadline.bold())
-            Text("\(product.unit) x \(product.quantity)")
-                .font(.callout)
-                .foregroundStyle(.secondary)
+                .font(.headline.bold())
+                .lineLimit(1)
+                .padding(.vertical, 0)
+               
         }
+        .padding(.vertical, 0)
+       
+       
     }
 }
 

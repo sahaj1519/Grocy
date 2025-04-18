@@ -9,26 +9,38 @@ import SwiftUI
 
 struct BannersView: View {
     let images: [String]
-    
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    var isLandscape: Bool {
+        verticalSizeClass == .compact
+    }
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 15) {
-                ForEach(images, id: \.self) {image in
+        
+        TabView {
+            ForEach(images, id: \.self) {image in
+                if isLandscape {
+                    Image(image)
+                        .resizable()
+                        .scaledToFit()
+                        .clipped()
+                        .shadow(radius: 4)
+                        .padding()
+                        .frame(maxWidth: 600)
+                } else {
                     
                     Image(image)
                         .resizable()
-                        .scaledToFill()
+                        .scaledToFit()
+                        .clipped()
                         .shadow(radius: 4)
                         .padding()
-                        .frame(width: 400, height: 120)
-                    
+                        .frame(width: 400, height: 140)
                 }
+                
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-           
         }
-        .scrollBounceBehavior(.basedOnSize)
-        .padding(.vertical,5)
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+        .frame(height: 150)
+        
         
         
         

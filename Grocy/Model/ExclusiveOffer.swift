@@ -15,4 +15,8 @@ struct ExclusiveOffer: Identifiable, Codable, Hashable, Equatable {
     var offerType: String
     var offerDetails: String
     
+    var convertedDiscountedPrice: String {
+        discountedPrice.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+    }
+    
 }

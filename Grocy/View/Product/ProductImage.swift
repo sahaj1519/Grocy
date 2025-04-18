@@ -44,15 +44,14 @@ struct ProductImage: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
-                    .clipped()
-                    .frame(width: 150, height: 150)
+                    
             } else {
                 ProgressView()
                     .frame(width: 150, height: 150)
                     .onAppear { loadImage() }
             }
         }
-        .frame(width: 150, height: 150)
+
     }
 
 }
