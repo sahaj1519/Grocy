@@ -13,6 +13,7 @@ struct CartProductRow: View {
     
     @Environment(\.verticalSizeClass) private var verticalSizeClass
 
+
     var isLandscape: Bool {
         verticalSizeClass == .compact
     }
@@ -32,7 +33,7 @@ struct CartProductRow: View {
                         .lineLimit(3)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.primary)
-                    
+                     
                     
                     if product.isOffer {
                         if let offer = product.exclusiveOffer {
@@ -129,7 +130,8 @@ struct CartProductRow: View {
                             .lineLimit(1)
                     }
                     
-                    CartQuantityControlview(product: product, animateChange: $animateChange, cartProducts: cartProducts)
+                  
+                        CartQuantityControlview(product: product, animateChange: $animateChange, cartProducts: cartProducts)
                     
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)

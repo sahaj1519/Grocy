@@ -8,11 +8,38 @@
 import SwiftUI
 
 struct MeView: View {
+    @Bindable var user: DataModel
+  
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ZStack(alignment: .top) {
+            
+                Circle()
+                    .fill(.green.opacity(0.3))
+                    .blur(radius: 100)
+                
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .center) {
+                        MeHeaderView(user: user)
+                        
+                        Rectangle()
+                            .fill(.primary)
+                            .frame(width: 300, height: 1)
+                            .padding(.bottom, 50)
+                        
+                        AllProfileRows(user: user)
+                    }
+                    
+                }
+                .scrollBounceBehavior(.basedOnSize)
+                .background(.ultraThinMaterial)
+            }
+        
+        }
     }
 }
 
 #Preview {
-    MeView()
+    MeView(user: .preview)
 }

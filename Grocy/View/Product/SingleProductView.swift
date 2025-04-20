@@ -31,11 +31,12 @@ struct SingleProductView: View {
                         .frame(minWidth: 130, maxHeight: 100)
                         .clipShape(.rect(cornerRadius: 10))
                     ProductInfoView(product: product)
-                        .frame(width: .infinity, height: 20)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     ProductPriceAndCartButtonView(product: product, cart: cart, showOverlay: $showAddedOverlay, isPressed: $isPressed)
-                        .frame(width: .infinity, height: 100)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     
                 }
+                .frame(height: 240)
                 .scaleEffect(isPressed ? 0.97 : 1.0)
                 .opacity(isPressed ? 0.95 : 1.0)
                 .animation(.easeInOut(duration: 0.15), value: isPressed)
@@ -51,10 +52,12 @@ struct SingleProductView: View {
                 .overlay(
                     ZStack(alignment: .topTrailing) {
                         if product.isOffer {
-                            OfferRibbon(product: product, text: "SALE" )
+                            OfferRibbon(product: product, text: "OFFER", font: .subheadline, fontWeight: .medium, foregroundColor: .white.opacity(0.9), backgroundColor: .red.opacity(0.9), shape: AnyShape(Capsule()), rotation: 0, offsetX: -10, offsetY: +270, shadowRadius: 5.0)
                                 .padding(.top, 6)
                                 .padding(.leading, 6)
-                                .offset(x: +22, y: -7)
+                                .offset(x: +4, y: -180)
+                                .zIndex(1)
+                               
                         }
                         
                         if quantityInCart > 0 {

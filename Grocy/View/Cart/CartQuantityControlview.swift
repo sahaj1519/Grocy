@@ -20,7 +20,11 @@ struct CartQuantityControlview: View {
                     if cartProducts.quantity(for: product) > 1 {
                         cartProducts.updateQuantity(for: product, by: -1)
                     } else {
-                        cartProducts.removeProductFromCart(product: product)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                            withAnimation {
+                                cartProducts.removeProductFromCart(product: product)
+                            }
+                        }
                     }
                 }
                 

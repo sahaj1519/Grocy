@@ -121,7 +121,7 @@ struct ExploreView: View {
                         Button {
                            showAllProducts = true
                         } label: {
-                            Label("Categories", systemImage: "rectangle.grid.1x2")
+                            Label("All Products", systemImage: "square.grid.3x3")
 
                         }
                     } else if showAllProducts {
@@ -130,7 +130,7 @@ struct ExploreView: View {
                             selectedCategory = nil
                             searchText = ""
                         } label: {
-                            Label("Show All", systemImage: "list.bullet")
+                            Label("Category", systemImage: "rectangle.3.offgrid")
 
                         }
                     }

@@ -8,17 +8,25 @@
 import Foundation
 
 @Observable
-class Favorite {
-   
+class Favorite: Codable, Equatable {
+    
     var products: [Product] = []
+    
+    enum CodingKeys: String, CodingKey {
+        case _products = "products"
+    }
+    
+    static func == (lhs: Favorite, rhs: Favorite) -> Bool {
+        lhs.products == rhs.products
+    }
     
     func addToFavorite(product: Product) {
         guard !products.contains(where: { $0.id == product.id }) else { return }
-       products.append(product)
+        products.append(product)
     }
     
     func removeFromFavorite(product: Product) {
-       products.removeAll { $0.id == product.id}
+        products.removeAll { $0.id == product.id}
     }
     
     func isFavorite(_ product: Product) -> Bool {

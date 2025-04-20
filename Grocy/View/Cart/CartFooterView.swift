@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CartFooter: View {
     var totalPrice: Decimal
+    @Bindable var user: DataModel
+    @Bindable var cart: Cart
     
     var body: some View {
         VStack {
@@ -17,7 +19,7 @@ struct CartFooter: View {
                     .font(.title.bold())
                     .lineLimit(1)
                 
-                Text(" \(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
+                Text(" \(cart.convertedTotalPrice)")
                     .font(.title.bold())
                     .foregroundColor(.green)
                     .frame(minWidth: 70)
@@ -27,7 +29,7 @@ struct CartFooter: View {
             .padding()
            
             
-            NavigationLink(destination: CheckoutView.init) {
+            NavigationLink(destination: CheckoutView(user: user, cart: cart)) {
                 Label("Checkout", systemImage: "creditcard")
                     .font(.headline)
                     .padding()
@@ -37,7 +39,7 @@ struct CartFooter: View {
             }
             
             .disabled(totalPrice <= 0)
-            .animation(.easeInOut(duration: 0.3), value: totalPrice)
+        
         }
         .opacity(totalPrice > 0 ? 1 : 0)
         
@@ -45,5 +47,5 @@ struct CartFooter: View {
 }
 
 #Preview {
-    CartFooter(totalPrice: 20)
+    CartFooter(totalPrice: 20, user: DataModel(), cart: .example)
 }

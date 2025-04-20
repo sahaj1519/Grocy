@@ -9,41 +9,36 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var cart = Cart()
-    @State var favoriteProducts = Favorite()
-    @State var products: [Product] = []
-    func loadProducts() async{
-        products = Bundle.main.decode(file: "products.json")
-    }
+   @State private var viewModel = ViewModel()
 
     var body: some View {
         TabView {
-            ShopView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+            ShopView(products: $viewModel.products, cart: viewModel.cart, favoriteProducts: viewModel.favoriteProducts)
                 .tabItem {
                     Label("Shop", systemImage: "storefront")
                        
                 }
                
             
-            ExploreView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+            ExploreView(products: $viewModel.products, cart: viewModel.cart, favoriteProducts: viewModel.favoriteProducts)
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")
                 }
                 
             
             
-            CartView(cartProducts: cart)
+            CartView(cartProducts: viewModel.cart, user: viewModel.user)
             
                 .tabItem {
                     Label("Cart", systemImage: "cart")
                 }
                 
-            FavoriteView(favoriteProducts: favoriteProducts, cart: cart)
+            FavoriteView(favoriteProducts: viewModel.favoriteProducts, cart: viewModel.cart)
                 .tabItem {
                     Label("Favorite", systemImage: "heart")
                 }
  
-            MeView()
+            MeView(user: viewModel.user)
             
                 .tabItem {
                     Label("Account", systemImage: "person")
@@ -53,7 +48,11 @@ struct ContentView: View {
         
         .tint(Color(red: 0.2, green: 0.5, blue: 0.25))
         .task {
-            await loadProducts()
+            Task { @MainActor in
+                await viewModel.loadProducts()
+                try await viewModel.user.loadUserData()
+               
+            }
         }
         
     }

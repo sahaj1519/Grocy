@@ -54,19 +54,19 @@ struct ProductPriceAndCartButtonView: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                         .strikethrough()
-                        .frame(width: .infinity)
+                      //  .frame(width: .infinity)
                         
                     Text("\(offer.convertedDiscountedPrice) / \(product.unit)")
                         .font(.subheadline.bold())
                         .lineLimit(1)
-                        .frame(width: .infinity)
+                       // .frame(width: .infinity)
                 }
                 
             } else {
                 Text("\(product.convertedPrice) / \(product.unit)")
                     .font(.subheadline.bold())
                     .lineLimit(1)
-                    .frame(width: .infinity)
+                    //.frame(width: .infinity)
             }
             if isAlreadyInCart {
                 HStack {

@@ -9,8 +9,9 @@ import SwiftUI
 
 struct CartView: View {
     @Bindable var cartProducts: Cart
+    @Bindable var user: DataModel
     @State private var animateChange: Set<UUID> = []
-
+   
     var body: some View {
         NavigationStack {
             
@@ -32,7 +33,7 @@ struct CartView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
                     Divider()
-                    VStack {
+                    LazyVStack {
                         ForEach(cartProducts.products, id: \.id) { product in
                             
                             CartProductRow(product: product, animateChange: $animateChange, cartProducts: cartProducts)
@@ -44,28 +45,30 @@ struct CartView: View {
                                 .id(product.id)
                             Divider()
                         }
-                        
+                        Spacer()
+                            .frame(height: 100)
                     }
                     .padding(.horizontal)
                     .animation(.easeInOut(duration: 0.3), value: cartProducts.products)
                     
                     Spacer(minLength: 30)
                 }
-                    CartFooter(totalPrice: cartProducts.totalPrice())
+                    CartFooter(totalPrice: cartProducts.totalPrice(), user: user, cart: cartProducts)
                         .padding(.vertical)
                     
                 }
-                .frame(minHeight: UIScreen.main.bounds.height - 100)
+                .frame(minHeight: UIScreen.main.bounds.height - 170)
                 
             }
             .scrollBounceBehavior(.basedOnSize)
             .background(.green.opacity(0.05))
-            
+           
             
         }
     }
 }
 
 #Preview {
-    CartView(cartProducts: .example)
+    CartView(cartProducts: Cart.loadFromUserDefaults() ?? .example, user: .preview)
+
 }
