@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExploreView: View {
     
-    @Binding var products: [Product]
+    @Binding var observableProducts: [ObservableProduct]
     @Bindable var cart: Cart
     
     @State private var searchText = ""
@@ -18,7 +18,7 @@ struct ExploreView: View {
 
      var favoriteProducts: Favorite
     
-    var filter: ((Product) -> Bool)? = nil
+    var filter: ((ObservableProduct) -> Bool)? = nil
     var filterTitle: String?
 
    
@@ -28,14 +28,14 @@ struct ExploreView: View {
     ]
     
     var uniqueCategories: [CategoryInfo] {
-        let categoryNames = Set(products.map { $0.category.lowercased() })
+        let categoryNames = Set(observableProducts.map { $0.category.lowercased() })
         return CategoryLibrary.all.filter { categoryNames.contains($0.name.lowercased()) }
     }
 
 
 
-    var filterProducts: [Product] {
-        var base: [Product] = products
+    var filterProducts: [ObservableProduct] {
+        var base: [ObservableProduct] = observableProducts
         
         if let filter = filter {
             base = base.filter(filter)
@@ -96,7 +96,7 @@ struct ExploreView: View {
                         ForEach(filterProducts) { product in
                             NavigationLink(value: product) {
                                 
-                                SingleProductView(product: product, cart: cart, favoriteProducts: favoriteProducts)
+                                SingleProductView(observableProduct: product, cart: cart, favoriteProducts: favoriteProducts)
                                 
                             }
                             
@@ -108,8 +108,8 @@ struct ExploreView: View {
                 }
             }
             .scrollBounceBehavior(.basedOnSize)
-            .navigationDestination(for: Product.self) { product in
-                ProductDetailView(product: product, cart: cart)
+            .navigationDestination(for: ObservableProduct.self) { product in
+                ProductDetailView(observableProduct: product, cart: cart)
             }
             .background(.green.opacity(0.05))
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
@@ -144,5 +144,8 @@ struct ExploreView: View {
 
 
 #Preview {
-    ExploreView(products: .constant([.example]) , cart: .example, favoriteProducts: .example)
+    ExploreView(
+        observableProducts: .constant([.example]),
+        cart: .example,
+        favoriteProducts: .example)
 }

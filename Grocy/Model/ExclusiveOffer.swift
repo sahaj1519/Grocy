@@ -15,6 +15,12 @@ struct ExclusiveOffer: Identifiable, Codable, Hashable, Equatable {
     var offerType: String
     var offerDetails: String
     
+    // Computed property to check if the offer is still valid
+    var isOfferValid: Bool {
+        guard expiresAt > Date() else { return false }
+        return true
+    }
+    
     var convertedDiscountedPrice: String {
         discountedPrice.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
     }

@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ExclusiveOffers: View {
-    @Binding var products: [Product]
+    @Binding var observableProducts: [ObservableProduct]
     @Bindable var cart: Cart
      var favoriteProducts: Favorite
     
-    var filteredProducts: [Product] {
-        products.filter { $0.isOffer == true }
+    var filteredProducts: [ObservableProduct] {
+        observableProducts.filter { $0.isOffer == true }
     }
     
     var body: some View {
@@ -26,7 +26,7 @@ struct ExclusiveOffers: View {
                     Spacer()
                     NavigationLink(
                         destination: ExploreView(
-                            products: $products,
+                            observableProducts: $observableProducts,
                             cart: cart,
                             favoriteProducts: favoriteProducts,
                             filter: { $0.isOffer },
@@ -44,7 +44,7 @@ struct ExclusiveOffers: View {
                         ForEach(filteredProducts.prefix(10)) { product in
                             NavigationLink(value: product) {
                                 SingleProductView(
-                                    product: product,
+                                    observableProduct: product,
                                     cart: cart,
                                     favoriteProducts: favoriteProducts
                                 )
@@ -61,8 +61,8 @@ struct ExclusiveOffers: View {
             .background(.gray.opacity(0.05))
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .padding(.bottom, 10)
-            .navigationDestination(for: Product.self) { product in
-                ProductDetailView(product: product, cart: cart)
+            .navigationDestination(for: ObservableProduct.self) { product in
+                ProductDetailView(observableProduct: product, cart: cart)
             }
             
         }
@@ -70,6 +70,6 @@ struct ExclusiveOffers: View {
 }
 
 #Preview {
-    ExclusiveOffers(products: .constant([.example]), cart: .example, favoriteProducts: .example)
+    ExclusiveOffers(observableProducts: .constant([.example]), cart: .example, favoriteProducts: .example)
         
 }

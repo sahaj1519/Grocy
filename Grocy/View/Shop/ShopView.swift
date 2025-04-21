@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShopView: View {
-    @Binding var products: [Product]
+    @Binding var observableProducts: [ObservableProduct]
    
     @Bindable var cart: Cart
     var favoriteProducts: Favorite
@@ -21,15 +21,15 @@ struct ShopView: View {
                 
                 BannersView(images: ["banner_top"])
                 
-                ExclusiveOffers(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+                ExclusiveOffers(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
                 
-                BestSellerView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+                BestSellerView(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
                 
-                OrganicView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+                OrganicView(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
                 
-                NewArrivalView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+                NewArrivalView(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
                 
-                SeasonalView(products: $products, cart: cart, favoriteProducts: favoriteProducts)
+                SeasonalView(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
                 
             }
             .padding(0)
@@ -43,6 +43,6 @@ struct ShopView: View {
 }
 
 #Preview {
-    ShopView(products: .constant([.example]),cart: .example, favoriteProducts: .example)
+    ShopView(observableProducts: .constant([.example]),cart: .example, favoriteProducts: .example)
         
 }

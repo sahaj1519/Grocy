@@ -11,26 +11,32 @@ import Foundation
 @Observable
 class Cart: Codable, Equatable {
     
-    var products: [Product] = []
+    var observableProducts: [ObservableProduct] = []
     
     var deliveryCharge: Decimal = 40.0
-    var taxRate: Decimal = 0.05
+    var taxRate: Decimal = 0.002
     var discount: Decimal = 0.0
     
-   
+    
     var taxAmount: Decimal {
         let subtotal = totalPrice()
         return subtotal * taxRate
     }
     
     var totalItems: Int {
-        return products.reduce(0) { $0 + $1.quantity }
+        return observableProducts.reduce(0) { $0 + $1.quantity }
     }
     
     var computedDeliveryCharge: Decimal {
         totalPrice() > 599.0 ? 0.0 : deliveryCharge
     }
 
+    var deliveryChargesPlusSubtotal: String {
+        let subtotal = totalPrice()
+        let deliverycharge = computedDeliveryCharge
+        let deliveryChargePlusTotalprice = subtotal + deliverycharge
+        return deliveryChargePlusTotalprice.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+    }
     
     var grandTotal: Decimal {
         let subtotal = totalPrice()
@@ -48,45 +54,45 @@ class Cart: Codable, Equatable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case _products = "products"
+        case _observableProducts = "observableProducts"
     }
     
     static func == (lhs: Cart, rhs: Cart) -> Bool {
-        lhs.products == rhs.products
+        lhs.observableProducts == rhs.observableProducts
     }
     
     
-    func addToCart(product: Product) {
-        if let index = products.firstIndex(where: { $0.id == product.id }) {
-            products[index].quantity += 1
+    func addToCart(product: ObservableProduct) {
+        if let index = observableProducts.firstIndex(where: { $0.id == product.id }) {
+            observableProducts[index].quantity += 1
         } else {
-            var newProduct = product
-            newProduct.quantity = 1
-            products.append(newProduct)
+            product.quantity = 1
+            observableProducts.append(product)
         }
         saveToUserDefaults()
     }
+
     
     
-    func quantity(for product: Product) -> Int {
-        return products.first(where: { $0.id == product.id })?.quantity ?? 0
+    func quantity(for product: ObservableProduct) -> Int {
+        return observableProducts.first(where: { $0.id == product.id })?.quantity ?? 0
     }
     
-    func updateQuantity(for product: Product, by amount: Int) {
-        if let index = products.firstIndex(where: { $0.id == product.id }) {
-            products[index].quantity += amount
+    func updateQuantity(for product: ObservableProduct, by amount: Int) {
+        if let index = observableProducts.firstIndex(where: { $0.id == product.id }) {
+            observableProducts[index].quantity += amount
         }
     }
     
-    func removeProductFromCart(product: Product) {
-        if let index = products.firstIndex(where: { $0.id == product.id }) {
-            products.remove(at: index)
+    func removeProductFromCart(product: ObservableProduct) {
+        if let index = observableProducts.firstIndex(where: { $0.id == product.id }) {
+            observableProducts.remove(at: index)
         }
     }
     
     
     func totalPrice() -> Decimal {
-        return products.reduce(0) { total, product in
+        return observableProducts.reduce(0) { total, product in
             let pricePerItem: Decimal
             if let offer = product.exclusiveOffer, product.isOffer {
                 pricePerItem = offer.discountedPrice
@@ -100,7 +106,7 @@ class Cart: Codable, Equatable {
     
     
     func totalSavings() -> Decimal {
-        return products.reduce(0) { savings, product in
+        return observableProducts.reduce(0) { savings, product in
             if let offer = product.exclusiveOffer {
                 let savedPerItem = product.price - offer.discountedPrice
                 return savings + (savedPerItem * Decimal(product.quantity))
@@ -114,7 +120,7 @@ class Cart: Codable, Equatable {
     
     static var example: Cart {
         let cart = Cart()
-        cart.products = [Product.example]
+        cart.observableProducts = [ObservableProduct.example]
         return cart
     }
     

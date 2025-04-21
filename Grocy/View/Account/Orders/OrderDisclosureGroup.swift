@@ -69,7 +69,7 @@ struct OrderDisclosureGroup: View {
                         valueFont: .subheadline,
                         valueColor: .secondary,
                         showHelp: true,
-                        helpMessage: "18% GST applied to your order."
+                        helpMessage: "GST applied to your order."
                     )
                     
                     Divider()

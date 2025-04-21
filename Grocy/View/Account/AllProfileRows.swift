@@ -18,7 +18,7 @@ struct AllProfileRows: View {
             .fill(.secondary)
             .frame(maxWidth: .infinity, maxHeight: 1)
         
-        ProfileRowView(systemImage: "person.text.rectangle", title: "My Details", destination: Text("My Details"))
+        ProfileRowView(systemImage: "person.text.rectangle", title: "My Details", destination: MyDetailsView(user: user))
         
         Rectangle()
             .fill(.secondary)
@@ -29,13 +29,13 @@ struct AllProfileRows: View {
         Rectangle()
             .fill(.secondary)
             .frame(maxWidth: .infinity, maxHeight: 1)
-        ProfileRowView(systemImage: "creditcard", title: "Payment Methods", destination: Text("Payment Methods"))
+        ProfileRowView(systemImage: "creditcard", title: "Payment Methods", destination: PaymentMethodsView())
         
         Rectangle()
             .fill(.secondary)
             .frame(maxWidth: .infinity, maxHeight: 1)
         
-        ProfileRowView(systemImage: "gift", title: "Promo Code", destination: Text("Promo Code"))
+        ProfileRowView(systemImage: "gift", title: "Promo Code", destination: PromoCodeView())
         
         Rectangle()
             .fill(.secondary)

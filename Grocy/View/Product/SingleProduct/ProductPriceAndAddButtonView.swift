@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ProductPriceAndCartButtonView: View {
-     var product: Product
+    @Bindable var observableProduct: ObservableProduct
     @Bindable var cart: Cart
     @Binding var showOverlay: Bool
     @Binding var isPressed: Bool
    
     
     var isAlreadyInCart: Bool {
-        cart.products.contains(where: { $0.id == product.id })
+        cart.observableProducts.contains(where: { $0.id == observableProduct.id })
     }
 
 
@@ -28,7 +28,7 @@ struct ProductPriceAndCartButtonView: View {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            cart.addToCart(product: product)
+            cart.addToCart(product: observableProduct)
             showOverlay = true
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -47,23 +47,23 @@ struct ProductPriceAndCartButtonView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
-            if product.isOffer {
-                if let offer = product.exclusiveOffer {
-                    Text("\(product.convertedPrice) / \(product.unit)")
+            if observableProduct.isOffer {
+                if let offer = observableProduct.exclusiveOffer {
+                    Text("\(observableProduct.convertedPrice) / \(observableProduct.unit)")
                         .font(.subheadline.bold())
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                         .strikethrough()
                       //  .frame(width: .infinity)
                         
-                    Text("\(offer.convertedDiscountedPrice) / \(product.unit)")
+                    Text("\(offer.convertedDiscountedPrice) / \(observableProduct.unit)")
                         .font(.subheadline.bold())
                         .lineLimit(1)
                        // .frame(width: .infinity)
                 }
                 
             } else {
-                Text("\(product.convertedPrice) / \(product.unit)")
+                Text("\(observableProduct.convertedPrice) / \(observableProduct.unit)")
                     .font(.subheadline.bold())
                     .lineLimit(1)
                     //.frame(width: .infinity)
@@ -71,10 +71,10 @@ struct ProductPriceAndCartButtonView: View {
             if isAlreadyInCart {
                 HStack {
                     Button {
-                        if cart.quantity(for: product) > 1 {
-                            cart.updateQuantity(for: product, by: -1)
+                        if cart.quantity(for: observableProduct) > 1 {
+                            cart.updateQuantity(for: observableProduct, by: -1)
                         } else {
-                            cart.removeProductFromCart(product: product)
+                            cart.removeProductFromCart(product: observableProduct)
                         }
                     } label: {
                         Image(systemName: "minus")
@@ -85,12 +85,12 @@ struct ProductPriceAndCartButtonView: View {
                     
                     
                     
-                    Text("\(cart.quantity(for: product))")
+                    Text("\(cart.quantity(for: observableProduct))")
                         .font(.headline)
                         .frame(minWidth: 30)
                     
                     Button {
-                        cart.updateQuantity(for: product, by: 1)
+                        cart.updateQuantity(for: observableProduct, by: 1)
                     }label: {
                         Image(systemName: "plus")
                             .padding(6)
@@ -124,7 +124,7 @@ struct ProductPriceAndCartButtonView: View {
 
 #Preview {
     ProductPriceAndCartButtonView(
-        product: .example,
+        observableProduct: .example,
         cart: .example,
         showOverlay: .constant(true),
         isPressed: .constant(true)

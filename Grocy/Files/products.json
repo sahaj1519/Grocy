@@ -71,13 +71,6 @@
             "https://i.imgur.com/y4r8YfJm.jpg",
             "https://i.imgur.com/y4r8YfJl.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "d2f6d0e4-0f79-4c6e-86fa-2dc5b296fa91",
-            "discountedPrice": 20,
-            "expiresAt": "2025-05-15T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 5 on Bread"
-        },
         "isOffer": false,
         "description": "Soft and fresh white bread, ideal for sandwiches or toast.",
         "source": "Baked fresh locally in Mumbai, India",
@@ -100,13 +93,6 @@
             "https://i.imgur.com/VFBFF5hm.jpg",
             "https://i.imgur.com/VFBFF5hl.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "0ec52d31-fcd6-4d8a-b3f8-87d43fef03d0",
-            "discountedPrice": 50,
-            "expiresAt": "2025-05-20T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 10 on Eggs"
-        },
         "isOffer": false,
         "description": "Farm fresh eggs, perfect for cooking, baking, and breakfast.",
         "source": "Sourced from organic farms in Tamil Nadu, India",
@@ -129,13 +115,6 @@
             "https://i.imgur.com/ZCtEukWm.jpg",
             "https://i.imgur.com/ZCtEukWl.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "bd0b826a-f139-4082-bb90-77c83e94a7e8",
-            "discountedPrice": 30,
-            "expiresAt": "2025-05-25T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 5 on Tomatoes"
-        },
         "isOffer": false,
         "description": "Juicy and ripe tomatoes, perfect for salads, sauces, and cooking.",
         "source": "Sourced from local farms in Himachal Pradesh, India",
@@ -158,13 +137,6 @@
             "https://i.imgur.com/krssFFOm.jpg",
             "https://i.imgur.com/krssFFOl.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "a734f13a-1c0c-4d7c-88fd-44a4f3cf4222",
-            "discountedPrice": 100,
-            "expiresAt": "2025-06-01T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 20 on Apples"
-        },
         "isOffer": false,
         "description": "Fresh and crunchy apples, great for snacking, baking, or juicing.",
         "source": "Sourced from orchards in Jammu & Kashmir, India",
@@ -187,13 +159,6 @@
             "https://i.imgur.com/F4sff8Om.jpg",
             "https://i.imgur.com/F4sff8Ol.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "e270d5b7-9e3e-4a3d-8416-d26e7bd70951",
-            "discountedPrice": 50,
-            "expiresAt": "2025-06-05T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 5 on Butter"
-        },
         "isOffer": false,
         "description": "Rich and creamy butter, perfect for spreading on toast or baking.",
         "source": "Made from fresh cream sourced from dairy farms in Maharashtra, India",
@@ -333,13 +298,6 @@
             "https://i.imgur.com/24uMuSim.jpg",
             "https://i.imgur.com/24uMuSil.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "944f5779-bd9a-4ec8-8a63-e2059ae5a63d",
-            "discountedPrice": 75,
-            "expiresAt": "2025-05-10T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 5 on Cheese"
-        },
         "isOffer": false,
         "description": "Creamy and flavorful cheese, perfect for sandwiches or pizzas.",
         "source": "Made from milk sourced from local dairy farms in Maharashtra, India",
@@ -391,13 +349,6 @@
             "https://i.imgur.com/QqtXjdLm.jpg",
             "https://i.imgur.com/QqtXjdLl.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "944f5779-bd9a-4ec8-8a63-e2059ae5a63d",
-            "discountedPrice": 80,
-            "expiresAt": "2025-05-10T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 15 on Green Tea"
-        },
         "isOffer": false,
         "description": "Refreshing and healthy green tea, rich in antioxidants.",
         "source": "Sourced from the tea gardens of Darjeeling, India",
@@ -449,13 +400,6 @@
             "https://i.imgur.com/1Og9u1Fm.jpg",
             "https://i.imgur.com/1Og9u1Fl.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "944f5779-bd9a-4ec8-8a63-e2059ae5a63d",
-            "discountedPrice": 35,
-            "expiresAt": "2025-05-10T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 5 on Yogurt"
-        },
         "isOffer": false,
         "description": "Creamy and smooth yogurt, perfect for breakfasts or smoothies.",
         "source": "Made from fresh cow's milk",
@@ -507,13 +451,6 @@
             "https://i.imgur.com/vDDImcRm.jpg",
             "https://i.imgur.com/vDDImcRl.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "944f5779-bd9a-4ec8-8a63-e2059ae5a63d",
-            "discountedPrice": 120,
-            "expiresAt": "2025-05-10T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 20 on Strawberries"
-        },
         "isOffer": false,
         "description": "Sweet and juicy strawberries, a great addition to desserts.",
         "source": "Locally grown in organic farms",
@@ -565,13 +502,6 @@
             "https://i.imgur.com/vZkymszm.jpg",
             "https://i.imgur.com/vZkymszl.jpg"
         ],
-        "exclusiveOffer": {
-            "id": "944f5779-bd9a-4ec8-8a63-e2059ae5a63d",
-            "discountedPrice": 25,
-            "expiresAt": "2025-05-10T00:00:00Z",
-            "offerType": "Discount",
-            "offerDetails": "Save 5 on Water Bottle"
-        },
         "isOffer": false,
         "description": "Refreshing and hydrating water, perfect for daily consumption.",
         "source": "Purified and sourced from natural springs",

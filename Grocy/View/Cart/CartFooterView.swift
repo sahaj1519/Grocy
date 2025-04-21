@@ -11,38 +11,68 @@ struct CartFooter: View {
     var totalPrice: Decimal
     @Bindable var user: DataModel
     @Bindable var cart: Cart
+    @State private var showDetails = false
     
     var body: some View {
-        VStack {
-            HStack(spacing: 1) {
-                Text("Total: ")
-                    .font(.title.bold())
-                    .lineLimit(1)
-                
-                Text(" \(cart.convertedTotalPrice)")
-                    .font(.title.bold())
-                    .foregroundColor(.green)
-                    .frame(minWidth: 70)
-                    .animation(.easeInOut(duration: 0.3), value: totalPrice)
+        VStack(spacing: 12) {
+            
+            DisclosureGroup(isExpanded: $showDetails) {
+                VStack(spacing: 4) {
+                    HStack {
+                        Text("Subtotal")
+                        Spacer()
+                        Text(cart.convertedTotalPrice)
+                            .bold()
+                    }
                     
+                    HStack {
+                        Text("Delivery")
+                        Spacer()
+                        Text("₹\(cart.computedDeliveryCharge)")
+                            .foregroundColor(cart.computedDeliveryCharge == 0 ? .green : .primary)
+                    }
+                    
+                    if cart.computedDeliveryCharge > 0 {
+                        Text("Free delivery above ₹599")
+                            .font(.caption2)
+                            .foregroundStyle(.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    
+                    Divider()
+                }
+                .font(.caption)
+                .padding(.top, 4)
+            } label: {
+                HStack {
+                    Text("Total Payable")
+                        .font(.subheadline.bold())
+                    Spacer()
+                    Text(cart.deliveryChargesPlusSubtotal)
+                        .font(.subheadline.bold())
+                        .foregroundColor(.primary)
+                }
             }
-            .padding()
-           
+            .padding(.horizontal)
+            .tint(.primary)
             
             NavigationLink(destination: CheckoutView(user: user, cart: cart)) {
                 Label("Checkout", systemImage: "creditcard")
-                    .font(.headline)
-                    .padding()
+                    .font(.subheadline)
+                    .padding(.vertical, 10)
+                    .frame(maxWidth: .infinity)
                     .foregroundColor(.white)
                     .background(Color.green)
                     .clipShape(Capsule())
             }
-            
+            .padding(.horizontal)
             .disabled(totalPrice <= 0)
-        
         }
+        .padding(.vertical, 10)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding(.horizontal)
         .opacity(totalPrice > 0 ? 1 : 0)
-        
     }
 }
 

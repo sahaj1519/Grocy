@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct CartProductRow: View {
-    var product: Product
+     var observableProduct: ObservableProduct
     @Binding var animateChange: Set<UUID>
     @Bindable var cartProducts: Cart
     
@@ -20,14 +20,14 @@ struct CartProductRow: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 20) {
-            ProductImage(imageURL: product.thumbnail)
+            ProductImage(imageURL: observableProduct.thumbnail)
                 .frame(maxWidth: 120, maxHeight: 100)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             
             if isLandscape {
                 Spacer()
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(product.name)
+                    Text(observableProduct.name)
                         .font(.system(size: 30))
                         .fontWeight(.bold)
                         .lineLimit(3)
@@ -35,9 +35,9 @@ struct CartProductRow: View {
                         .foregroundColor(.primary)
                      
                     
-                    if product.isOffer {
-                        if let offer = product.exclusiveOffer {
-                            Text("(\(offer.convertedDiscountedPrice) / \(product.unit))")
+                    if observableProduct.isOffer {
+                        if let offer = observableProduct.exclusiveOffer {
+                            Text("(\(offer.convertedDiscountedPrice) / \(observableProduct.unit))")
                                 .font(.headline.italic())
                                 .fontWeight(.heavy)
                                 .lineLimit(1)
@@ -45,7 +45,7 @@ struct CartProductRow: View {
                             
                         }
                     } else {
-                        Text("(\(product.convertedPrice) / \(product.unit))")
+                        Text("(\(observableProduct.convertedPrice) / \(observableProduct.unit))")
                             .font(.headline.italic())
                             .fontWeight(.heavy)
                             .lineLimit(1)
@@ -59,11 +59,11 @@ struct CartProductRow: View {
                 
                 Spacer()
                 VStack(alignment: .leading) {
-                    if product.isOffer {
-                        if let offer = product.exclusiveOffer {
-                            let (value, unit) = product.parsedUnit ?? (1, "unit")
-                            let totalQuantity = Int(product.quantity) * Int(value)
-                            let totalPrice = offer.discountedPrice * Decimal(product.quantity)
+                    if observableProduct.isOffer {
+                        if let offer = observableProduct.exclusiveOffer {
+                            let (value, unit) = observableProduct.parsedUnit ?? (1, "unit")
+                            let totalQuantity = Int(observableProduct.quantity) * Int(value)
+                            let totalPrice = offer.discountedPrice * Decimal(observableProduct.quantity)
                             
                             Text("\(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD")) - \(totalQuantity) \(unit)")
                                 .fontWeight(.bold)
@@ -71,17 +71,17 @@ struct CartProductRow: View {
                             
                         }
                     } else {
-                        let (value, unit) = product.parsedUnit ?? (1, "unit")
-                        let totalQuantity = Int(product.quantity) * Int(value)
+                        let (value, unit) = observableProduct.parsedUnit ?? (1, "unit")
+                        let totalQuantity = Int(observableProduct.quantity) * Int(value)
                        
                         
-                        Text("\(product.convertedTotalPrice) - \(totalQuantity) \(unit)")
+                        Text("\(observableProduct.convertedTotalPrice) - \(totalQuantity) \(unit)")
                             .fontWeight(.bold)
                             .lineLimit(1)
                         
                     }
                     
-                    CartQuantityControlview(product: product, animateChange: $animateChange, cartProducts: cartProducts)
+                    CartQuantityControlview(observableProduct: observableProduct, animateChange: $animateChange, cartProducts: cartProducts)
                     
                 }
                 .padding(.horizontal, 10)
@@ -90,24 +90,24 @@ struct CartProductRow: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     
-                    Text(product.name)
+                    Text(observableProduct.name)
                         .font(.system(size: 20))
                         .fontWeight(.bold)
                         .lineLimit(3)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.primary)
                     
-                    if product.isOffer {
-                        if let offer = product.exclusiveOffer {
-                            Text("(\(offer.convertedDiscountedPrice) / \(product.unit))")
+                    if observableProduct.isOffer {
+                        if let offer = observableProduct.exclusiveOffer {
+                            Text("(\(offer.convertedDiscountedPrice) / \(observableProduct.unit))")
                                 .font(.subheadline.italic())
                                 .fontWeight(.heavy)
                                 .lineLimit(1)
                                 .foregroundStyle(.secondary)
                             
-                            let (value, unit) = product.parsedUnit ?? (1, "unit")
-                            let totalQuantity = Int(product.quantity) * Int(value)
-                            let totalPrice = offer.discountedPrice * Decimal(product.quantity)
+                            let (value, unit) = observableProduct.parsedUnit ?? (1, "unit")
+                            let totalQuantity = Int(observableProduct.quantity) * Int(value)
+                            let totalPrice = offer.discountedPrice * Decimal(observableProduct.quantity)
                             
                             Text("\(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD")) -  \(totalQuantity) \(unit)")
                                 .fontWeight(.bold)
@@ -115,23 +115,23 @@ struct CartProductRow: View {
                         }
                     } else {
                         
-                        Text("(\(product.convertedPrice) / \(product.unit))")
+                        Text("(\(observableProduct.convertedPrice) / \(observableProduct.unit))")
                             .font(.subheadline.italic())
                             .fontWeight(.heavy)
                             .lineLimit(1)
                             .foregroundStyle(.secondary)
                         
-                        let (value, unit) = product.parsedUnit ?? (1, "unit")
-                        let totalQuantity = Int(product.quantity) * Int(value)
+                        let (value, unit) = observableProduct.parsedUnit ?? (1, "unit")
+                        let totalQuantity = Int(observableProduct.quantity) * Int(value)
                        
                         
-                        Text("\(product.convertedTotalPrice) -  \(totalQuantity) \(unit)")
+                        Text("\(observableProduct.convertedTotalPrice) -  \(totalQuantity) \(unit)")
                             .fontWeight(.bold)
                             .lineLimit(1)
                     }
                     
                   
-                        CartQuantityControlview(product: product, animateChange: $animateChange, cartProducts: cartProducts)
+                        CartQuantityControlview(observableProduct: observableProduct, animateChange: $animateChange, cartProducts: cartProducts)
                     
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -142,7 +142,7 @@ struct CartProductRow: View {
             }
             VStack(alignment: .trailing) {
                 Button {
-                    cartProducts.removeProductFromCart(product: product)
+                    cartProducts.removeProductFromCart(product: observableProduct)
                     
                 } label: {
                     Image(systemName: "trash")
@@ -161,12 +161,12 @@ struct CartProductRow: View {
         }
         .frame(maxWidth: .infinity)
         .fixedSize(horizontal: false, vertical: true)
-        .scaleEffect(animateChange.contains(product.id) ? 1.04 : 1.0)
-        .opacity(animateChange.contains(product.id) ? 0.95 : 1.0)
+        .scaleEffect(animateChange.contains(observableProduct.id) ? 1.04 : 1.0)
+        .opacity(animateChange.contains(observableProduct.id) ? 0.95 : 1.0)
         .animation(.easeInOut(duration: 0.2), value: animateChange)
     }
 }
 
 #Preview {
-    CartProductRow(product: .example, animateChange: .constant([UUID()]), cartProducts: .example)
+    CartProductRow(observableProduct: .example, animateChange: .constant([UUID()]), cartProducts: .example)
 }

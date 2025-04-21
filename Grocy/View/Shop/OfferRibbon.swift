@@ -22,7 +22,8 @@ struct AnyShape: Shape, @unchecked Sendable {
 
 
 struct OfferRibbon: View {
-    var product: Product
+    @Bindable var observableProduct: ObservableProduct
+    var showText: String
     var text: String
     var font: Font = .caption2
     var fontWeight: Font.Weight = .black
@@ -37,7 +38,7 @@ struct OfferRibbon: View {
     
     var body: some View {
         
-        Text("\(product.percentDiscount == "0%" ? text : product.percentDiscount)")
+        Text("\(String(describing: observableProduct.percentDiscount == "0%" ? text : observableProduct.percentDiscount)) \(showText)")
             .font(font)
             .fontWeight(fontWeight)
             .foregroundColor(foregroundColor)
@@ -57,10 +58,14 @@ struct OfferRibbon: View {
 
 #Preview {
     VStack(spacing: 20) {
-        OfferRibbon(product: .example, text: "OFFER")
+        OfferRibbon(
+            observableProduct: .example,
+            showText: "Off",
+            text: "OFFER")
 
         OfferRibbon(
-            product: .example,
+            observableProduct: .example,
+            showText: "Off",
             text: "SALE",
             foregroundColor: .black,
             backgroundColor: .yellow,

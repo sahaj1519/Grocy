@@ -11,7 +11,7 @@ struct Order: Hashable, Codable, Identifiable, Equatable {
     var id = UUID()
     var date: Date = .now
     var isCompleted: Bool = false
-    var products: [Product] = []
+    var observableProducts: [ObservableProduct] = []
     
     var deliveryCharge: Decimal = 40.0
     var taxRate: Decimal = 0.05
@@ -25,7 +25,7 @@ struct Order: Hashable, Codable, Identifiable, Equatable {
         case id = "id"
         case date = "date"
         case isCompleted = "isCompleted"
-        case products = "products"
+        case observableProducts = "observableProducts"
        
     }
     
@@ -34,7 +34,7 @@ struct Order: Hashable, Codable, Identifiable, Equatable {
     }
     
     func totalPrice() -> Decimal {
-        return products.reduce(0) { total, product in
+        return observableProducts.reduce(0) { total, product in
             let pricePerItem: Decimal
             if let offer = product.exclusiveOffer, product.isOffer {
                 pricePerItem = offer.discountedPrice
@@ -53,7 +53,7 @@ struct Order: Hashable, Codable, Identifiable, Equatable {
     }
     
     var totalItems: Int {
-        return products.reduce(0) { $0 + $1.quantity }
+        return observableProducts.reduce(0) { $0 + $1.quantity }
     }
     
     var computedDeliveryCharge: Decimal {
@@ -76,6 +76,14 @@ struct Order: Hashable, Codable, Identifiable, Equatable {
     }
     
     
-    static let products: [Product] = Bundle.main.decode(file: "products.json")
-    static let example = Order(date: .now, isCompleted: false, products: products)
+    static var example: Order {
+        guard let products: [Product] = Bundle.main.decode(file: "products.json") else {
+               return Order(date: .now, isCompleted: false, observableProducts: [])
+           }
+           
+          
+           let observableProducts = products.map { ObservableProduct(product: $0) }
+           
+           return Order(date: .now, isCompleted: false, observableProducts: observableProducts)
+       }
 }

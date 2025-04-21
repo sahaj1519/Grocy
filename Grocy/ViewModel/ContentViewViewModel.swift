@@ -13,15 +13,23 @@ extension ContentView {
         
         var cart = Cart.loadFromUserDefaults() ?? Cart()
         var favoriteProducts = Favorite()
-        var products: [Product] = []
+        var observableProducts: [ObservableProduct] = []
+
         
         
         var user = DataModel()
         
-        func loadProducts() async{
-            products = Bundle.main.decode(file: "products.json")
+        func loadProducts() async {
+                    let rawProducts: [Product] = Bundle.main.decode(file: "products.json")
+                    self.observableProducts = rawProducts.map { ObservableProduct(product: $0) }
+                }
+
+
+       
+        func product(withId id: UUID) -> ObservableProduct? {
+            observableProducts.first { $0.id == id }
         }
-        
+
         
     }
 }

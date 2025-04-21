@@ -19,8 +19,8 @@ struct CheckoutView: View {
             
             Form {
                 Section {
-                    ForEach(cart.products) {product in
-                        CheckoutProductRow(product: product)
+                    ForEach(cart.observableProducts) {product in
+                        CheckoutProductRow(observableProduct: product)
                     }
                     
                 }header: {
@@ -41,20 +41,25 @@ struct CheckoutView: View {
                         Button("Place Order") {
                             isShowOrderPlaced = true
                             Task { @MainActor in
-                                let order = Order(date: .now, isCompleted: true, products: cart.products)
+                                let order = Order(date: .now, isCompleted: true, observableProducts: cart.observableProducts)
                                 user.currentUser.orders.append(order)
                                 
                                 Cart.clearFromUserDefaults()
-                                cart.products.removeAll()
+                                cart.observableProducts.removeAll()
                                 
                                 try await user.saveUserData()
                             }
                         }
+                        .frame(maxWidth: .infinity)
                         .padding(.horizontal)
+                        .padding(.vertical, 8)
+                        .background(user.currentUser.canPlaceOrder ? Color.green : Color.gray)
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .clipShape(Capsule())
                         .disabled(!user.currentUser.canPlaceOrder)
                         Spacer()
                     }
-                    .buttonStyle(.borderedProminent)
                     .tint(.green)
                     .clipShape(Capsule())
                     

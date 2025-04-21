@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct ProductDetailView: View {
-    var product: Product
+    @Bindable var observableProduct: ObservableProduct
     var cart: Cart
     @State private var showAddedOverlay = false
     @State private var isPressed = false
     @State var animateChange: Set<UUID> = []
     @State private var animateDetails = false
+    
     var body: some View {
         
         ZStack {
             ScrollView(showsIndicators: false) {
                 VStack {
-                    ZStack(alignment: .topLeading) {
-                        ProductImage(imageURL: product.thumbnail)
+                    ZStack(alignment: .bottomLeading) {
+                        ProductImage(imageURL: observableProduct.thumbnail)
                             .frame(maxWidth: .infinity)
                             .ignoresSafeArea(edges: .top)
                             .blur(radius: 100)
@@ -28,16 +29,25 @@ struct ProductDetailView: View {
                             .opacity(animateDetails ? 1 : 0)
                             .animation(.easeIn(duration: 1), value: animateDetails)
                         
-                        if product.isOffer {
-                            OfferRibbon(product: product, text: "OFFER", font: .headline, fontWeight: .bold, foregroundColor: .white.opacity(0.9), backgroundColor: .red.opacity(0.7), shape: AnyShape(RoundedRectangle(cornerRadius: 10)), rotation: 0, offsetX: -10, offsetY: +270, shadowRadius: 3.0)
+                        if observableProduct.isOffer {
+                            OfferRibbon(observableProduct: observableProduct,showText: "off", text: "OFFER", font: .headline, fontWeight: .bold, foregroundColor: .white, backgroundColor: .red, shape: AnyShape(Capsule()), rotation: 0, offsetX: -10, offsetY: +270, shadowRadius: 2.0)
                                 .padding(.top, 6)
                                 .padding(.leading, 6)
-                                .offset(x: +22, y: -5)
+                                .offset(x: +10, y: -260)
                                 .zIndex(1)
+                            
+                            if  observableProduct.isOffer {
+                                OfferCountDown(observableProduct: observableProduct)
+                                    .padding(.top, 4)
+                                    .padding(.leading, 6)
+                                    .offset(x: +220, y: +8)
+                                    .zIndex(1)
+                            }
+
                         }
                         
                         TabView {
-                            ForEach(product.images, id: \.self) {image in
+                            ForEach(observableProduct.images, id: \.self) {image in
                                 ProductImage(imageURL: image)
                                     .frame(maxWidth: .infinity)
                                     .transition(.opacity.combined(with: .scale))
@@ -47,15 +57,11 @@ struct ProductDetailView: View {
                         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                         .frame(height: 300)
                         
-                        
-                        
                     }
                 }
                
-                
-                
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(product.name)
+                    Text(observableProduct.name)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .opacity(animateDetails ? 1 : 0)
@@ -65,7 +71,7 @@ struct ProductDetailView: View {
                     HStack {
                         Text("Category:")
                             .font(.headline.bold())
-                        Text("\(product.category)")
+                        Text("\(observableProduct.category)")
                             .font(.body)
                         
                     }
@@ -79,7 +85,7 @@ struct ProductDetailView: View {
                         Text("Price:")
                             .font(.headline.bold())
                         VStack {
-                            ProductPriceAndCartButtonView(product: product, cart: cart, showOverlay: $showAddedOverlay, isPressed: $isPressed)
+                            ProductPriceAndCartButtonView(observableProduct: observableProduct, cart: cart, showOverlay: $showAddedOverlay, isPressed: $isPressed)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 0)
                                 .scaleEffect(isPressed ? 1.1 : 1.0)
@@ -92,33 +98,12 @@ struct ProductDetailView: View {
                     .offset(y: animateDetails ? 0 : 20)
                     .animation(.easeOut(duration: 0.6).delay(0.4), value: animateDetails)
                     
-                    Text("Description: ")
-                        .font(.headline.bold())
-                        .opacity(animateDetails ? 1 : 0)
-                        .offset(y: animateDetails ? 0 : 20)
-                        .animation(.easeOut(duration: 0.6).delay(0.5), value: animateDetails)
-                    
-                    Text(product.description)
-                        .opacity(animateDetails ? 1 : 0)
-                        .offset(y: animateDetails ? 0 : 20)
-                        .animation(.easeOut(duration: 0.6).delay(0.6), value: animateDetails)
-                    
-                    Text("Source: ")
-                        .font(.headline.bold())
-                        .opacity(animateDetails ? 1 : 0)
-                        .offset(y: animateDetails ? 0 : 20)
-                        .animation(.easeOut(duration: 0.6).delay(0.5), value: animateDetails)
-                    
-                    
-                    Text(product.source)
-                        .opacity(animateDetails ? 1 : 0)
-                        .offset(y: animateDetails ? 0 : 20)
-                        .animation(.easeOut(duration: 0.6).delay(0.6), value: animateDetails)
+                    DetailsRow(animateDetails: $animateDetails, observableProduct: observableProduct)
                 }
                 .padding()
                 
             }
-            .scrollBounceBehavior(.basedOnSize)
+            .scrollBounceBehavior(.always)
             .onAppear {
                 animateDetails = true
             }
@@ -147,5 +132,5 @@ struct ProductDetailView: View {
 }
 
 #Preview {
-    ProductDetailView(product: .example, cart: .example, animateChange: [UUID()])
+    ProductDetailView(observableProduct: ObservableProduct(product: .example), cart: .example, animateChange: [UUID()])
 }

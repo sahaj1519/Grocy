@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SingleProductView: View {
-     var product: Product
+    @Bindable var observableProduct: ObservableProduct
     @Bindable var cart: Cart
      var favoriteProducts: Favorite
     
@@ -18,7 +18,7 @@ struct SingleProductView: View {
     @State private var showAddedOverlay = false
     
     private var quantityInCart: Int {
-        cart.quantity(for: product)
+        cart.quantity(for: observableProduct)
     }
     
     
@@ -26,13 +26,13 @@ struct SingleProductView: View {
       
             ZStack(alignment: .topLeading) {
                 VStack {
-                    ProductImage(imageURL: product.thumbnail)
+                    ProductImage(imageURL: observableProduct.thumbnail)
                         .clipped()
                         .frame(minWidth: 130, maxHeight: 100)
                         .clipShape(.rect(cornerRadius: 10))
-                    ProductInfoView(product: product)
+                    ProductInfoView(observableProduct: observableProduct)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                    ProductPriceAndCartButtonView(product: product, cart: cart, showOverlay: $showAddedOverlay, isPressed: $isPressed)
+                    ProductPriceAndCartButtonView(observableProduct: observableProduct, cart: cart, showOverlay: $showAddedOverlay, isPressed: $isPressed)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     
                 }
@@ -51,8 +51,8 @@ struct SingleProductView: View {
                 .frame(minWidth: 170, maxWidth: .infinity)
                 .overlay(
                     ZStack(alignment: .topTrailing) {
-                        if product.isOffer {
-                            OfferRibbon(product: product, text: "OFFER", font: .subheadline, fontWeight: .medium, foregroundColor: .white.opacity(0.9), backgroundColor: .red.opacity(0.9), shape: AnyShape(Capsule()), rotation: 0, offsetX: -10, offsetY: +270, shadowRadius: 5.0)
+                        if observableProduct.isOffer {
+                            OfferRibbon(observableProduct: observableProduct,showText: "", text: "OFFER", font: .subheadline, fontWeight: .bold, foregroundColor: .white, backgroundColor: .red, shape: AnyShape(Capsule()), rotation: 0, offsetX: -10, offsetY: +270, shadowRadius: 1.0)
                                 .padding(.top, 6)
                                 .padding(.leading, 6)
                                 .offset(x: +4, y: -180)
@@ -72,7 +72,7 @@ struct SingleProductView: View {
                     alignment: .topTrailing
                 )
                 
-                FavoriteButtonView(favoriteProducts: favoriteProducts, product: product)
+                FavoriteButtonView(favoriteProducts: favoriteProducts, observableProduct: observableProduct)
                     .offset(x: -1.2, y: +0.19)
                 
                 
@@ -83,5 +83,5 @@ struct SingleProductView: View {
 }
 
 #Preview {
-    SingleProductView(product: .example, cart: .example, favoriteProducts: .example)
+    SingleProductView(observableProduct: .example, cart: .example, favoriteProducts: .example)
 }

@@ -12,6 +12,7 @@ class DataModel: Codable {
     
     var currentUser: User = .example
     
+    
     func getFileURL() -> URL {
         let fileManager = FileManager.default
         let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -40,6 +41,11 @@ class DataModel: Codable {
        
     }
     
+    func removeOrder(_ order: Order) {
+        currentUser.orders.removeAll { $0.id == order.id }
+    }
+
+
     static var preview: DataModel {
         let model = DataModel()
         model.currentUser = User(

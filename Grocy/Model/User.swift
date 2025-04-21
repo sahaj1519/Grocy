@@ -32,6 +32,10 @@ struct User: Codable, Hashable, Identifiable, Equatable {
         case address = "address"
     }
     
+    var sortedOrdersByDate: [Order] {
+        orders.sorted { $0.date > $1.date }
+    }
+    
     var primaryAddress: UserAddress {
         get {
             address.first ?? UserAddress(

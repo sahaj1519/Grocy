@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CartQuantityControlview: View {
-    var product: Product
+    var observableProduct: ObservableProduct
     @Binding var animateChange: Set<UUID>
     @Bindable var cartProducts: Cart
 
@@ -16,20 +16,20 @@ struct CartQuantityControlview: View {
         HStack {
             Button {
                 withAnimation {
-                    animateChange.insert(product.id)
-                    if cartProducts.quantity(for: product) > 1 {
-                        cartProducts.updateQuantity(for: product, by: -1)
+                    animateChange.insert(observableProduct.id)
+                    if cartProducts.quantity(for: observableProduct) > 1 {
+                        cartProducts.updateQuantity(for: observableProduct, by: -1)
                     } else {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                             withAnimation {
-                                cartProducts.removeProductFromCart(product: product)
+                                cartProducts.removeProductFromCart(product: observableProduct)
                             }
                         }
                     }
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    animateChange.remove(product.id)
+                    animateChange.remove(observableProduct.id)
                 }
             } label: {
                 Image(systemName: "minus")
@@ -40,19 +40,19 @@ struct CartQuantityControlview: View {
             }
             
            
-            Text("\(product.quantity)")
+            Text("\(observableProduct.quantity)")
                 .font(.headline)
                 .frame(minWidth: 40)
                 
             
             Button {
                 withAnimation {
-                    animateChange.insert(product.id)
-                    cartProducts.updateQuantity(for: product, by: 1)
+                    animateChange.insert(observableProduct.id)
+                    cartProducts.updateQuantity(for: observableProduct, by: 1)
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    animateChange.remove(product.id)
+                    animateChange.remove(observableProduct.id)
                 }
             } label: {
                 Image(systemName: "plus")
@@ -68,5 +68,5 @@ struct CartQuantityControlview: View {
 
 
 #Preview {
-    CartQuantityControlview(product: .example, animateChange: .constant([UUID()]), cartProducts: .example)
+    CartQuantityControlview(observableProduct: .example, animateChange: .constant([UUID()]), cartProducts: .example)
 }

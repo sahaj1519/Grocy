@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ProductInfoView: View {
-    var product: Product
+    @Bindable var observableProduct: ObservableProduct
 
     var body: some View {
         VStack {
-            Text(product.name)
+            Text(observableProduct.name)
                 .font(.headline.bold())
                 .lineLimit(1)
                 .padding(.vertical, 0)
@@ -25,5 +25,5 @@ struct ProductInfoView: View {
 }
 
 #Preview {
-    ProductInfoView(product: .example)
+    ProductInfoView(observableProduct: .example)
 }

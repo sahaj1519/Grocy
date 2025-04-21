@@ -13,14 +13,14 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            ShopView(products: $viewModel.products, cart: viewModel.cart, favoriteProducts: viewModel.favoriteProducts)
+            ShopView(observableProducts: $viewModel.observableProducts, cart: viewModel.cart, favoriteProducts: viewModel.favoriteProducts)
                 .tabItem {
                     Label("Shop", systemImage: "storefront")
                        
                 }
                
             
-            ExploreView(products: $viewModel.products, cart: viewModel.cart, favoriteProducts: viewModel.favoriteProducts)
+            ExploreView(observableProducts: $viewModel.observableProducts, cart: viewModel.cart, favoriteProducts: viewModel.favoriteProducts)
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")
                 }
@@ -32,18 +32,21 @@ struct ContentView: View {
                 .tabItem {
                     Label("Cart", systemImage: "cart")
                 }
-                
+                .badge(viewModel.cart.totalItems)
+            
             FavoriteView(favoriteProducts: viewModel.favoriteProducts, cart: viewModel.cart)
                 .tabItem {
                     Label("Favorite", systemImage: "heart")
                 }
- 
+                .badge(viewModel.favoriteProducts.observableProducts.count)
+            
             MeView(user: viewModel.user)
             
                 .tabItem {
                     Label("Account", systemImage: "person")
                 }
                
+
         }
         
         .tint(Color(red: 0.2, green: 0.5, blue: 0.25))

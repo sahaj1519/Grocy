@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct CheckoutProductRow: View {
-    var product: Product
+    @Bindable var observableProduct: ObservableProduct
     
     var body: some View {
         
         HStack(spacing: 5) {
-            ProductImage(imageURL: product.thumbnail)
+            ProductImage(imageURL: observableProduct.thumbnail)
                 .clipped()
                 .frame(width: 50, height: 40, alignment: .leading)
                 .clipShape(.rect(cornerRadius: 10))
                 .frame(maxWidth: 70, alignment: .leading)
             
 
-                Text(product.name)
+                Text(observableProduct.name)
                     .font(.headline)
                     .lineLimit(3)
                     .multilineTextAlignment(.center)
@@ -29,12 +29,12 @@ struct CheckoutProductRow: View {
             
             VStack(alignment: .leading) {
               
-                if product.isOffer {
-                    if let offer = product.exclusiveOffer {
+                if observableProduct.isOffer {
+                    if let offer = observableProduct.exclusiveOffer {
                         
-                        let (value, unit) = product.parsedUnit ?? (1, "unit")
-                        let totalQuantity = Int(product.quantity) * Int(value)
-                        let totalPrice = offer.discountedPrice * Decimal(product.quantity)
+                        let (value, unit) = observableProduct.parsedUnit ?? (1, "unit")
+                        let totalQuantity = Int(observableProduct.quantity) * Int(value)
+                        let totalPrice = offer.discountedPrice * Decimal(observableProduct.quantity)
                         
                         Text("Quantity: ")
                             .font(.subheadline)
@@ -52,8 +52,8 @@ struct CheckoutProductRow: View {
                     }
                 } else {
                     
-                    let (value, unit) = product.parsedUnit ?? (1, "unit")
-                    let totalQuantity = Int(product.quantity) * Int(value)
+                    let (value, unit) = observableProduct.parsedUnit ?? (1, "unit")
+                    let totalQuantity = Int(observableProduct.quantity) * Int(value)
                    
                     Text("Quantity: ")
                         .font(.subheadline)
@@ -64,7 +64,7 @@ struct CheckoutProductRow: View {
                     Text("Price: ")
                         .font(.subheadline)
                     +
-                    Text("\(product.convertedTotalPrice)")
+                    Text("\(observableProduct.convertedTotalPrice)")
                         .fontWeight(.bold)
                         
                 }
@@ -77,5 +77,5 @@ struct CheckoutProductRow: View {
 }
 
 #Preview {
-    CheckoutProductRow(product: .example)
+    CheckoutProductRow(observableProduct: .example)
 }

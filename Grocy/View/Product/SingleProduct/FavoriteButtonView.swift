@@ -13,7 +13,7 @@ struct FavoriteButtonView: View {
     var favoriteProducts: Favorite
     @State private var isTappingDisabled = false
     @State private var isTapped = false
-    var product: Product
+    @Bindable var observableProduct: ObservableProduct
     
     
     
@@ -29,10 +29,10 @@ struct FavoriteButtonView: View {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                if  favoriteProducts.isFavorite(product) {
-                    favoriteProducts.removeFromFavorite(product: product)
+                if  favoriteProducts.isFavorite(observableProduct) {
+                    favoriteProducts.removeFromFavorite(product: observableProduct)
                 } else {
-                    favoriteProducts.addToFavorite(product: product)
+                    favoriteProducts.addToFavorite(product: observableProduct)
                 }
             }
             
@@ -47,13 +47,13 @@ struct FavoriteButtonView: View {
         } label: {
             ZStack {
                 Circle()
-                    .fill( favoriteProducts.isFavorite(product) ? Color.red.opacity(0.35) : Color.gray.opacity(0.8))
+                    .fill( favoriteProducts.isFavorite(observableProduct) ? Color.red.opacity(0.35) : Color.gray.opacity(0.8))
                     .frame(width: 35, height: 35)
                     .scaleEffect(isAnimate ? 1.25 : 1.0)
                     .opacity(isAnimate ? 0.75 : 1.0)
                 
-                Image(systemName:  favoriteProducts.isFavorite(product) ? "heart.fill" : "heart")
-                    .foregroundStyle( favoriteProducts.isFavorite(product) ? .red : .white)
+                Image(systemName:  favoriteProducts.isFavorite(observableProduct) ? "heart.fill" : "heart")
+                    .foregroundStyle( favoriteProducts.isFavorite(observableProduct) ? .red : .white)
                     .font(.title2)
                     .scaleEffect(isAnimate ? 1.2 : 1.0)
                     .opacity(isTapped ? 1.0 : 0.85)
@@ -68,5 +68,5 @@ struct FavoriteButtonView: View {
 
 
 #Preview {
-    FavoriteButtonView(favoriteProducts: .example, product: .example)
+    FavoriteButtonView(favoriteProducts: .example, observableProduct: .example)
 }

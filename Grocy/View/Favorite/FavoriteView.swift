@@ -18,7 +18,7 @@ struct FavoriteView: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 
-                if favoriteProducts.products.isEmpty {
+                if favoriteProducts.observableProducts.isEmpty {
                     ContentUnavailableView(
                         "No Favorites Yet",
                         systemImage: "heart.slash",
@@ -33,16 +33,16 @@ struct FavoriteView: View {
                     LazyVGrid(columns: columns, spacing: 10) {
                         
                         
-                        ForEach(favoriteProducts.products, id: \.id) { product in
+                        ForEach(favoriteProducts.observableProducts, id: \.id) { product in
                             NavigationLink(value: product) {
-                                SingleProductView(product: product, cart: cart, favoriteProducts: favoriteProducts)
+                                SingleProductView(observableProduct: product, cart: cart, favoriteProducts: favoriteProducts)
                                     .transition(.asymmetric(insertion: .identity, removal: .scale(scale: 0.8).combined(with: .opacity)))
                                     .id(product.id)
                             }
                         }
                         .onDelete { indexSet in
                             withAnimation(.easeInOut(duration: 0.3)) {
-                                favoriteProducts.products.remove(atOffsets: indexSet)
+                                favoriteProducts.observableProducts.remove(atOffsets: indexSet)
                             }
                         }
                     }
@@ -52,8 +52,8 @@ struct FavoriteView: View {
             }
             .padding(20)
             .background(.green.opacity(0.05))
-            .navigationDestination(for: Product.self) { product in
-                ProductDetailView(product: product, cart: cart)
+            .navigationDestination(for: ObservableProduct.self) { product in
+                ProductDetailView(observableProduct: product, cart: cart)
             }
         }
     }

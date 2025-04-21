@@ -15,9 +15,8 @@ struct MeHeaderView: View {
                 if let data = user.currentUser.image, let uiImage = UIImage(data: data) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .padding(40)
+                        .scaledToFill()
+                        .frame(width: 140, height: 140)
                         .clipShape(.circle)
                 } else {
                     
