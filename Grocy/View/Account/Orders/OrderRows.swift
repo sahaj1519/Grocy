@@ -20,17 +20,17 @@ struct OrderRows: View {
                     let totalPrice = offer.discountedPrice * Decimal(observableProduct.quantity)
                     
                     Text("Quantity: ")
-                        .font(.subheadline)
+                        .font(.system(size: 10))
                     +
                     Text("\(totalQuantity) \(unit)")
-                        .font(.headline.bold())
+                        .font(.system(size: 10).bold())
                     
                     
                     Text("Price: ")
-                        .font(.subheadline)
+                        .font(.system(size: 10))
                     +
                     Text("\(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
-                        .fontWeight(.bold)
+                        .font(.system(size: 10).bold())
                     
                 }
             } else {
@@ -39,16 +39,16 @@ struct OrderRows: View {
                 let totalQuantity = Int(observableProduct.quantity) * Int(value)
                 
                 Text("Quantity: ")
-                    .font(.subheadline)
+                    .font(.system(size: 10))
                 +
                 Text("\(totalQuantity) \(unit)")
-                    .font(.headline.bold())
+                    .font(.system(size: 10).bold())
                 
                 Text("Price: ")
-                    .font(.subheadline)
+                    .font(.system(size: 10))
                 +
                 Text("\(observableProduct.convertedTotalPrice)")
-                    .fontWeight(.bold)
+                    .font(.system(size: 10).bold())
                 
             }
             

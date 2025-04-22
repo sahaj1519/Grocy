@@ -78,6 +78,16 @@ struct NewAddressView: View {
                     .font(.footnote)
                     .foregroundColor(.red)
             }
+            Picker("Address Type", selection: addressBinding.addressType) {
+                Text("Work").tag("Work")
+                Text("Home").tag("Home")
+                Text("Office").tag("Office")
+            }
+            .pickerStyle(.segmented)
+            .padding(.vertical, 4)
+            .tint(.primary)
+            .font(.subheadline)
+           
             
             Button("Save Address") {
                 Task { @MainActor in
@@ -96,7 +106,7 @@ struct NewAddressView: View {
 
 #Preview {
     let user = DataModel()
-    let address = UserAddress(name: "order name", email: "order@email.com", phone: "0000000000", city: "Delhicity", state: "Delhi", country: "India", district: "Central", street: "123 St", pincode: "110001", landmark: "Near Metro")
+    let address = UserAddress(name: "order name", email: "order@email.com", phone: "0000000000", city: "Delhicity", state: "Delhi", country: "India", district: "Central", street: "123 St", pincode: "110001", landmark: "Near Metro", addressType: "Home")
     user.currentUser.address.append(address)
     return NewAddressView(user: user, address: address)
 }

@@ -11,7 +11,9 @@ struct FavoriteView: View {
     var favoriteProducts: Favorite
    @Bindable var cart: Cart
     let columns = [
-            GridItem(.adaptive(minimum: 150), spacing: 10)
+        GridItem(.adaptive(minimum: 120), spacing: 5),
+        GridItem(.adaptive(minimum: 120), spacing: 5),
+        GridItem(.adaptive(minimum: 120), spacing: 5)
         ]
     
     var body: some View {
@@ -29,6 +31,11 @@ struct FavoriteView: View {
                     .transition(.opacity.combined(with: .move(edge: .top)))
                     
                 } else {
+                    Text("My Favorites")
+                        .font(.title.bold())
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)
+                    Divider()
                     
                     LazyVGrid(columns: columns, spacing: 10) {
                         
@@ -46,11 +53,12 @@ struct FavoriteView: View {
                             }
                         }
                     }
+                    .padding(.horizontal)
+                    .padding(.top,10)
                     .tint(.primary)
                 }
                 
             }
-            .padding(20)
             .background(.green.opacity(0.05))
             .navigationDestination(for: ObservableProduct.self) { product in
                 ProductDetailView(observableProduct: product, cart: cart)

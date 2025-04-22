@@ -12,24 +12,26 @@ struct DetailsRow: View {
     @Bindable var observableProduct: ObservableProduct
     var body: some View {
         Text("Description: ")
-            .font(.headline.bold())
+            .font(.subheadline.bold())
             .opacity(animateDetails ? 1 : 0)
             .offset(y: animateDetails ? 0 : 20)
             .animation(.easeOut(duration: 0.6).delay(0.5), value: animateDetails)
         
         Text(observableProduct.description)
+            .font(.caption)
             .opacity(animateDetails ? 1 : 0)
             .offset(y: animateDetails ? 0 : 20)
             .animation(.easeOut(duration: 0.6).delay(0.6), value: animateDetails)
         
         Text("Source: ")
-            .font(.headline.bold())
+            .font(.subheadline.bold())
             .opacity(animateDetails ? 1 : 0)
             .offset(y: animateDetails ? 0 : 20)
             .animation(.easeOut(duration: 0.6).delay(0.5), value: animateDetails)
         
         
         Text(observableProduct.source)
+            .font(.caption)
             .opacity(animateDetails ? 1 : 0)
             .offset(y: animateDetails ? 0 : 20)
             .animation(.easeOut(duration: 0.6).delay(0.6), value: animateDetails)

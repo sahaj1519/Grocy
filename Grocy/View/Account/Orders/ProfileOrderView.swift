@@ -10,8 +10,8 @@ import SwiftUI
 struct ProfileOrderView: View {
     @Bindable var user: DataModel
     @State private var activeTooltipID = false
-    
-    
+    @Binding var selectedTab: Tab
+
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
@@ -25,7 +25,7 @@ struct ProfileOrderView: View {
                         },
                         actions: {
                             Button("Start Shopping") {
-                                // Optional: Navigate to shopping tab
+                                selectedTab = .shop
                             }
                             .buttonStyle(.borderedProminent)
                         }
@@ -37,7 +37,7 @@ struct ProfileOrderView: View {
                     ForEach(user.currentUser.sortedOrdersByDate) { order in
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Order Date: \(order.convertedDate)")
-                                .font(.headline)
+                                .font(.system(size: 12).bold())
                                 .foregroundStyle(.secondary)
                                 .padding(.vertical, 4)
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -45,13 +45,13 @@ struct ProfileOrderView: View {
                                 HStack(spacing: 5) {
                                     ProductImage(imageURL: product.thumbnail)
                                         .clipped()
-                                        .frame(width: 50, height: 40, alignment: .leading)
+                                        .frame(width: 60, height: 30, alignment: .leading)
                                         .clipShape(.rect(cornerRadius: 10))
                                         .frame(maxWidth: 70, alignment: .leading)
                                     
                                     
                                     Text(product.name)
-                                        .font(.headline)
+                                        .font(.system(size: 12).bold())
                                         .lineLimit(3)
                                         .multilineTextAlignment(.center)
                                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -87,5 +87,5 @@ struct ProfileOrderView: View {
 }
 
 #Preview {
-    ProfileOrderView(user: .preview)
+    ProfileOrderView(user: .preview, selectedTab: .constant(.account))
 }

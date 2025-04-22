@@ -33,7 +33,8 @@ struct CartQuantityControlview: View {
                 }
             } label: {
                 Image(systemName: "minus")
-                    .padding(8.5)
+                    .font(.caption2)
+                    .padding(7)
                     .background(.red)
                     .foregroundColor(.white)
                     .clipShape(Circle())
@@ -41,7 +42,7 @@ struct CartQuantityControlview: View {
             
            
             Text("\(observableProduct.quantity)")
-                .font(.headline)
+                .font(.subheadline.bold())
                 .frame(minWidth: 40)
                 
             
@@ -56,7 +57,8 @@ struct CartQuantityControlview: View {
                 }
             } label: {
                 Image(systemName: "plus")
-                    .padding(3)
+                    .font(.caption2)
+                    .padding(3.3)
                     .background(.green)
                     .foregroundColor(.white)
                     .clipShape(Circle())

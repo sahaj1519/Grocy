@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ExploreView: View {
-    
+    @Environment(\.isPresented) private var isPresented
+
     @Binding var observableProducts: [ObservableProduct]
     @Bindable var cart: Cart
     
@@ -23,8 +24,14 @@ struct ExploreView: View {
 
    
     let columns = [
+        GridItem(.adaptive(minimum: 120), spacing: 5),
+        GridItem(.adaptive(minimum: 120), spacing: 5),
+        GridItem(.adaptive(minimum: 120), spacing: 5)
+    ]
+    
+    let categoryColumns = [
         GridItem(.adaptive(minimum: 150), spacing: 15),
-        GridItem(.adaptive(minimum: 150), spacing: 15)
+       
     ]
     
     var uniqueCategories: [CategoryInfo] {
@@ -59,7 +66,7 @@ struct ExploreView: View {
             ScrollView {
                 
                 if searchText.isEmpty && selectedCategory == nil && !showAllProducts && filter == nil {
-                    LazyVGrid(columns: columns, spacing: 15) {
+                    LazyVGrid(columns: categoryColumns, spacing: 15) {
                         ForEach(uniqueCategories) { category in
                             CategoryGridView(
                                 category: category
@@ -69,10 +76,10 @@ struct ExploreView: View {
                             }
                         }
                     }
-                    .padding(.horizontal)
-                   
+                    .padding()
+                    .padding(.top, 15)
                 }
-
+                
                 
                 if let category = selectedCategory {
                     HStack {
@@ -84,7 +91,7 @@ struct ExploreView: View {
                             selectedCategory = nil
                         } label: {
                             Label("Clear", systemImage: "xmark.circle")
-
+                            
                         }
                         .font(.footnote)
                     }
@@ -92,7 +99,7 @@ struct ExploreView: View {
                 }
                 
                 if selectedCategory != nil || !searchText.isEmpty || showAllProducts || filter != nil {
-                    LazyVGrid(columns: columns, spacing: 15) {
+                    LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(filterProducts) { product in
                             NavigationLink(value: product) {
                                 
@@ -116,27 +123,27 @@ struct ExploreView: View {
             .navigationTitle(filterTitle ?? "Find Products")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    if !showAllProducts && selectedCategory == nil && searchText.isEmpty {
-                        Button {
-                           showAllProducts = true
-                        } label: {
-                            Label("All Products", systemImage: "square.grid.3x3")
-
-                        }
-                    } else if showAllProducts {
-                        Button {
-                            showAllProducts = false
-                            selectedCategory = nil
-                            searchText = ""
-                        } label: {
-                            Label("Category", systemImage: "rectangle.3.offgrid")
-
+                if !isPresented {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        if !showAllProducts && selectedCategory == nil && searchText.isEmpty {
+                            Button {
+                                showAllProducts = true
+                            } label: {
+                                Label("All Products", systemImage: "square.grid.3x3")
+                            }
+                        } else if showAllProducts {
+                            Button {
+                                showAllProducts = false
+                                selectedCategory = nil
+                                searchText = ""
+                            } label: {
+                                Label("Category", systemImage: "rectangle.3.offgrid")
+                            }
                         }
                     }
                 }
             }
-
+            
         }
         
     }

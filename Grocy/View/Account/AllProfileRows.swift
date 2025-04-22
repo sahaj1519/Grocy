@@ -9,10 +9,11 @@ import SwiftUI
 
 struct AllProfileRows: View {
     @Bindable var user: DataModel
+    @Binding var selectedTab: Tab
     
     var body: some View {
         
-        ProfileRowView(systemImage: "shippingbox", title: "Orders", destination: ProfileOrderView(user: user))
+        ProfileRowView(systemImage: "shippingbox", title: "Orders", destination: ProfileOrderView(user: user, selectedTab: $selectedTab))
         
         Rectangle()
             .fill(.secondary)
@@ -44,5 +45,5 @@ struct AllProfileRows: View {
 }
 
 #Preview {
-    AllProfileRows(user: DataModel())
+    AllProfileRows(user: DataModel(), selectedTab: .constant(.account))
 }

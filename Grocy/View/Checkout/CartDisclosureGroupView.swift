@@ -26,7 +26,7 @@ struct CartDisclosureGroupView: View {
                         id: UUID(),
                         title: "Total no. of items",
                         value: "\(cart.totalItems)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 12).bold(),
                         valueColor: .secondary,
                         showHelp: false,
                         helpMessage: ""
@@ -36,7 +36,7 @@ struct CartDisclosureGroupView: View {
                         id: UUID(),
                         title: "Price of items",
                         value: "\(cart.convertedTotalPrice)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 12).bold(),
                         valueColor: .secondary,
                         showHelp: false,
                         helpMessage: ""
@@ -46,7 +46,7 @@ struct CartDisclosureGroupView: View {
                         id: discountID,
                         title: "Discount",
                         value: "- ₹\(cart.discount)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 12).bold(),
                         valueColor: .green,
                         showHelp: true,
                         helpMessage: "Discounts from offers or coupons."
@@ -56,7 +56,7 @@ struct CartDisclosureGroupView: View {
                         id: deliveryID,
                         title: "Delivery Charges",
                         value: "₹\(cart.computedDeliveryCharge)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 12).bold(),
                         valueColor: .secondary,
                         showHelp: true,
                         helpMessage: "No delivery charges on order above ₹599"
@@ -66,7 +66,7 @@ struct CartDisclosureGroupView: View {
                         id: gstID,
                         title: "GST",
                         value: "₹\(cart.taxAmount)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 12).bold(),
                         valueColor: .secondary,
                         showHelp: true,
                         helpMessage: "GST applied to your order."
@@ -79,7 +79,7 @@ struct CartDisclosureGroupView: View {
                         id: UUID(),
                         title: "Grand Total",
                         value: "\(cart.convertedGrandTotal)",
-                        valueFont: .headline.bold(),
+                        valueFont: .system(size: 12).bold(),
                         valueColor: .primary,
                         showHelp: false,
                         helpMessage: ""
@@ -94,7 +94,7 @@ struct CartDisclosureGroupView: View {
                     id: UUID(),
                     title: "Order Total:",
                     value: "\(cart.convertedGrandTotal)",
-                    valueFont: .subheadline.bold(),
+                    valueFont: .system(size: 14).bold(),
                     valueColor: .primary,
                     showHelp: false,
                     helpMessage: ""

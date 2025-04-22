@@ -51,70 +51,70 @@ struct UserDetailsView: View {
                 .font(.footnote)
                 .opacity(!user.currentUser.isValidPhoneNumber && isEdit ? 1 : 0)
             
-          
+            
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .padding()
         .disabled(!isEdit)
         
-        if !isEdit {
-            Button {
-                isEdit = true
-            } label: {
-                Label("Edit", systemImage: "square.and.pencil")
-                    .font(.title2)
-                    .foregroundStyle(.white)
-                    .padding(.vertical, 2)
-                    .padding(.leading, 14)
-                    .padding(.trailing, 23)
-                    .background(.blue)
-                    .clipShape(.capsule)
-                    .shadow(color: .blue, radius: 2)
-                    .buttonStyle(.borderedProminent)
-                
-            }
-            .padding()
-        } else {
-            HStack {
+        VStack {
+            
+            if !isEdit {
                 Button {
-                   isEdit = false
+                    isEdit = true
                 } label: {
-                    Label("Save", systemImage: "checkmark.circle")
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                        .padding(.vertical, 2)
-                        .padding(.leading, 14)
-                        .padding(.trailing, 23)
-                        .background(.green)
-                        .clipShape(.capsule)
-                        .buttonStyle(.borderedProminent)
-                    
-                }
-                .padding()
-                
-                Button {
-                    Task { @MainActor in
-                        
-                       isEdit = false
-                        try await user.saveUserData()
-                        
+                    HStack(spacing: 4) {
+                        Image(systemName: "pencil")
+                        Text("Edit")
                     }
-                } label: {
-                    Label("Cancel", systemImage: "xmark.circle")
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                        .padding(.vertical, 1.5)
-                        .padding(.leading, 13)
-                        .padding(.trailing, 20)
-                        .background(.red)
-                        .clipShape(.capsule)
-                        .buttonStyle(.borderedProminent)
-                    
+                    .font(.subheadline)
+                    .foregroundStyle(.white)
+                    .padding(.vertical, 6)
+                    .padding(.horizontal, 16)
+                    .background(.blue)
+                    .clipShape(Capsule())
                 }
-                .padding()
+                .padding(.top, 10)
+            } else {
+                HStack(spacing: 12) {
+                    Button {
+                        Task { @MainActor in
+                            try await user.saveUserData()
+                            isEdit = false
+                        }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "checkmark")
+                            Text("Save")
+                        }
+                        .font(.subheadline)
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 16)
+                        .background(.green)
+                        .clipShape(Capsule())
+                    }
+                    
+                    Button {
+                        isEdit = false
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "xmark")
+                            Text("Cancel")
+                        }
+                        .font(.subheadline)
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 16)
+                        .background(.red)
+                        .clipShape(Capsule())
+                    }
+                }
+                .padding(.top, 10)
             }
         }
+        .buttonStyle(.plain)
     }
 }
 

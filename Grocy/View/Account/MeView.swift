@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MeView: View {
     @Bindable var user: DataModel
-  
+    @Binding var selectedTab: Tab
     
     var body: some View {
         NavigationStack {
@@ -28,7 +28,7 @@ struct MeView: View {
                             .frame(width: 300, height: 1)
                             .padding(.bottom, 50)
                         
-                        AllProfileRows(user: user)
+                        AllProfileRows(user: user, selectedTab: $selectedTab)
                     }
                     
                 }
@@ -41,5 +41,5 @@ struct MeView: View {
 }
 
 #Preview {
-    MeView(user: .preview)
+    MeView(user: .preview, selectedTab: .constant(.account))
 }

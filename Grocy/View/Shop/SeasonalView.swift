@@ -21,7 +21,7 @@ struct SeasonalView: View {
             LazyVStack(alignment: .leading) {
                 HStack {
                     Text("Seasonals")
-                        .font(.title.weight(.heavy))
+                        .font(.title3.weight(.heavy))
                     Spacer()
                     NavigationLink(
                         destination: ExploreView(
@@ -32,14 +32,18 @@ struct SeasonalView: View {
                             filterTitle: "Seasonals"
                         )
                     ) {
-                        Text("See all")
-                            .font(.title2)
-                            .foregroundStyle(Color(red: 0.1, green: 0.8, blue: 0.5))
+                        HStack(spacing: 4) {
+                            Text("See all")
+                                .font(.subheadline.weight(.bold))
+                            Image(systemName: "chevron.right.circle.fill")
+                                .font(.headline.weight(.bold))
+                        }
+                        .foregroundColor(Color(red: 0.1, green: 0.8, blue: 0.5))
                     }
                 }
-                .padding(.horizontal)
+                .padding([.horizontal,.top])
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 10) {
+                    HStack(spacing: 6) {
                         ForEach(filteredProducts.prefix(10)) { product in
                             NavigationLink(value: product) {
                                 SingleProductView(observableProduct: product, cart: cart, favoriteProducts: favoriteProducts)
@@ -54,7 +58,7 @@ struct SeasonalView: View {
             }
             .background(.gray.opacity(0.05))
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .padding(.bottom, 10)
+            .padding(.bottom, 5)
             .navigationDestination(for: ObservableProduct.self) { product in
                 ProductDetailView(observableProduct: product, cart: cart)
             }

@@ -39,7 +39,7 @@ struct User: Codable, Hashable, Identifiable, Equatable {
     var primaryAddress: UserAddress {
         get {
             address.first ?? UserAddress(
-                name: "", email: "", phone: "", city: "", state: "", country: "", district: "", street: "", pincode: "", landmark: ""
+                name: "", email: "", phone: "", city: "", state: "", country: "", district: "", street: "", pincode: "", landmark: "", addressType: "Home"
             )
         }
         set {

@@ -35,7 +35,7 @@ struct CartFooter: View {
                     if cart.computedDeliveryCharge > 0 {
                         Text("Free delivery above ₹599")
                             .font(.caption2)
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     

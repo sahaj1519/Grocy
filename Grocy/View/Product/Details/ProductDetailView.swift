@@ -20,12 +20,11 @@ struct ProductDetailView: View {
         ZStack {
             ScrollView(showsIndicators: false) {
                 VStack {
-                    ZStack(alignment: .bottomLeading) {
+                    ZStack(alignment: .top) {
                         ProductImage(imageURL: observableProduct.thumbnail)
-                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity, maxHeight: 100)
                             .ignoresSafeArea(edges: .top)
                             .blur(radius: 100)
-                            .frame(height: 200)
                             .opacity(animateDetails ? 1 : 0)
                             .animation(.easeIn(duration: 1), value: animateDetails)
                         
@@ -33,14 +32,14 @@ struct ProductDetailView: View {
                             OfferRibbon(observableProduct: observableProduct,showText: "off", text: "OFFER", font: .headline, fontWeight: .bold, foregroundColor: .white, backgroundColor: .red, shape: AnyShape(Capsule()), rotation: 0, offsetX: -10, offsetY: +270, shadowRadius: 2.0)
                                 .padding(.top, 6)
                                 .padding(.leading, 6)
-                                .offset(x: +10, y: -260)
+                                .offset(x: -140, y: -45)
                                 .zIndex(1)
                             
                             if  observableProduct.isOffer {
                                 OfferCountDown(observableProduct: observableProduct)
                                     .padding(.top, 4)
                                     .padding(.leading, 6)
-                                    .offset(x: +220, y: +8)
+                                    .offset(x: +100, y: +230)
                                     .zIndex(1)
                             }
 
@@ -49,20 +48,21 @@ struct ProductDetailView: View {
                         TabView {
                             ForEach(observableProduct.images, id: \.self) {image in
                                 ProductImage(imageURL: image)
-                                    .frame(maxWidth: .infinity)
+                                    .frame(maxWidth: .infinity, maxHeight: 100)
                                     .transition(.opacity.combined(with: .scale))
+                                    
                                 
                             }
                         }
                         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-                        .frame(height: 300)
+                        .frame(height: 250)
                         
                     }
                 }
                
                 VStack(alignment: .leading, spacing: 8) {
                     Text(observableProduct.name)
-                        .font(.largeTitle)
+                        .font(.title2)
                         .fontWeight(.bold)
                         .opacity(animateDetails ? 1 : 0)
                         .offset(y: animateDetails ? 0 : 20)
@@ -70,9 +70,9 @@ struct ProductDetailView: View {
                     
                     HStack {
                         Text("Category:")
-                            .font(.headline.bold())
+                            .font(.subheadline.bold())
                         Text("\(observableProduct.category)")
-                            .font(.body)
+                            .font(.subheadline)
                         
                     }
                     .opacity(animateDetails ? 1 : 0)
@@ -83,7 +83,7 @@ struct ProductDetailView: View {
                     
                     HStack(alignment: .firstTextBaseline) {
                         Text("Price:")
-                            .font(.headline.bold())
+                            .font(.subheadline.bold())
                         VStack {
                             ProductPriceAndCartButtonView(observableProduct: observableProduct, cart: cart, showOverlay: $showAddedOverlay, isPressed: $isPressed)
                                 .padding(.vertical, 5)
@@ -101,6 +101,7 @@ struct ProductDetailView: View {
                     DetailsRow(animateDetails: $animateDetails, observableProduct: observableProduct)
                 }
                 .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
             }
             .scrollBounceBehavior(.always)

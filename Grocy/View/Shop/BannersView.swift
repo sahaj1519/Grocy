@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct BannersView: View {
-    let images: [String]
+   var banners: [Banner] = Bundle.main.decode(file: "Banner.json")
+
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     var isLandscape: Bool {
         verticalSizeClass == .compact
@@ -16,30 +17,28 @@ struct BannersView: View {
     var body: some View {
         
         TabView {
-            ForEach(images, id: \.self) {image in
+            ForEach(banners, id: \.self) {image in
                 if isLandscape {
-                    Image(image)
-                        .resizable()
-                        .scaledToFit()
+                    ProductImage(imageURL: image.imageURL)
                         .clipped()
                         .shadow(radius: 4)
-                        .padding()
-                        .frame(maxWidth: 600)
+                        .padding(5)
+                        .frame(maxWidth: .infinity, maxHeight: 100)
+                        .clipShape(.rect(cornerRadius: 10))
                 } else {
                     
-                    Image(image)
-                        .resizable()
-                        .scaledToFit()
+                    ProductImage(imageURL: image.imageURL)
                         .clipped()
                         .shadow(radius: 4)
-                        .padding()
-                        .frame(width: 400, height: 140)
+                        .padding(5)
+                        .frame(maxWidth: .infinity, maxHeight: 100)
+                        .clipShape(.rect(cornerRadius: 10))
                 }
                 
             }
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-        .frame(height: 150)
+        .frame(height: 120)
         
         
         
@@ -48,5 +47,5 @@ struct BannersView: View {
 }
 
 #Preview {
-    BannersView(images: ["banner_top"])
+    BannersView()
 }

@@ -19,6 +19,7 @@ struct UserAddress: Codable, Equatable, Hashable, Identifiable {
     var street: String
     var pincode: String
     var landmark: String
+    var addressType: String
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
@@ -31,9 +32,10 @@ struct UserAddress: Codable, Equatable, Hashable, Identifiable {
         case street = "street"
         case pincode = "pincode"
         case landmark = "landmark"
+        case addressType = "addressType"
     }
     
-    init(id: UUID = UUID(), name: String, email: String, phone: String, city: String, state: String, country: String, district: String, street: String, pincode: String, landmark: String) {
+    init(id: UUID = UUID(), name: String, email: String, phone: String, city: String, state: String, country: String, district: String, street: String, pincode: String, landmark: String, addressType: String) {
         self.id = id
         self.name = name
         self.email = email
@@ -45,6 +47,7 @@ struct UserAddress: Codable, Equatable, Hashable, Identifiable {
         self.street = street
         self.pincode = pincode
         self.landmark = landmark
+        self.addressType = addressType
     }
     
     var isValidPincode: Bool {
@@ -53,7 +56,7 @@ struct UserAddress: Codable, Equatable, Hashable, Identifiable {
     }
     
     var hasValidAddress: Bool {
-        let fields = [name, email, phone, state, city, district, street, country, landmark]
+        let fields = [name, email, phone, state, city, district, street, country, landmark, addressType]
         
         let allFieldsValid = fields.allSatisfy {
             !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -86,6 +89,7 @@ struct UserAddress: Codable, Equatable, Hashable, Identifiable {
         !country.isEmpty &&
         !district.isEmpty &&
         !landmark.isEmpty &&
+        !addressType.isEmpty &&
         isValidPincode
     }
     

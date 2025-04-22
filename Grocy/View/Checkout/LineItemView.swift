@@ -39,6 +39,7 @@ struct LineItemView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
                     Text(title)
+                        .font(.system(size: 14).bold())
                         .foregroundStyle(.secondary)
                     
                     if showHelp {
@@ -90,7 +91,7 @@ struct LineItemView: View {
             }
 
         }
-       // .animation(.easeInOut, value: activeTooltipID)
+      
     }
 }
 

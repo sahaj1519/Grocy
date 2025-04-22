@@ -15,13 +15,13 @@ struct CheckoutProductRow: View {
         HStack(spacing: 5) {
             ProductImage(imageURL: observableProduct.thumbnail)
                 .clipped()
-                .frame(width: 50, height: 40, alignment: .leading)
+                .frame(width: 70, height: 40, alignment: .leading)
                 .clipShape(.rect(cornerRadius: 10))
                 .frame(maxWidth: 70, alignment: .leading)
             
 
                 Text(observableProduct.name)
-                    .font(.headline)
+                .font(.system(size: 12).bold())
                     .lineLimit(3)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -37,17 +37,17 @@ struct CheckoutProductRow: View {
                         let totalPrice = offer.discountedPrice * Decimal(observableProduct.quantity)
                         
                         Text("Quantity: ")
-                            .font(.subheadline)
+                            .font(.system(size: 12))
                         +
                         Text("\(totalQuantity) \(unit)")
-                            .font(.headline.bold())
+                            .font(.system(size: 12).bold())
                         
                         
                         Text("Price: ")
-                            .font(.subheadline)
+                            .font(.system(size: 12))
                         +
                         Text("\(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
-                            .fontWeight(.bold)
+                            .font(.system(size: 12).bold())
                             
                     }
                 } else {
@@ -56,16 +56,16 @@ struct CheckoutProductRow: View {
                     let totalQuantity = Int(observableProduct.quantity) * Int(value)
                    
                     Text("Quantity: ")
-                        .font(.subheadline)
+                        .font(.system(size: 12))
                     +
                     Text("\(totalQuantity) \(unit)")
-                        .font(.headline.bold())
+                        .font(.system(size: 12).bold())
                     
                     Text("Price: ")
-                        .font(.subheadline)
+                        .font(.system(size: 12))
                     +
                     Text("\(observableProduct.convertedTotalPrice)")
-                        .fontWeight(.bold)
+                        .font(.system(size: 12).bold())
                         
                 }
                 

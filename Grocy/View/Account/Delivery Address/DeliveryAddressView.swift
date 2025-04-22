@@ -35,7 +35,7 @@ struct DeliveryAddressView: View {
                                 selectedAddress = UserAddress(
                                     name: "", email: "", phone: "",
                                     city: "", state: "", country: "",
-                                    district: "", street: "", pincode: "", landmark: ""
+                                    district: "", street: "", pincode: "", landmark: "", addressType: "Home"
                                 )
                             } label: {
                                 Label("Add Address", systemImage: "plus")
@@ -52,6 +52,7 @@ struct DeliveryAddressView: View {
                                     selectedAddress = address
                                 } label: {
                                     VStack(alignment: .leading, spacing: 10) {
+                                        LabelView(label: "Type", value: address.addressType)
                                         LabelView(label: "Name", value: address.name)
                                         LabelView(label: "Email", value: address.email)
                                         LabelView(label: "Phone", value: address.phone)
@@ -61,6 +62,7 @@ struct DeliveryAddressView: View {
                                         LabelView(label: "State", value: address.state)
                                         LabelView(label: "Country", value: address.country)
                                         LabelView(label: "Pincode", value: address.pincode)
+                 
                                     }
                                     .padding(16)
                                     .background(.ultraThinMaterial)
@@ -100,7 +102,7 @@ struct DeliveryAddressView: View {
             .toolbar {
                 ToolbarItem {
                     Button {
-                        selectedAddress = UserAddress(name: "", email: "", phone: "", city: "", state: "", country: "", district: "", street: "", pincode: "", landmark: "")
+                        selectedAddress = UserAddress(name: "", email: "", phone: "", city: "", state: "", country: "", district: "", street: "", pincode: "", landmark: "", addressType: "Home")
                     } label: {
                         Image(systemName: "plus")
                     }

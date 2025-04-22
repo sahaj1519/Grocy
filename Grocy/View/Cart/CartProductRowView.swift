@@ -21,7 +21,7 @@ struct CartProductRow: View {
     var body: some View {
         HStack(alignment: .center, spacing: 20) {
             ProductImage(imageURL: observableProduct.thumbnail)
-                .frame(maxWidth: 120, maxHeight: 100)
+                .frame(maxWidth: 100, maxHeight: 70)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             
             if isLandscape {
@@ -91,7 +91,7 @@ struct CartProductRow: View {
                 VStack(alignment: .leading, spacing: 4) {
                     
                     Text(observableProduct.name)
-                        .font(.system(size: 20))
+                        .font(.subheadline)
                         .fontWeight(.bold)
                         .lineLimit(3)
                         .multilineTextAlignment(.leading)
@@ -100,7 +100,7 @@ struct CartProductRow: View {
                     if observableProduct.isOffer {
                         if let offer = observableProduct.exclusiveOffer {
                             Text("(\(offer.convertedDiscountedPrice) / \(observableProduct.unit))")
-                                .font(.subheadline.italic())
+                                .font(.caption2.italic())
                                 .fontWeight(.heavy)
                                 .lineLimit(1)
                                 .foregroundStyle(.secondary)
@@ -110,13 +110,13 @@ struct CartProductRow: View {
                             let totalPrice = offer.discountedPrice * Decimal(observableProduct.quantity)
                             
                             Text("\(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD")) -  \(totalQuantity) \(unit)")
-                                .fontWeight(.bold)
+                                .font(.subheadline.bold())
                                 .lineLimit(1)
                         }
                     } else {
                         
                         Text("(\(observableProduct.convertedPrice) / \(observableProduct.unit))")
-                            .font(.subheadline.italic())
+                            .font(.caption2.italic())
                             .fontWeight(.heavy)
                             .lineLimit(1)
                             .foregroundStyle(.secondary)
@@ -126,7 +126,7 @@ struct CartProductRow: View {
                        
                         
                         Text("\(observableProduct.convertedTotalPrice) -  \(totalQuantity) \(unit)")
-                            .fontWeight(.bold)
+                            .font(.subheadline.bold())
                             .lineLimit(1)
                     }
                     
@@ -146,12 +146,13 @@ struct CartProductRow: View {
                     
                 } label: {
                     Image(systemName: "trash")
+                        .font(.subheadline)
                 }
                 .buttonStyle(.borderless)
                 .padding([.top,.trailing], 20)
                 .foregroundStyle(.red)
                 
-                
+               
                Spacer()
             }
             .padding(0)

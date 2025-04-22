@@ -109,7 +109,7 @@ class ObservableProduct: Identifiable, Codable, Equatable, Hashable {
             price: 10.99,
             unit: "kg",
             quantity: 5,
-            thumbnail: URL(string: "https://example.com/thumbnail.jpg")!,
+            thumbnail: URL(string: "https://i.imgur.com/d7dzK2xt.jpg")!,
             images: [URL(string: "https://example.com/image1.jpg")!, URL(string: "https://example.com/image2.jpg")!],
             exclusiveOffer: nil,
             isOffer: true,

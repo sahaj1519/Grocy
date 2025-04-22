@@ -29,7 +29,7 @@ struct CartView: View {
                         .frame(maxHeight: .infinity)
                     } else {
                         Text("My Cart")
-                            .font(.largeTitle.bold())
+                            .font(.title.bold())
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
                         Divider()

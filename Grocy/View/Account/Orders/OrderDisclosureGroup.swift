@@ -26,7 +26,7 @@ struct OrderDisclosureGroup: View {
                         id: UUID(),
                         title: "Total no. of items",
                         value: "\(order.totalItems)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 10),
                         valueColor: .secondary,
                         showHelp: false,
                         helpMessage: ""
@@ -36,7 +36,7 @@ struct OrderDisclosureGroup: View {
                         id: UUID(),
                         title: "Price of items",
                         value: "\(order.convertedTotalPrice)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 10),
                         valueColor: .secondary,
                         showHelp: false,
                         helpMessage: ""
@@ -46,7 +46,7 @@ struct OrderDisclosureGroup: View {
                         id: discountID,
                         title: "Discount",
                         value: "- ₹\(order.discount)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 10),
                         valueColor: .green,
                         showHelp: true,
                         helpMessage: "Discounts from offers or coupons."
@@ -56,7 +56,7 @@ struct OrderDisclosureGroup: View {
                         id: deliveryID,
                         title: "Delivery Charges",
                         value: "₹\(order.computedDeliveryCharge)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 10),
                         valueColor: .secondary,
                         showHelp: true,
                         helpMessage: "No delivery charges on order above ₹599"
@@ -66,7 +66,7 @@ struct OrderDisclosureGroup: View {
                         id: gstID,
                         title: "GST",
                         value: "₹\(order.taxAmount)",
-                        valueFont: .subheadline,
+                        valueFont: .system(size: 10),
                         valueColor: .secondary,
                         showHelp: true,
                         helpMessage: "GST applied to your order."
@@ -79,7 +79,7 @@ struct OrderDisclosureGroup: View {
                         id: UUID(),
                         title: "Grand Total",
                         value: "\(order.convertedGrandTotal)",
-                        valueFont: .headline.bold(),
+                        valueFont: .system(size: 13).bold(),
                         valueColor: .primary,
                         showHelp: false,
                         helpMessage: ""
@@ -94,7 +94,7 @@ struct OrderDisclosureGroup: View {
                     id: UUID(),
                     title: "Total Paid:",
                     value: "\(order.convertedGrandTotal)",
-                    valueFont: .headline.bold(),
+                    valueFont: .system(size: 13).bold(),
                     valueColor: .secondary,
                     showHelp: false,
                     helpMessage: ""

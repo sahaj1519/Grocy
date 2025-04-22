@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum Field: Hashable {
-    case name, email, phone, street, landmark, country, state, city, district, pincode
+    case name, email, phone, street, landmark, country, state, city, district, pincode, addressType
 }
 
 
@@ -99,6 +99,16 @@ struct CheckoutDetailsFormView: View {
                         .font(.footnote)
                         .foregroundColor(.red)
                 }
+                
+                Picker("Address Type", selection: addressBinding.addressType) {
+                    Text("Work").tag("Work")
+                    Text("Home").tag("Home")
+                    Text("Office").tag("Office")
+                }
+                .pickerStyle(.menu)
+                .tint(.primary)
+                .font(.subheadline)
+               
                 
             }header: {
                 Text("Delivery Address")

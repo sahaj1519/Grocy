@@ -44,7 +44,7 @@ struct CategoryGridView: View {
             
         }
         .padding()
-        .frame(minWidth: 170, maxWidth: .infinity, minHeight: 230, maxHeight: 250, alignment: .center)
+        .frame(maxWidth: 180, maxHeight: 180, alignment: .center)
         .fixedSize(horizontal: false, vertical: false)
         .background(backgroundColor.opacity(0.07))
         .clipShape(.rect(cornerRadius: 15))

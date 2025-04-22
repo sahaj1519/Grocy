@@ -19,7 +19,7 @@ struct ShopView: View {
                 
                 HeaderView()
                 
-                BannersView(images: ["banner_top"])
+                BannersView()
                 
                 ExclusiveOffers(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
                 
