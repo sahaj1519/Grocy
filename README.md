@@ -1,3 +1,8 @@
+
+<img width="1680" alt="Grocy - eCommerce" src="https://github.com/user-attachments/assets/ba710c64-ec29-4c5d-8a6d-95386610c529" />
+
+
+
 #Grocy - Grocery Shopping App
 
 Grocy is an iOS grocery shopping app built using SwiftUI and Firebase that offers a seamless, modern, and efficient experience for users to manage their grocery shopping. With features like category exploration, cart management, and real-time Firebase sync, Grocy aims to be the ultimate tool for both casual and power users.
