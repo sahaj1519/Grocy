@@ -10,7 +10,8 @@ import SwiftUI
 struct UserDetailsView: View {
     @Bindable var user: DataModel
     @State private var isEdit = false
-    
+    @State private var isPasswordVisible = false
+    @State private var passwordStrength: String = "Weak"
     
     var body: some View {
         VStack(spacing: 10) {
@@ -45,14 +46,50 @@ struct UserDetailsView: View {
                 )
                 .textContentType(.telephoneNumber)
             
+            if !user.currentUser.isValidPhoneNumber && isEdit {
+                Text("Please enter a valid 10-digit phone number.")
+                    .foregroundColor(.red)
+                    .font(.footnote)
+            }
             
-            Text("Please enter a valid 10-digit phone number.")
-                .foregroundColor(.red)
-                .font(.footnote)
-                .opacity(!user.currentUser.isValidPhoneNumber && isEdit ? 1 : 0)
+            
+            HStack {
+                if isPasswordVisible {
+                    TextField("Password", text: $user.currentUser.password)
+                        .padding(5)
+                        .background(isEdit ? Color.white : Color.clear)
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(isEdit ? Color.green : Color.clear, lineWidth: 1)
+                        )
+                        .textContentType(.password)
+                } else {
+                    SecureField("Password", text: $user.currentUser.password)
+                        .padding(5)
+                        .background(isEdit ? Color.white : Color.clear)
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(isEdit ? Color.green : Color.clear, lineWidth: 1)
+                        )
+                        .textContentType(.password)
+                }
+                
+                Button {
+                    isPasswordVisible.toggle()  // Toggle password visibility
+                }label: {
+                    Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                        .foregroundColor(.gray)
+                }
+            }
             
             
-            
+            if isEdit {
+                Text("Password Strength: \(passwordStrength)")
+                    .font(.footnote)
+                    .foregroundColor(passwordStrength == "Weak" ? .red : .green)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .padding()
@@ -63,6 +100,7 @@ struct UserDetailsView: View {
             if !isEdit {
                 Button {
                     isEdit = true
+                    isPasswordVisible = false
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "pencil")
@@ -82,6 +120,7 @@ struct UserDetailsView: View {
                         Task { @MainActor in
                             try await user.saveUserData()
                             isEdit = false
+                            isPasswordVisible = false
                         }
                     } label: {
                         HStack(spacing: 4) {
@@ -98,6 +137,7 @@ struct UserDetailsView: View {
                     
                     Button {
                         isEdit = false
+                        isPasswordVisible = false
                     } label: {
                         HStack(spacing: 4) {
                             Image(systemName: "xmark")

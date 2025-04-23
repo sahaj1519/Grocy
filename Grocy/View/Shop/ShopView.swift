@@ -33,10 +33,9 @@ struct ShopView: View {
                 
             }
             .padding(0)
-            //.frame(width: .infinity, alignment: .leading)
             .scrollBounceBehavior(.basedOnSize)
             .background(.green.opacity(0.05))
-        
+            
         }
        
     }

@@ -13,6 +13,7 @@ struct User: Codable, Hashable, Identifiable, Equatable {
     var image: Data?
     var name: String
     var email: String
+    var password: String = ""
     var phone: String
     var orders: [Order]
     var favorite: Favorite?
@@ -25,12 +26,22 @@ struct User: Codable, Hashable, Identifiable, Equatable {
         case image = "image"
         case name = "name"
         case email = "email"
+        case password = "password"
         case phone = "phone"
         case orders = "orders"
         case favorite = "favorite"
         case cart = "cart"
         case address = "address"
     }
+    
+    var isSignUpDataValid: Bool {
+        !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        !phone.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        !(password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) &&
+        isValidPhoneNumber
+    }
+
     
     var sortedOrdersByDate: [Order] {
         orders.sorted { $0.date > $1.date }
@@ -96,6 +107,7 @@ struct User: Codable, Hashable, Identifiable, Equatable {
         id: UUID(),
         name: "john akia rom",
         email: "akia@example.com",
+        password: "password",
         phone: "1234567890",
         orders: [],
         favorite: nil,

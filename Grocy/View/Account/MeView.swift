@@ -34,8 +34,18 @@ struct MeView: View {
                 }
                 .scrollBounceBehavior(.basedOnSize)
                 .background(.ultraThinMaterial)
+                
             }
-        
+            .toolbar {
+                Button("Logout") {
+                    user.logout()  // Properly clear session and UserDefaults
+
+                    Task { @MainActor in
+                        try? await user.saveUserData()  // Save updated user data
+                    }
+                }
+            }
+
         }
     }
 }

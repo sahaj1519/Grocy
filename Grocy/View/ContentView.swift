@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
    @State private var viewModel = ViewModel()
-   
+    @Bindable var user: DataModel
     
     var body: some View {
         TabView(selection: $viewModel.selectedTab) {
@@ -28,7 +28,7 @@ struct ContentView: View {
                 .tag(Tab.explore)
             
             
-            CartView(cartProducts: viewModel.cart, user: viewModel.user)
+            CartView(cartProducts: viewModel.cart, user: user)
                 .tabItem {
                     Label("Cart", systemImage: "cart")
                 }
@@ -42,7 +42,7 @@ struct ContentView: View {
                 .badge(viewModel.favoriteProducts.observableProducts.count)
                 .tag(Tab.favorite)
             
-            MeView(user: viewModel.user, selectedTab: $viewModel.selectedTab)
+            MeView(user: user, selectedTab: $viewModel.selectedTab)
                 .tabItem {
                     Label("Account", systemImage: "person")
                 }
@@ -54,8 +54,7 @@ struct ContentView: View {
         .task {
             Task { @MainActor in
                 await viewModel.loadProducts()
-                try await viewModel.user.loadUserData()
-               
+                
             }
         }
         
@@ -63,7 +62,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(user: .preview)
         
 }
 

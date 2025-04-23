@@ -106,7 +106,31 @@ struct NewAddressView: View {
 
 #Preview {
     let user = DataModel()
-    let address = UserAddress(name: "order name", email: "order@email.com", phone: "0000000000", city: "Delhicity", state: "Delhi", country: "India", district: "Central", street: "123 St", pincode: "110001", landmark: "Near Metro", addressType: "Home")
-    user.currentUser.address.append(address)
+    let address = UserAddress(
+        name: "order name",
+        email: "order@email.com",
+        phone: "0000000000",
+        city: "Delhicity",
+        state: "Delhi",
+        country: "India",
+        district: "Central",
+        street: "123 St",
+        pincode: "110001",
+        landmark: "Near Metro",
+        addressType: "Home"
+    )
+    
+    let sampleUser = User(
+        name: "Test User",
+        email: "test@email.com",
+        phone: "0000000000",
+        orders: [],
+        address: [address]
+    )
+    
+    user.users.append(sampleUser)
+    user.optionalUser = sampleUser
+
     return NewAddressView(user: user, address: address)
 }
+
