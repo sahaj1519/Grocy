@@ -24,7 +24,7 @@ struct GrocyApp: App {
                     SplashScreenView(user: user, showSplashScreen: $showSplashScreen)
                         .onAppear {
                             // Delay hiding splash screen to make it visible for a reasonable time
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) { // Show splash for 2 seconds
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) { // Show splash for 4 seconds
                                 if user.isLoggedIn {
                                     showSplashScreen = false
                                 } else {

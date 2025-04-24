@@ -23,3 +23,11 @@ extension Color {
         self.init(red: red, green: green, blue: blue)
     }
 }
+
+
+extension Color {
+    static var random: Color {
+        return Color(hue: .random(in: 0...1), saturation: 0.7, brightness: 0.8)
+    }
+}
+

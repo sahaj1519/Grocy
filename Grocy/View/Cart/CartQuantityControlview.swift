@@ -14,60 +14,53 @@ struct CartQuantityControlview: View {
 
     var body: some View {
         HStack {
-            Button {
-                withAnimation {
-                    animateChange.insert(observableProduct.id)
-                    if cartProducts.quantity(for: observableProduct) > 1 {
-                        cartProducts.updateQuantity(for: observableProduct, by: -1)
-                    } else {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                            withAnimation {
-                                cartProducts.removeProductFromCart(product: observableProduct)
-                            }
+            quantityButton(systemName: "minus", color: .red) {
+                animateChange.insert(observableProduct.id)
+                if cartProducts.quantity(for: observableProduct) > 1 {
+                    cartProducts.updateQuantity(for: observableProduct, by: -1)
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        withAnimation {
+                            cartProducts.removeProductFromCart(product: observableProduct)
                         }
                     }
                 }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    animateChange.remove(observableProduct.id)
-                }
-            } label: {
-                Image(systemName: "minus")
-                    .font(.caption2)
-                    .padding(7)
-                    .background(.red)
-                    .foregroundColor(.white)
-                    .clipShape(Circle())
+                removeAnimationDelay()
             }
-            
-           
+
             Text("\(observableProduct.quantity)")
                 .font(.subheadline.bold())
                 .frame(minWidth: 40)
-                
-            
-            Button {
-                withAnimation {
-                    animateChange.insert(observableProduct.id)
-                    cartProducts.updateQuantity(for: observableProduct, by: 1)
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    animateChange.remove(observableProduct.id)
-                }
-            } label: {
-                Image(systemName: "plus")
-                    .font(.caption2)
-                    .padding(3.3)
-                    .background(.green)
-                    .foregroundColor(.white)
-                    .clipShape(Circle())
+
+            quantityButton(systemName: "plus", color: .green) {
+                animateChange.insert(observableProduct.id)
+                cartProducts.updateQuantity(for: observableProduct, by: 1)
+                removeAnimationDelay()
             }
-          
+        }
+    }
+
+    private func quantityButton(systemName: String, color: Color, action: @escaping () -> Void) -> some View {
+        Button {
+            withAnimation {
+                action()
+            }
+        } label: {
+            Image(systemName: systemName)
+                .font(.caption2)
+                .padding(systemName == "plus" ? 3.3 : 7)
+                .background(color)
+                .foregroundColor(.white)
+                .clipShape(Circle())
+        }
+    }
+
+    private func removeAnimationDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            animateChange.remove(observableProduct.id)
         }
     }
 }
-
 
 #Preview {
     CartQuantityControlview(observableProduct: .example, animateChange: .constant([UUID()]), cartProducts: .example)

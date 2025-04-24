@@ -14,16 +14,16 @@ struct CheckoutProductRow: View {
         
         HStack(spacing: 5) {
             ProductImage(imageURL: observableProduct.thumbnail)
-                .clipped()
-                .frame(width: 70, height: 40, alignment: .leading)
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: 50, maxHeight: 40, alignment: .leading)
                 .clipShape(.rect(cornerRadius: 10))
-                .frame(maxWidth: 70, alignment: .leading)
+               
             
 
                 Text(observableProduct.name)
                 .font(.system(size: 12).bold())
                     .lineLimit(3)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
             
@@ -72,7 +72,7 @@ struct CheckoutProductRow: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        //.padding(.vertical, 6)
+        
     }
 }
 
