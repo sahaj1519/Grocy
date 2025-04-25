@@ -17,6 +17,7 @@ struct ErrorMessageView: View {
                 .font(.subheadline)
                 .transition(.opacity)
                 .accessibilityLabel("Error message: \(message)")
+                .accessibilityIdentifier("LoginErrorMessage")
         }
     }
 }

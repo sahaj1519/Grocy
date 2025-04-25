@@ -25,16 +25,19 @@ struct LoginFormView: View {
                 .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white.opacity(0.3), lineWidth: 1))
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
+                .accessibilityIdentifier("EmailField")
                 .accessibilityLabel("Email field")
                 .accessibilityHint("Enter your email address")
             
             HStack {
                 if isPasswordVisible {
                     TextField("Password", text: $password)
+                        .accessibilityIdentifier("PasswordField")
                         .accessibilityLabel("Password field")
                         .accessibilityHint("Enter your password. Currently visible.")
                 } else {
                     SecureField("Password", text: $password)
+                        .accessibilityIdentifier("PasswordField")
                         .accessibilityLabel("Password field")
                         .accessibilityHint("Enter your password. Currently hidden.")
                 }
@@ -54,8 +57,10 @@ struct LoginFormView: View {
                 .font(.footnote)
                 .foregroundColor(.blue)
                 .padding(.top, -10)
+                .accessibilityIdentifier("Forgot Password?")
                 .accessibilityLabel("Forgot Password")
                 .accessibilityHint("Resets your password")
+                .accessibilityAddTraits(.isButton)
             
             Button {
                 if validateLogin() {
@@ -74,8 +79,10 @@ struct LoginFormView: View {
                     .cornerRadius(15)
                     .shadow(radius: 20)
             }
+            .accessibilityIdentifier("LoginButton")
             .accessibilityLabel("Login button")
             .accessibilityHint("Attempts to log into your account")
+            .accessibilityAddTraits(.isButton)
         }
         .padding(.horizontal, 30)
     }

@@ -46,6 +46,8 @@ struct MeView: View {
                 }
                 .accessibilityLabel("Logout")
                 .accessibilityHint("Logs out of your account and clears saved session.")
+                .accessibilityIdentifier("Logout")
+                .accessibilityAddTraits(.isButton)
             }
             
         }

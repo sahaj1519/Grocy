@@ -60,6 +60,7 @@ struct FavoriteButtonView: View {
             }
             .accessibilityLabel("Favorite Button")
             .accessibilityHint("Tap to add/remove from favorites")
+            .accessibilityIdentifier("favorite_button")
             .animation(.easeInOut(duration: 0.25), value: isAnimate)
             .animation(.easeInOut(duration: 0.25), value: isTapped)
         }

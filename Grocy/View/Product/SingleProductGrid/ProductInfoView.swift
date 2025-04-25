@@ -20,6 +20,7 @@ struct ProductInfoView: View {
                 .accessibilityLabel(Text(observableProduct.name))
                 .accessibilityHint(Text("Product name"))
                 .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier("Explore_Product_\(observableProduct.name)")
             
         }
         .padding(.vertical, 0)

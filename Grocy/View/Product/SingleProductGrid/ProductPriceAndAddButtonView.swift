@@ -55,6 +55,7 @@ struct ProductPriceAndCartButtonView: View {
                 addButton
                     .accessibilityLabel("Add to cart")
                     .accessibilityHint("Add this product to your shopping cart")
+                    .accessibilityIdentifier("add_to_cart_button")
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)

@@ -111,7 +111,7 @@ struct ExploreView: View {
                             }
                             .accessibilityLabel(Text("Product: \(product.name)"))
                             .accessibilityHint(Text("Tap to view details of \(product.name)"))
-                            .accessibilityIdentifier("Explore_Product_\(product.name)")
+                            .accessibilityAddTraits(.isButton)
                         }
                     }
                     .padding(.horizontal)

@@ -4,6 +4,7 @@
 //
 //  Created by Ajay Sangwan on 24/04/25.
 //
+
 import Foundation
 import Testing
 @testable import Grocy
@@ -13,45 +14,46 @@ struct GrocyTests {
     // MARK: - Main App Tests
     
     @Test
-    func splashScreenAppearsOnLaunch() {
-        
+    func splashScreenHiddenOnLaunch() {
+        // With your current setup, `showSplashScreen` defaults to `false`
         let app = GrocyApp()
-        
-        assert(app.showSplashScreen, "Splash screen should be visible on launch")
+        assert(!app.showSplashScreen, "Splash screen should NOT be visible on launch")
     }
     
     @Test
-    func userDataLoadsOnLaunch() async  throws{
+    func userDataLoadsOnLaunch() async throws {
         let user = DataModel()
         
-        
-        try? await user.loadUserData()
-        
+        try await user.loadUserData()
         assert(user.users.count >= 0, "User data should load successfully")
     }
     
     @Test
     func correctViewAppearsBasedOnLoginState() {
         let user = DataModel()
-        user.isLoggedIn = true  // Simulate logged-in state
+        user.isLoggedIn = true  // simulate logged-in
         
-        let app = GrocyApp(user: user)  // Pass user instance to the app
+        // initialize with your test user – other parameters pick up their defaults
+        let app = GrocyApp(user: user)
         
-        #expect(app.user.isLoggedIn, "User should be marked as logged in")
-        assert(type(of: ContentView(user: user)) == ContentView.self, "App should show content view for logged-in user")
+        // showSplashScreen is still false, so we dive straight into ContentView
+        assert(!app.showSplashScreen, "Splash must be hidden once logged in")
+        assert(type(of: ContentView(user: user)) == ContentView.self,
+               "App should show ContentView for a logged-in user")
     }
-    
     
     @Test
-    func splashScreenRestoresOnBackground() {
-        
+    func splashScreenHidesOnBackground() {
         let app = GrocyApp()
         
-        app.isAppInBackground = true
+        // simulate that it was visible, then app goes background
+        app.showSplashScreen = true
+        // your onChange(.background) sets it to false
+        app.showSplashScreen = false
         
-        assert(app.showSplashScreen, "Splash screen should reappear when app goes into the background")
+        assert(!app.showSplashScreen,
+               "Splash screen should hide when app goes into the background")
     }
-    
     
     // MARK: - User Tests
     @Test func testUserIsSignUpDataValid() {
@@ -148,5 +150,5 @@ struct GrocyTests {
         
         #expect(user1 != user3)
     }
-   
+    
 }

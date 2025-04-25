@@ -30,10 +30,37 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:GrocyUITestsScheme.xctestplan"
+            reference = "container:Grocy.xctestplan"
             default = "YES">
          </TestPlanReference>
+         <TestPlanReference
+            reference = "container:GrocyUITestsScheme.xctestplan">
+         </TestPlanReference>
       </TestPlans>
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5DD856E72DBA19980051FE14"
+               BuildableName = "GrocyTests.xctest"
+               BlueprintName = "GrocyTests"
+               ReferencedContainer = "container:Grocy.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5DE37A7F2DBA891F002D9122"
+               BuildableName = "GrocyUITests.xctest"
+               BlueprintName = "GrocyUITests"
+               ReferencedContainer = "container:Grocy.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"

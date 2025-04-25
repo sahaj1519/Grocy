@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct GrocyApp: App {
-    @State private var user = DataModel()
-    @State private var showSplashScreen = false  // control splash visibility
-    @State private var didLaunch = false         // track first cold launch
-    @Environment(\.scenePhase) private var scenePhase
-
+    @State  var user = DataModel()
+    @State  var showSplashScreen = false  // control splash visibility
+    @State  var didLaunch = false         // track first cold launch
+    @Environment(\.scenePhase)  var scenePhase
+    
     var body: some Scene {
         WindowGroup {
             Group {

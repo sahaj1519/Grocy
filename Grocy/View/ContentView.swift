@@ -17,6 +17,7 @@ struct ContentView: View {
             ShopView(observableProducts: $viewModel.observableProducts, cart: viewModel.cart, favoriteProducts: viewModel.favoriteProducts)
                 .tabItem {
                     Label("Shop", systemImage: "storefront")
+                        .accessibilityIdentifier("Shop")
                        
                 }
                 .tag(Tab.shop)
@@ -24,6 +25,7 @@ struct ContentView: View {
             ExploreView(observableProducts: $viewModel.observableProducts, cart: viewModel.cart, favoriteProducts: viewModel.favoriteProducts)
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")
+                        .accessibilityIdentifier("Explore")
                 }
                 .tag(Tab.explore)
             
@@ -31,6 +33,7 @@ struct ContentView: View {
             CartView(cartProducts: viewModel.cart, user: user)
                 .tabItem {
                     Label("Cart", systemImage: "cart")
+                        .accessibilityIdentifier("Cart")
                 }
                 .badge(viewModel.cart.totalItems)
                 .tag(Tab.cart)
@@ -38,6 +41,7 @@ struct ContentView: View {
             FavoriteView(favoriteProducts: viewModel.favoriteProducts, cart: viewModel.cart)
                 .tabItem {
                     Label("Favorite", systemImage: "heart")
+                        .accessibilityIdentifier("Favorite")
                 }
                 .badge(viewModel.favoriteProducts.observableProducts.count)
                 .tag(Tab.favorite)
@@ -45,6 +49,7 @@ struct ContentView: View {
             MeView(user: user, selectedTab: $viewModel.selectedTab)
                 .tabItem {
                     Label("Account", systemImage: "person")
+                        .accessibilityIdentifier("Account")
                 }
                 .tag(Tab.account)
 

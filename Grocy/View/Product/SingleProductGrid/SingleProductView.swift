@@ -92,6 +92,7 @@ struct SingleProductView: View {
                 .stroke(Color(red: 0.2, green: 0.5, blue: 0.25), lineWidth: 0.4)
                 .shadow(color: .secondary, radius: 4)
         )
+        .accessibilityIdentifier("Explore_Product_\(observableProduct.name)")
     }
 }
 
