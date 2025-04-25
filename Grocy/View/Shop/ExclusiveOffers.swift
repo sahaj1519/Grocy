@@ -40,8 +40,10 @@ struct ExclusiveOffers: View {
                                 .font(.headline.weight(.bold))
                         }
                         .foregroundColor(Color(red: 0.1, green: 0.8, blue: 0.5))
-                            
+                        
                     }
+                    .accessibilityLabel(Text("See all exclusive offers"))
+                    .accessibilityHint(Text("Tap to explore more exclusive offers"))
                 }
                 .padding([.horizontal,.top])
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -53,6 +55,8 @@ struct ExclusiveOffers: View {
                                     cart: cart,
                                     favoriteProducts: favoriteProducts
                                 )
+                                .accessibilityLabel(Text("Exclusive offer product: \(product.name)"))
+                                .accessibilityHint(Text("Tap to view product details"))
                                 
                             }
                         }

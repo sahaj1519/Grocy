@@ -10,16 +10,20 @@ import SwiftUI
 struct PasswordField: View {
     @Binding var isPasswordVisible: Bool
     @Binding var password: String
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         HStack {
             Group {
                 if isPasswordVisible {
                     TextField("Password", text: $password)
+                       
                 } else {
                     SecureField("Password", text: $password)
+                      
                 }
             }
+            .foregroundColor(colorScheme == .dark ? .white : .black)
             .textContentType(.password)
             .autocapitalization(.none)
             Button { isPasswordVisible.toggle() } label: {
@@ -34,6 +38,7 @@ struct PasswordField: View {
             RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.white.opacity(0.3), lineWidth: 1)
         )
+        .accessibilityIdentifier("SignUp_PasswordField")
     }
 }
 

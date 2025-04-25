@@ -25,6 +25,8 @@ struct BannersView: View {
                         .padding(5)
                         .frame(maxWidth: .infinity, maxHeight: 100)
                         .clipShape(.rect(cornerRadius: 10))
+                        .accessibilityLabel(Text("Featured banner with offer"))
+                        .accessibilityHint(Text("Swipe to see other offers"))
                 } else {
                     
                     ProductImage(imageURL: image.imageURL)
@@ -33,6 +35,8 @@ struct BannersView: View {
                         .padding(5)
                         .frame(maxWidth: .infinity, maxHeight: 100)
                         .clipShape(.rect(cornerRadius: 10))
+                        .accessibilityLabel(Text("Featured banner with offer"))
+                        .accessibilityHint(Text("Swipe to see other offers"))
                 }
                 
             }

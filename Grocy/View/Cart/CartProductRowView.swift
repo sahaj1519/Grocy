@@ -151,7 +151,7 @@ struct CartProductRow: View {
                 .buttonStyle(.borderless)
                 .padding([.top,.trailing], 20)
                 .foregroundStyle(.red)
-                
+                .accessibilityLabel("Remove \(observableProduct.name)")
                
                Spacer()
             }
@@ -165,6 +165,10 @@ struct CartProductRow: View {
         .scaleEffect(animateChange.contains(observableProduct.id) ? 1.04 : 1.0)
         .opacity(animateChange.contains(observableProduct.id) ? 0.95 : 1.0)
         .animation(.easeInOut(duration: 0.2), value: animateChange)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(Text(observableProduct.name))
+        .accessibilityValue(Text("Quantity \(observableProduct.quantity), Total price \(observableProduct.convertedTotalPrice)"))
+        .accessibilityHint("Double tap to remove or change quantity.")
     }
 }
 

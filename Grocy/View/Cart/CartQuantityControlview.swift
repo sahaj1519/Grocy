@@ -27,16 +27,23 @@ struct CartQuantityControlview: View {
                 }
                 removeAnimationDelay()
             }
+            .accessibilityLabel("Decrease quantity")
+            .accessibilityHint("Decreases quantity of \(observableProduct.name)")
+
 
             Text("\(observableProduct.quantity)")
                 .font(.subheadline.bold())
                 .frame(minWidth: 40)
+                .accessibilityLabel("Quantity")
+                .accessibilityValue("\(observableProduct.quantity)")
 
             quantityButton(systemName: "plus", color: .green) {
                 animateChange.insert(observableProduct.id)
                 cartProducts.updateQuantity(for: observableProduct, by: 1)
                 removeAnimationDelay()
             }
+            .accessibilityLabel("Increase quantity")
+            .accessibilityHint("Increases quantity of \(observableProduct.name)")
         }
     }
 

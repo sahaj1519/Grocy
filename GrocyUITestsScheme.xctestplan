@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "7DD2D232-EDA6-421A-9AE9-06CF59C8294A",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Grocy.xcodeproj",
+      "identifier" : "5D062E3D2DAA7B60003B5500",
+      "name" : "Grocy"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Grocy.xcodeproj",
+        "identifier" : "5DE37A7F2DBA891F002D9122",
+        "name" : "GrocyUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

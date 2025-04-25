@@ -25,4 +25,7 @@ struct ExclusiveOffer: Identifiable, Codable, Hashable, Equatable {
         discountedPrice.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
     }
     
+    
+    static let example = ExclusiveOffer(id: UUID(), discountedPrice: Decimal(58), expiresAt: Date().addingTimeInterval(60 * 60 * 24), offerType: "Discount", offerDetails: "20% off!")
+    
 }

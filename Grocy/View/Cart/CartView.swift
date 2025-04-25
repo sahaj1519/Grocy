@@ -27,6 +27,8 @@ struct CartView: View {
                         .multilineTextAlignment(.center)
                         .transition(.opacity.combined(with: .move(edge: .top)))
                         .frame(maxHeight: .infinity)
+                        .accessibilityLabel("Your cart is empty.")
+                        .accessibilityHint("Browse products and tap Add to Cart to get started.")
                     } else {
                         Text("My Cart")
                             .font(.title.bold())

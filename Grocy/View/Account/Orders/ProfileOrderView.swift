@@ -11,7 +11,7 @@ struct ProfileOrderView: View {
     @Bindable var user: DataModel
     @State private var activeTooltipID = false
     @Binding var selectedTab: Tab
-
+    
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
@@ -19,15 +19,19 @@ struct ProfileOrderView: View {
                     ContentUnavailableView(
                         label: {
                             Label("No Orders Yet", systemImage: "cart")
+                                .accessibilityLabel("No orders available.")
                         },
                         description: {
                             Text("When you place orders, they’ll show up here.")
+                                .accessibilityLabel("When you place orders, they’ll show up here.")
                         },
                         actions: {
                             Button("Start Shopping") {
                                 selectedTab = .shop
                             }
                             .buttonStyle(.borderedProminent)
+                            .accessibilityLabel("Start shopping")
+                            .accessibilityHint("Tap to begin shopping")
                         }
                     )
                     .padding()
@@ -41,6 +45,8 @@ struct ProfileOrderView: View {
                                 .foregroundStyle(.secondary)
                                 .padding(.vertical, 4)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .accessibilityLabel("Order Date")
+                                .accessibilityValue(order.convertedDate)
                             ForEach(order.observableProducts) { product in
                                 HStack(spacing: 5) {
                                     ProductImage(imageURL: product.thumbnail)
@@ -48,6 +54,7 @@ struct ProfileOrderView: View {
                                         .frame(width: 60, height: 30, alignment: .leading)
                                         .clipShape(.rect(cornerRadius: 10))
                                         .frame(maxWidth: 70, alignment: .leading)
+                                        .accessibilityLabel("Product Image")
                                     
                                     
                                     Text(product.name)
@@ -55,6 +62,8 @@ struct ProfileOrderView: View {
                                         .lineLimit(3)
                                         .multilineTextAlignment(.center)
                                         .frame(maxWidth: .infinity, alignment: .leading)
+                                        .accessibilityLabel("Product Name")
+                                        .accessibilityValue(product.name)
                                     
                                     OrderRows(observableProduct: product)
                                     
@@ -77,6 +86,8 @@ struct ProfileOrderView: View {
                                     try await user.saveUserData()
                                 }
                             }
+                            .accessibilityLabel("Delete Order")
+                            .accessibilityHint("Tap to delete this order.")
                         }
                     }
                     .navigationTitle("Orders History")

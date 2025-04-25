@@ -22,6 +22,7 @@ struct SignUpButton: View {
                 .shadow(radius: 2)
         }
         .padding(.top)
+        .accessibilityIdentifier("SignUp_Button")
        
     }
 }

@@ -10,11 +10,13 @@ import SwiftUI
 struct SplashScreenView: View {
     @Bindable var user: DataModel
     @Binding var showSplashScreen: Bool
-
     @State private var animateShapes = false
     @State private var revealLogo = false
     @State private var revealText = false
-    @State private var showMainView = false
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    var isLandscape: Bool {
+        verticalSizeClass == .compact
+    }
 
     var body: some View {
         ZStack {
@@ -24,14 +26,7 @@ struct SplashScreenView: View {
             if revealText { titleView }
         }
         .onAppear { startAnimations() }
-        .fullScreenCover(isPresented: $showMainView) {
-            user.isLoggedIn
-                ? AnyView(ContentView(user: user))
-                : AnyView(LoginView(user: user))
-        }
     }
-
-    // MARK: - Subviews
 
     private var animatedCircles: some View {
         ForEach(0..<10, id: \.self) { index in
@@ -72,14 +67,15 @@ struct SplashScreenView: View {
             Text("Smart Grocery Shopping")
                 .font(.title2)
                 .foregroundColor(.white.opacity(0.9))
-
-            Spacer().frame(height: 200)
+            if isLandscape {
+                Spacer().frame(height: 10)
+            } else {
+                Spacer().frame(height: 200)
+            }
         }
         .transition(.opacity)
         .animation(.easeInOut(duration: 0.8), value: revealText)
     }
-
-    // MARK: - Logic
 
     private func startAnimations() {
         animateShapes = true
@@ -91,8 +87,7 @@ struct SplashScreenView: View {
         withDelay(2) { revealLogo = true }
         withDelay(3) { revealText = true }
         withDelay(4) {
-            showSplashScreen = false
-            showMainView = true
+            showSplashScreen = false // Hide splash screen after animation
         }
     }
 

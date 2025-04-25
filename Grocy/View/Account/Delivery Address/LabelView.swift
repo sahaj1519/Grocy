@@ -17,13 +17,15 @@ struct LabelView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .frame(minWidth: 80, idealWidth: 100, maxWidth: 120, alignment: .leading)
-            
+                .accessibilityHidden(true)
             
             Text(value)
                 .font(.subheadline)
                 .foregroundStyle(.primary)
                 .lineLimit(nil)
                 .fixedSize(horizontal: false, vertical: true)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("\(label): \(value)")
             
             Spacer()
         }

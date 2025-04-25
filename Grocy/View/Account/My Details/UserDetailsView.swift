@@ -18,29 +18,36 @@ struct UserDetailsView: View {
             userTextField(title: "Name", text: $user.currentUser.name, contentType: .name)
             userTextField(title: "Email", text: $user.currentUser.email, contentType: .emailAddress)
             userTextField(title: "Phone Number", text: $user.currentUser.phone, contentType: .telephoneNumber)
-
+            
             if !user.currentUser.isValidPhoneNumber && isEdit {
                 Text("Please enter a valid 10-digit phone number.")
                     .foregroundColor(.red)
                     .font(.footnote)
+                    .accessibilityLabel("Invalid Phone Number")
+                    .accessibilityHint("Please enter a valid 10-digit phone number.")
+                    .accessibilityAddTraits(.isStaticText)
+                
             }
-
+            
             passwordField
             
             if isEdit {
                 Text("Password Strength: \(passwordStrength)")
                     .font(.footnote)
                     .foregroundColor(passwordStrength == "Weak" ? .red : .green)
+                    .accessibilityLabel("Password Strength")
+                    .accessibilityHint("Current password strength: \(passwordStrength)")
+                    .accessibilityAddTraits(.isStaticText)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .padding()
         .disabled(!isEdit)
-
+        
         actionButtons
             .buttonStyle(.plain)
     }
-
+    
     private func userTextField(title: String, text: Binding<String>, contentType: UITextContentType) -> some View {
         TextField(title, text: text)
             .padding(5)
@@ -51,8 +58,11 @@ struct UserDetailsView: View {
                     .stroke(isEdit ? Color.green : Color.clear, lineWidth: 1)
             )
             .textContentType(contentType)
+            .accessibilityLabel(title)
+            .accessibilityHint("Enter your \(title.lowercased())")
+            .accessibilityAddTraits(.isStaticText)
     }
-
+    
     private var passwordField: some View {
         HStack {
             Group {
@@ -70,7 +80,7 @@ struct UserDetailsView: View {
                     .stroke(isEdit ? Color.green : Color.clear, lineWidth: 1)
             )
             .textContentType(.password)
-
+            
             Button {
                 isPasswordVisible.toggle()
             } label: {
@@ -79,7 +89,7 @@ struct UserDetailsView: View {
             }
         }
     }
-
+    
     private var actionButtons: some View {
         VStack {
             if !isEdit {
@@ -93,7 +103,7 @@ struct UserDetailsView: View {
             }
         }
     }
-
+    
     private var editButton: some View {
         Button {
             isEdit = true
@@ -104,7 +114,7 @@ struct UserDetailsView: View {
         }
         .padding(.top, 10)
     }
-
+    
     private var saveButton: some View {
         Button {
             Task { @MainActor in
@@ -117,7 +127,7 @@ struct UserDetailsView: View {
                 .background(.green)
         }
     }
-
+    
     private var cancelButton: some View {
         Button {
             isEdit = false
@@ -127,7 +137,7 @@ struct UserDetailsView: View {
                 .background(.red)
         }
     }
-
+    
     private func actionLabel(_ systemName: String, _ text: String) -> some View {
         HStack(spacing: 4) {
             Image(systemName: systemName)

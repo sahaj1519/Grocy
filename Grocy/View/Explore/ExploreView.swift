@@ -9,20 +9,20 @@ import SwiftUI
 
 struct ExploreView: View {
     @Environment(\.isPresented) private var isPresented
-
+    
     @Binding var observableProducts: [ObservableProduct]
     @Bindable var cart: Cart
     
     @State private var searchText = ""
     @State private var selectedCategory: String? = nil
     @State private var showAllProducts = false
-
-     var favoriteProducts: Favorite
+    
+    var favoriteProducts: Favorite
     
     var filter: ((ObservableProduct) -> Bool)? = nil
     var filterTitle: String?
-
-   
+    
+    
     let columns = [
         GridItem(.adaptive(minimum: 120), spacing: 5),
         GridItem(.adaptive(minimum: 120), spacing: 5),
@@ -31,16 +31,16 @@ struct ExploreView: View {
     
     let categoryColumns = [
         GridItem(.adaptive(minimum: 150), spacing: 15),
-       
+        
     ]
     
     var uniqueCategories: [CategoryInfo] {
         let categoryNames = Set(observableProducts.map { $0.category.lowercased() })
         return CategoryLibrary.all.filter { categoryNames.contains($0.name.lowercased()) }
     }
-
-
-
+    
+    
+    
     var filterProducts: [ObservableProduct] {
         var base: [ObservableProduct] = observableProducts
         
@@ -58,8 +58,8 @@ struct ExploreView: View {
         
         return base
     }
-
-
+    
+    
     
     var body: some View {
         NavigationStack {
@@ -74,6 +74,9 @@ struct ExploreView: View {
                                 selectedCategory = category.name
                                 searchText = ""
                             }
+                            .accessibilityLabel(Text("Category: \(category.name)"))
+                            .accessibilityHint(Text("Tap to view products in the \(category.name) category"))
+                            
                         }
                     }
                     .padding()
@@ -86,6 +89,7 @@ struct ExploreView: View {
                         Text("Showing: \(category)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
+                            .accessibilityLabel(Text("Showing category: \(category)"))
                         Spacer()
                         Button {
                             selectedCategory = nil
@@ -94,6 +98,7 @@ struct ExploreView: View {
                             
                         }
                         .font(.footnote)
+                        .accessibilityLabel(Text("Clear the selected category"))
                     }
                     .padding(.horizontal)
                 }
@@ -102,11 +107,11 @@ struct ExploreView: View {
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(filterProducts) { product in
                             NavigationLink(value: product) {
-                                
                                 SingleProductView(observableProduct: product, cart: cart, favoriteProducts: favoriteProducts)
-                                
                             }
-                            
+                            .accessibilityLabel(Text("Product: \(product.name)"))
+                            .accessibilityHint(Text("Tap to view details of \(product.name)"))
+                            .accessibilityIdentifier("Explore_Product_\(product.name)")
                         }
                     }
                     .padding(.horizontal)
@@ -131,6 +136,8 @@ struct ExploreView: View {
                             } label: {
                                 Label("All Products", systemImage: "square.grid.3x3")
                             }
+                            .accessibilityLabel(Text("Show all products"))
+                            .accessibilityHint(Text("Tap to view all available products"))
                         } else if showAllProducts {
                             Button {
                                 showAllProducts = false
@@ -139,6 +146,8 @@ struct ExploreView: View {
                             } label: {
                                 Label("Category", systemImage: "rectangle.3.offgrid")
                             }
+                            .accessibilityLabel(Text("Show products by category"))
+                            .accessibilityHint(Text("Tap to view products by category"))
                         }
                     }
                 }

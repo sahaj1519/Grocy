@@ -15,7 +15,9 @@ struct PaymentMethodsView: View {
                     "No payment methods available",
                     systemImage: "creditcard",
                     description: Text("No payment methods added yet. Tap the button below to add one.")
+                        .accessibilityLabel("No payment methods available. Tap the button to add a payment method.")
                 )
+                .accessibilityElement(children: .combine)
                 
                 Button {
                     // Add payment method action
@@ -26,6 +28,8 @@ struct PaymentMethodsView: View {
                         .background(.blue)
                         .foregroundColor(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .accessibilityLabel("Add Payment Method Button")
+                        .accessibilityHint("Tap to add a new payment method")
                 }
                 .padding(.horizontal)
             }

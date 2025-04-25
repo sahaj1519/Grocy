@@ -16,7 +16,7 @@ struct CartDisclosureGroupView: View {
     private let discountID = UUID()
     private let deliveryID = UUID()
     private let gstID = UUID()
-
+    
     var body: some View {
         Group {
             DisclosureGroup(isExpanded: $isExpanded) {
@@ -31,6 +31,8 @@ struct CartDisclosureGroupView: View {
                         showHelp: false,
                         helpMessage: ""
                     )
+                    .accessibilityElement()
+                    .accessibilityLabel("Total items: \(cart.totalItems)")
                     LineItemView(
                         activeTooltipID: $activeTooltipID,
                         id: UUID(),
@@ -41,6 +43,8 @@ struct CartDisclosureGroupView: View {
                         showHelp: false,
                         helpMessage: ""
                     )
+                    .accessibilityElement()
+                    .accessibilityLabel("Total price: ₹\(cart.convertedTotalPrice)")
                     LineItemView(
                         activeTooltipID: $activeTooltipID,
                         id: discountID,
@@ -51,6 +55,9 @@ struct CartDisclosureGroupView: View {
                         showHelp: true,
                         helpMessage: "Discounts from offers or coupons."
                     )
+                    .accessibilityElement()
+                    .accessibilityLabel("Discount applied: ₹\(cart.discount)")
+                    .accessibilityHint("Discounts from offers or coupons.")
                     LineItemView(
                         activeTooltipID: $activeTooltipID,
                         id: deliveryID,
@@ -61,6 +68,10 @@ struct CartDisclosureGroupView: View {
                         showHelp: true,
                         helpMessage: "No delivery charges on order above ₹599"
                     )
+                    .accessibilityElement()
+                    .accessibilityLabel("Delivery charges: ₹\(cart.computedDeliveryCharge)")
+                    .accessibilityHint("No delivery charges on orders above ₹599.")
+                    
                     LineItemView(
                         activeTooltipID: $activeTooltipID,
                         id: gstID,
@@ -71,6 +82,10 @@ struct CartDisclosureGroupView: View {
                         showHelp: true,
                         helpMessage: "GST applied to your order."
                     )
+                    .accessibilityElement()
+                    .accessibilityLabel("GST applied: ₹\(cart.taxAmount)")
+                    .accessibilityHint("GST applied to your order.")
+                    
                     
                     Divider()
                     
@@ -84,6 +99,9 @@ struct CartDisclosureGroupView: View {
                         showHelp: false,
                         helpMessage: ""
                     )
+                    .accessibilityElement()
+                    .accessibilityLabel("Grand total: ₹\(cart.convertedGrandTotal)")
+                    
                 }
                 .padding()
                 .background(.ultraThinMaterial)
@@ -99,6 +117,8 @@ struct CartDisclosureGroupView: View {
                     showHelp: false,
                     helpMessage: ""
                 )
+                .accessibilityElement()
+                .accessibilityLabel("Order total: ₹\(cart.convertedGrandTotal)")
             }
             .tint(.primary)
         }

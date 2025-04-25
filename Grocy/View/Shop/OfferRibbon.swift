@@ -35,6 +35,14 @@ struct OfferRibbon: View {
     var offsetY: CGFloat = 10
     var shadowRadius: CGFloat = 1
     
+    // Accessibility label and hint
+    var accessibilityLabel: String {
+        "\(observableProduct.percentDiscount == "0%" ? text : observableProduct.percentDiscount) \(showText) offer ribbon"
+    }
+    
+    var accessibilityHint: String {
+        "Discount or special offer applied to the product"
+    }
     
     var body: some View {
         
@@ -49,7 +57,9 @@ struct OfferRibbon: View {
             .rotationEffect(.degrees(rotation))
             .offset(x: offsetX, y: offsetY)
             .shadow(radius: shadowRadius)
-        
+            .accessibilityLabel(Text(accessibilityLabel))
+            .accessibilityHint(Text(accessibilityHint))
+          
         
     }
 }
@@ -62,7 +72,9 @@ struct OfferRibbon: View {
             observableProduct: .example,
             showText: "Off",
             text: "OFFER")
-
+        .accessibilityLabel(Text("OFFER OFF"))
+        .accessibilityHint(Text("Discount offer applied"))
+        
         OfferRibbon(
             observableProduct: .example,
             showText: "Off",
@@ -74,6 +86,8 @@ struct OfferRibbon: View {
             offsetX: -10,
             offsetY: 15
         )
+        .accessibilityLabel(Text("SALE OFF"))
+        .accessibilityHint(Text("Sale offer applied"))
     }
 }
 

@@ -6,8 +6,29 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		5DD856EC2DBA19980051FE14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D062E362DAA7B60003B5500 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D062E3D2DAA7B60003B5500;
+			remoteInfo = Grocy;
+		};
+		5DE37A862DBA891F002D9122 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D062E362DAA7B60003B5500 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D062E3D2DAA7B60003B5500;
+			remoteInfo = Grocy;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		5D062E3E2DAA7B60003B5500 /* Grocy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grocy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DD856E82DBA19980051FE14 /* GrocyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrocyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DD856F12DBA285B0051FE14 /* Grocy.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Grocy.xctestplan; sourceTree = "<group>"; };
+		5DE37A802DBA891F002D9122 /* GrocyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrocyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DE37AE02DBA8D40002D9122 /* GrocyUITestsScheme.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GrocyUITestsScheme.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -18,6 +39,13 @@
 			);
 			target = 5D062E3D2DAA7B60003B5500 /* Grocy */;
 		};
+		5DD857CE2DBA4DD50051FE14 /* Exceptions for "Grocy" folder in "GrocyTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Files/LargeProducts.json,
+			);
+			target = 5DD856E72DBA19980051FE14 /* GrocyTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -25,8 +53,19 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				5D062E662DAA967E003B5500 /* Exceptions for "Grocy" folder in "Grocy" target */,
+				5DD857CE2DBA4DD50051FE14 /* Exceptions for "Grocy" folder in "GrocyTests" target */,
 			);
 			path = Grocy;
+			sourceTree = "<group>";
+		};
+		5DD856E92DBA19980051FE14 /* GrocyTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GrocyTests;
+			sourceTree = "<group>";
+		};
+		5DE37A812DBA891F002D9122 /* GrocyUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GrocyUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -39,13 +78,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5DD856E52DBA19980051FE14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DE37A7D2DBA891F002D9122 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		5D062E352DAA7B60003B5500 = {
 			isa = PBXGroup;
 			children = (
+				5DE37AE02DBA8D40002D9122 /* GrocyUITestsScheme.xctestplan */,
+				5DD856F12DBA285B0051FE14 /* Grocy.xctestplan */,
 				5D062E402DAA7B60003B5500 /* Grocy */,
+				5DD856E92DBA19980051FE14 /* GrocyTests */,
+				5DE37A812DBA891F002D9122 /* GrocyUITests */,
 				5D062E3F2DAA7B60003B5500 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				5D062E3E2DAA7B60003B5500 /* Grocy.app */,
+				5DD856E82DBA19980051FE14 /* GrocyTests.xctest */,
+				5DE37A802DBA891F002D9122 /* GrocyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +142,52 @@
 			productReference = 5D062E3E2DAA7B60003B5500 /* Grocy.app */;
 			productType = "com.apple.product-type.application";
 		};
+		5DD856E72DBA19980051FE14 /* GrocyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5DD856EE2DBA19980051FE14 /* Build configuration list for PBXNativeTarget "GrocyTests" */;
+			buildPhases = (
+				5DD856E42DBA19980051FE14 /* Sources */,
+				5DD856E52DBA19980051FE14 /* Frameworks */,
+				5DD856E62DBA19980051FE14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5DD856ED2DBA19980051FE14 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				5DD856E92DBA19980051FE14 /* GrocyTests */,
+			);
+			name = GrocyTests;
+			packageProductDependencies = (
+			);
+			productName = GrocyTests;
+			productReference = 5DD856E82DBA19980051FE14 /* GrocyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5DE37A7F2DBA891F002D9122 /* GrocyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5DE37A882DBA891F002D9122 /* Build configuration list for PBXNativeTarget "GrocyUITests" */;
+			buildPhases = (
+				5DE37A7C2DBA891F002D9122 /* Sources */,
+				5DE37A7D2DBA891F002D9122 /* Frameworks */,
+				5DE37A7E2DBA891F002D9122 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5DE37A872DBA891F002D9122 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				5DE37A812DBA891F002D9122 /* GrocyUITests */,
+			);
+			name = GrocyUITests;
+			packageProductDependencies = (
+			);
+			productName = GrocyUITests;
+			productReference = 5DE37A802DBA891F002D9122 /* GrocyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -95,6 +200,14 @@
 				TargetAttributes = {
 					5D062E3D2DAA7B60003B5500 = {
 						CreatedOnToolsVersion = 16.3;
+					};
+					5DD856E72DBA19980051FE14 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 5D062E3D2DAA7B60003B5500;
+					};
+					5DE37A7F2DBA891F002D9122 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 5D062E3D2DAA7B60003B5500;
 					};
 				};
 			};
@@ -115,12 +228,28 @@
 			projectRoot = "";
 			targets = (
 				5D062E3D2DAA7B60003B5500 /* Grocy */,
+				5DD856E72DBA19980051FE14 /* GrocyTests */,
+				5DE37A7F2DBA891F002D9122 /* GrocyUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5D062E3C2DAA7B60003B5500 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DD856E62DBA19980051FE14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DE37A7E2DBA891F002D9122 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,7 +266,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5DD856E42DBA19980051FE14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DE37A7C2DBA891F002D9122 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5DD856ED2DBA19980051FE14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D062E3D2DAA7B60003B5500 /* Grocy */;
+			targetProxy = 5DD856EC2DBA19980051FE14 /* PBXContainerItemProxy */;
+		};
+		5DE37A872DBA891F002D9122 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D062E3D2DAA7B60003B5500 /* Grocy */;
+			targetProxy = 5DE37A862DBA891F002D9122 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5D062E472DAA7B61003B5500 /* Debug */ = {
@@ -327,6 +483,78 @@
 			};
 			name = Release;
 		};
+		5DD856EF2DBA19980051FE14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CG26R55WU3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Portfolio.GrocyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Grocy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Grocy";
+			};
+			name = Debug;
+		};
+		5DD856F02DBA19980051FE14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CG26R55WU3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Portfolio.GrocyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Grocy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Grocy";
+			};
+			name = Release;
+		};
+		5DE37A892DBA891F002D9122 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CG26R55WU3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Portfolio.GrocyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Grocy;
+			};
+			name = Debug;
+		};
+		5DE37A8A2DBA891F002D9122 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CG26R55WU3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Portfolio.GrocyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Grocy;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -344,6 +572,24 @@
 			buildConfigurations = (
 				5D062E4A2DAA7B61003B5500 /* Debug */,
 				5D062E4B2DAA7B61003B5500 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5DD856EE2DBA19980051FE14 /* Build configuration list for PBXNativeTarget "GrocyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DD856EF2DBA19980051FE14 /* Debug */,
+				5DD856F02DBA19980051FE14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5DE37A882DBA891F002D9122 /* Build configuration list for PBXNativeTarget "GrocyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DE37A892DBA891F002D9122 /* Debug */,
+				5DE37A8A2DBA891F002D9122 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -17,11 +17,15 @@ struct LocationView: View {
                         .resizable()
                         .foregroundStyle(.gray)
                         .frame(width: 20, height: 20)
+                        .accessibilityLabel(Text("Location icon"))
                     
                     Text(locationManager.address)
                         .font(.headline)
                 }
                 .padding(0)
+                .accessibilityElement()
+                .accessibilityLabel(Text("Current location: \(locationManager.address)"))
+                .accessibilityHint(Text("Location of the user"))
             
        
     }

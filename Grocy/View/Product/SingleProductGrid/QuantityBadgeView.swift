@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuantityBadgeView: View {
     var quantity: Int
-
+    
     var body: some View {
         ZStack {
             Circle()
@@ -18,8 +18,10 @@ struct QuantityBadgeView: View {
             Text("\(quantity)")
                 .font(.caption2.bold())
                 .foregroundColor(.white)
-                
+            
         }
+        .accessibilityLabel("\(quantity) items")
+        .accessibilityHint("Indicates how many of the product are in the cart")
     }
 }
 

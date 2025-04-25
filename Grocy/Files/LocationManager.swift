@@ -10,7 +10,7 @@ import CoreLocation
 
 @Observable
 class LocationManager: NSObject, CLLocationManagerDelegate {
-    private let manager = CLLocationManager()
+    let manager = CLLocationManager()
     var location: CLLocation?
     var address: String = "Locating..."
     var lastGeocodedLocation: CLLocation?
@@ -44,7 +44,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
 
-    private func reverseGeocode(location: CLLocation) async {
+     func reverseGeocode(location: CLLocation) async {
         let geocoder = CLGeocoder()
         do {
             let placemarks = try await geocoder.reverseGeocodeLocation(location)

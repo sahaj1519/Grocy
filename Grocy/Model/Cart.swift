@@ -11,7 +11,7 @@ import Foundation
 @Observable
 class Cart: Codable, Equatable {
     
-    var observableProducts: [ObservableProduct] = []
+   var observableProducts: [ObservableProduct] = []
     
     var deliveryCharge: Decimal = 40.0
     var taxRate: Decimal = 0.002
@@ -58,12 +58,12 @@ class Cart: Codable, Equatable {
     }
     
     static func == (lhs: Cart, rhs: Cart) -> Bool {
-        lhs.observableProducts == rhs.observableProducts
+        return lhs.observableProducts == rhs.observableProducts
     }
     
     
     func addToCart(product: ObservableProduct) {
-        if let index = observableProducts.firstIndex(where: { $0.id == product.id }) {
+        if let index = observableProducts.firstIndex(where: { $0.productID == product.productID }) {
             observableProducts[index].quantity += 1
         } else {
             product.quantity = 1
@@ -72,8 +72,8 @@ class Cart: Codable, Equatable {
         saveToUserDefaults()
     }
 
-    
-    
+
+
     func quantity(for product: ObservableProduct) -> Int {
         return observableProducts.first(where: { $0.id == product.id })?.quantity ?? 0
     }
@@ -81,12 +81,14 @@ class Cart: Codable, Equatable {
     func updateQuantity(for product: ObservableProduct, by amount: Int) {
         if let index = observableProducts.firstIndex(where: { $0.id == product.id }) {
             observableProducts[index].quantity += amount
+            saveToUserDefaults()
         }
     }
     
     func removeProductFromCart(product: ObservableProduct) {
         if let index = observableProducts.firstIndex(where: { $0.id == product.id }) {
             observableProducts.remove(at: index)
+            saveToUserDefaults()
         }
     }
     

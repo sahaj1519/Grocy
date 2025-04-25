@@ -58,6 +58,8 @@ struct FavoriteButtonView: View {
                     .scaleEffect(isAnimate ? 1.2 : 1.0)
                     .opacity(isTapped ? 1.0 : 0.85)
             }
+            .accessibilityLabel("Favorite Button")
+            .accessibilityHint("Tap to add/remove from favorites")
             .animation(.easeInOut(duration: 0.25), value: isAnimate)
             .animation(.easeInOut(duration: 0.25), value: isTapped)
         }

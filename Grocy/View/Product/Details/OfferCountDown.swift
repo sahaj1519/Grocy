@@ -24,9 +24,13 @@ struct OfferCountDown: View {
                     .padding(8)
                     .background(.regularMaterial)
                     .clipShape(.capsule)
+                    .accessibilityLabel(Text("Offer countdown"))
+                    .accessibilityValue(Text("Time remaining: \(String(format: "%02dd : %02dh : %02dm : %02ds", days, hours, minutes, seconds))"))
+                    .accessibilityHint(Text("Time remaining for the offer"))
+                    .accessibilityAddTraits(.updatesFrequently)
             } else {
                 Text("")
-                    
+                
             }
         }
         .onAppear {

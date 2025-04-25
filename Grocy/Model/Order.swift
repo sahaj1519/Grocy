@@ -33,22 +33,29 @@ struct Order: Hashable, Codable, Identifiable, Equatable {
         date.formatted(date: .abbreviated, time: .shortened)
     }
     
-    func totalPrice() -> Decimal {
+    func subTotalPrice() -> Decimal {
         return observableProducts.reduce(0) { total, product in
+            
             let pricePerItem: Decimal
-            if let offer = product.exclusiveOffer, product.isOffer {
+            
+            // Check if the offer is valid and only apply once
+            if let offer = product.exclusiveOffer, offer.isOfferValid {
+                // Apply the discounted price once
                 pricePerItem = offer.discountedPrice
             } else {
+                // Otherwise, use the regular price
                 pricePerItem = product.price
             }
-            
+
+            // Add the total price based on the quantity
             return total + (pricePerItem * Decimal(product.quantity))
         }
     }
+
     
 
     var taxAmount: Decimal {
-        let subtotal = totalPrice()
+        let subtotal = subTotalPrice()
         return subtotal * taxRate
     }
     
@@ -57,11 +64,11 @@ struct Order: Hashable, Codable, Identifiable, Equatable {
     }
     
     var computedDeliveryCharge: Decimal {
-        totalPrice() > 599.0 ? 0.0 : deliveryCharge
+        subTotalPrice() > 599.0 ? 0.0 : deliveryCharge
     }
     
     var grandTotal: Decimal {
-        let subtotal = totalPrice()
+        let subtotal = subTotalPrice()
         return subtotal + taxAmount + computedDeliveryCharge - discount
     }
     
@@ -71,7 +78,7 @@ struct Order: Hashable, Codable, Identifiable, Equatable {
     
     
     var convertedTotalPrice: String {
-        let price = totalPrice()
+        let price = subTotalPrice()
         return price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
     }
     

@@ -41,6 +41,9 @@ struct DeliveryAddressView: View {
                                 Label("Add Address", systemImage: "plus")
                             }
                             .buttonStyle(.borderedProminent)
+                            .accessibilityLabel("Add New Address")
+                            .accessibilityHint("Adds a new delivery address")
+                            .accessibilityAddTraits(.isButton)
                         }
                     )
                     .padding()
@@ -62,7 +65,7 @@ struct DeliveryAddressView: View {
                                         LabelView(label: "State", value: address.state)
                                         LabelView(label: "Country", value: address.country)
                                         LabelView(label: "Pincode", value: address.pincode)
-                 
+                                        
                                     }
                                     .padding(16)
                                     .background(.ultraThinMaterial)
@@ -73,15 +76,23 @@ struct DeliveryAddressView: View {
                                             .stroke(.regularMaterial)
                                     )
                                     .padding(.horizontal)
+                                    .accessibilityElement(children: .combine)
+                                    .accessibilityLabel("Address for \(address.name)")
+                                    .accessibilityHint("Double tap to edit this address")
                                     
                                 }
                                 .tint(.primary)
+                                
                                 
                                 Button {
                                     deleteAddress(address)
                                 } label: {
                                     Image(systemName: "trash")
                                         .foregroundStyle(.red)
+                                        .accessibilityLabel("Delete Address")
+                                        .accessibilityHint("Deletes this saved address")
+                                        .accessibilityAddTraits(.isButton)
+
                                 }
                                 .offset(x: -20)
                             }
@@ -105,6 +116,9 @@ struct DeliveryAddressView: View {
                         selectedAddress = UserAddress(name: "", email: "", phone: "", city: "", state: "", country: "", district: "", street: "", pincode: "", landmark: "", addressType: "Home")
                     } label: {
                         Image(systemName: "plus")
+                            .accessibilityLabel("Add New Address")
+                            .accessibilityHint("Adds a new delivery address")
+                            .accessibilityAddTraits(.isButton)
                     }
                 }
             }

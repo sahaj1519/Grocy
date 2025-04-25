@@ -25,16 +25,24 @@ struct LoginFormView: View {
                 .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white.opacity(0.3), lineWidth: 1))
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
+                .accessibilityLabel("Email field")
+                .accessibilityHint("Enter your email address")
             
             HStack {
                 if isPasswordVisible {
                     TextField("Password", text: $password)
+                        .accessibilityLabel("Password field")
+                        .accessibilityHint("Enter your password. Currently visible.")
                 } else {
                     SecureField("Password", text: $password)
+                        .accessibilityLabel("Password field")
+                        .accessibilityHint("Enter your password. Currently hidden.")
                 }
                 Button { isPasswordVisible.toggle() } label: {
                     Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
                         .foregroundColor(.gray)
+                        .accessibilityLabel(isPasswordVisible ? "Hide password" : "Show password")
+                        .accessibilityHint("Toggles password visibility")
                 }
             }
             .padding()
@@ -42,10 +50,12 @@ struct LoginFormView: View {
             .cornerRadius(15)
             .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white.opacity(0.3), lineWidth: 1))
             
-            Button("Forgot Password?") { /* handle forgot password */ }
+            Button("Forgot Password?") { /* handle forgot password */  onLoginSuccess() }
                 .font(.footnote)
                 .foregroundColor(.blue)
                 .padding(.top, -10)
+                .accessibilityLabel("Forgot Password")
+                .accessibilityHint("Resets your password")
             
             Button {
                 if validateLogin() {
@@ -64,6 +74,8 @@ struct LoginFormView: View {
                     .cornerRadius(15)
                     .shadow(radius: 20)
             }
+            .accessibilityLabel("Login button")
+            .accessibilityHint("Attempts to log into your account")
         }
         .padding(.horizontal, 30)
     }

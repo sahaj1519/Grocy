@@ -20,8 +20,10 @@ struct PromoCodeView: View {
                         .textInputAutocapitalization(.characters)
                         .disableAutocorrection(true)
                         .focused($isFieldFocused)
+                        .accessibilityLabel("Promo Code Text Field")
+                        .accessibilityHint("Enter your promo code here")
                 }
-
+                
                 Button {
                     isApplied = true
                     isFieldFocused = false
@@ -34,12 +36,16 @@ struct PromoCodeView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.green)
                 .disabled(promoCode.isEmpty)
+                .accessibilityLabel("Apply Promo Code Button")
+                .accessibilityHint("Tap to apply the promo code")
                 
                 if isApplied {
                     Text("Promo code applied successfully!")
                         .font(.caption)
                         .foregroundColor(.green)
                         .transition(.opacity)
+                        .accessibilityLabel("Promo Code Applied")
+                        .accessibilityValue("Promo code applied successfully!")
                 }
             }
             .navigationTitle("Promo Code")
@@ -49,6 +55,8 @@ struct PromoCodeView: View {
                     Button("Done") {
                         isFieldFocused = false
                     }
+                    .accessibilityLabel("Done Button")
+                    .accessibilityHint("Dismiss the keyboard")
                 }
             }
         }

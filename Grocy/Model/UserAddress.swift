@@ -93,4 +93,48 @@ struct UserAddress: Codable, Equatable, Hashable, Identifiable {
         isValidPincode
     }
     
+    static let example = UserAddress(
+            name: "Ajay",
+            email: "ajay@example.com",
+            phone: "9876543210",
+            city: "Delhi",
+            state: "Delhi",
+            country: "India",
+            district: "South",
+            street: "Main Street",
+            pincode: "110092",
+            landmark: "Near Park",
+            addressType: "Home"
+        )
+        
+        func with(
+            id: UUID? = nil,
+            name: String? = nil,
+            email: String? = nil,
+            phone: String? = nil,
+            city: String? = nil,
+            state: String? = nil,
+            country: String? = nil,
+            district: String? = nil,
+            street: String? = nil,
+            pincode: String? = nil,
+            landmark: String? = nil,
+            addressType: String? = nil
+        ) -> UserAddress {
+            UserAddress(
+                id: id ?? self.id,
+                name: name ?? self.name,
+                email: email ?? self.email,
+                phone: phone ?? self.phone,
+                city: city ?? self.city,
+                state: state ?? self.state,
+                country: country ?? self.country,
+                district: district ?? self.district,
+                street: street ?? self.street,
+                pincode: pincode ?? self.pincode,
+                landmark: landmark ?? self.landmark,
+                addressType: addressType ?? self.addressType
+            )
+        }
+    
 }

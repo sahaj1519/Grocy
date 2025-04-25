@@ -9,12 +9,12 @@ import SwiftUI
 
 struct FavoriteView: View {
     var favoriteProducts: Favorite
-   @Bindable var cart: Cart
+    @Bindable var cart: Cart
     let columns = [
         GridItem(.adaptive(minimum: 120), spacing: 5),
         GridItem(.adaptive(minimum: 120), spacing: 5),
         GridItem(.adaptive(minimum: 120), spacing: 5)
-        ]
+    ]
     
     var body: some View {
         NavigationStack {
@@ -29,12 +29,16 @@ struct FavoriteView: View {
                     .padding(.top, 100)
                     .multilineTextAlignment(.center)
                     .transition(.opacity.combined(with: .move(edge: .top)))
+                    .accessibilityLabel(Text("No favorite products"))
+                    .accessibilityHint(Text("You don't have any products in your favorites yet"))
                     
                 } else {
                     Text("My Favorites")
                         .font(.title.bold())
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
+                        .accessibilityLabel(Text("My Favorites"))
+                    
                     Divider()
                     
                     LazyVGrid(columns: columns, spacing: 10) {
@@ -45,6 +49,9 @@ struct FavoriteView: View {
                                 SingleProductView(observableProduct: product, cart: cart, favoriteProducts: favoriteProducts)
                                     .transition(.asymmetric(insertion: .identity, removal: .scale(scale: 0.8).combined(with: .opacity)))
                                     .id(product.id)
+                                    .accessibilityLabel(Text("\(product.name) in your favorites"))
+                                    .accessibilityHint(Text("Tap to view details of \(product.name)"))
+                                
                             }
                         }
                         .onDelete { indexSet in

@@ -31,6 +31,9 @@ struct ProfileRowView<Destination: View>: View {
             .padding(.horizontal)
         }
         .tint(.primary)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title)")
+        .accessibilityHint("Opens \(title) section")
     }
 }
 

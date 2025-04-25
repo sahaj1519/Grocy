@@ -19,37 +19,46 @@ struct OrderRows: View {
                     let totalQuantity = Int(observableProduct.quantity) * Int(value)
                     let totalPrice = offer.discountedPrice * Decimal(observableProduct.quantity)
                     
-                    Text("Quantity: ")
-                        .font(.system(size: 10))
-                    +
-                    Text("\(totalQuantity) \(unit)")
-                        .font(.system(size: 10).bold())
+                    HStack {
+                        Text("Quantity: ")
+                            .font(.system(size: 10))
+                            .accessibilityLabel("Quantity")
+                        Text("\(totalQuantity) \(unit)")
+                            .font(.system(size: 10).bold())
+                            .accessibilityValue("\(totalQuantity), \(unit)")
+                    }
                     
-                    
-                    Text("Price: ")
-                        .font(.system(size: 10))
-                    +
-                    Text("\(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
-                        .font(.system(size: 10).bold())
-                    
+                    HStack {
+                        Text("Price: ")
+                            .font(.system(size: 10))
+                            .accessibilityLabel("Price")
+                        Text("\(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
+                            .font(.system(size: 10).bold())
+                            .accessibilityValue("\(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
+                    }
                 }
             } else {
                 
                 let (value, unit) = observableProduct.parsedUnit ?? (1, "unit")
                 let totalQuantity = Int(observableProduct.quantity) * Int(value)
                 
-                Text("Quantity: ")
-                    .font(.system(size: 10))
-                +
-                Text("\(totalQuantity) \(unit)")
-                    .font(.system(size: 10).bold())
+                HStack {
+                    Text("Quantity: ")
+                        .font(.system(size: 10))
+                        .accessibilityLabel("Quantity")
+                    Text("\(totalQuantity) \(unit)")
+                        .font(.system(size: 10).bold())
+                        .accessibilityValue("\(totalQuantity) \(unit)")
+                }
                 
-                Text("Price: ")
-                    .font(.system(size: 10))
-                +
-                Text("\(observableProduct.convertedTotalPrice)")
-                    .font(.system(size: 10).bold())
-                
+                HStack {
+                    Text("Price: ")
+                        .font(.system(size: 10))
+                        .accessibilityLabel("Price")
+                    Text("\(observableProduct.convertedTotalPrice)")
+                        .font(.system(size: 10).bold())
+                        .accessibilityValue("\(observableProduct.convertedTotalPrice)")
+                }
             }
             
         }

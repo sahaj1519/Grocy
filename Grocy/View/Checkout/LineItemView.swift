@@ -41,6 +41,7 @@ struct LineItemView: View {
                     Text(title)
                         .font(.system(size: 14).bold())
                         .foregroundStyle(.secondary)
+                        .accessibilityLabel(title)
                     
                     if showHelp {
                         
@@ -61,6 +62,8 @@ struct LineItemView: View {
                         }
                         .buttonStyle(.plain)
                         .offset(y: 4)
+                        .accessibilityLabel("Help button")
+                        .accessibilityHint(helpMessage)
                         
                         
                     }
@@ -70,6 +73,7 @@ struct LineItemView: View {
                     Text(value)
                         .font(valueFont)
                         .foregroundStyle(valueColor)
+                        .accessibilityValue(value)
                 }
                 
             }
@@ -88,10 +92,12 @@ struct LineItemView: View {
                     .transition(.opacity.combined(with: .move(edge: .top)))
                     .offset(x: -40, y: -40)
                     .zIndex(2)
+                    .accessibilityLabel(helpMessage)
+                    .accessibilityHint("This message appears after clicking help.")
             }
-
+            
         }
-      
+        
     }
 }
 

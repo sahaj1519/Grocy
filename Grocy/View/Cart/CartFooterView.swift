@@ -55,6 +55,9 @@ struct CartFooter: View {
             }
             .padding(.horizontal)
             .tint(.primary)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Price details")
+            .accessibilityHint("Tap to expand or collapse subtotal and delivery information")
             
             NavigationLink(destination: CheckoutView(user: user, cart: cart)) {
                 Label("Checkout", systemImage: "creditcard")
@@ -67,6 +70,8 @@ struct CartFooter: View {
             }
             .padding(.horizontal)
             .disabled(totalPrice <= 0)
+            .accessibilityLabel("Proceed to checkout")
+            .accessibilityHint("Navigates to payment and order details screen")
         }
         .padding(.vertical, 10)
         .background(.ultraThinMaterial)

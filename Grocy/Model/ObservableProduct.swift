@@ -11,6 +11,7 @@ import Foundation
 class ObservableProduct: Identifiable, Codable, Equatable, Hashable {
     
     var id: UUID
+    var productID: UUID
     var name: String
     var category: String
     var price: Decimal
@@ -33,7 +34,8 @@ class ObservableProduct: Identifiable, Codable, Equatable, Hashable {
        }
     
     init(product: Product) {
-        self.id = product.id
+        self.id = UUID()
+        self.productID = product.id
         self.name = product.name
         self.category = product.category
         self.price = product.price
@@ -42,7 +44,7 @@ class ObservableProduct: Identifiable, Codable, Equatable, Hashable {
         self.thumbnail = product.thumbnail
         self.images = product.images
         self.exclusiveOffer = product.exclusiveOffer
-       
+        
         self.description = product.description
         self.source = product.source
         self.seasonal = product.seasonal
@@ -50,14 +52,29 @@ class ObservableProduct: Identifiable, Codable, Equatable, Hashable {
         self.newArrival = product.newArrival
         self.bestSeller = product.bestSeller
         
-      
+        
     }
     
 
 
     // Equatable conformance
     static func == (lhs: ObservableProduct, rhs: ObservableProduct) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id &&
+                   lhs.productID == rhs.productID &&
+                   lhs.name == rhs.name &&
+                   lhs.category == rhs.category &&
+                   lhs.price == rhs.price &&
+                   lhs.unit == rhs.unit &&
+                   lhs.quantity == rhs.quantity &&
+                   lhs.thumbnail == rhs.thumbnail &&
+                   lhs.images == rhs.images &&
+                   lhs.exclusiveOffer == rhs.exclusiveOffer &&
+                   lhs.description == rhs.description &&
+                   lhs.source == rhs.source &&
+                   lhs.seasonal == rhs.seasonal &&
+                   lhs.organic == rhs.organic &&
+                   lhs.newArrival == rhs.newArrival &&
+                   lhs.bestSeller == rhs.bestSeller
     }
     
     // Hashable conformance

@@ -16,6 +16,7 @@ struct ErrorMessageView: View {
                 .foregroundColor(.red)
                 .font(.subheadline)
                 .transition(.opacity)
+                .accessibilityLabel("Error message: \(message)")
         }
     }
 }

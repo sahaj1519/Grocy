@@ -8,7 +8,7 @@
 import Foundation
 
 extension Cart {
-    private static let userDefaultsKey = "SavedCart"
+     static let userDefaultsKey = "SavedCart"
 
     func saveToUserDefaults() {
         if let data = try? JSONEncoder().encode(self) {

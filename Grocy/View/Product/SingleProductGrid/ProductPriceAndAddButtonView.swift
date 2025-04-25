@@ -40,15 +40,21 @@ struct ProductPriceAndCartButtonView: View {
     private func triggerHapticFeedback() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
     }
-
+    
+    //Body
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
             priceText
-
+            
             if isAlreadyInCart {
                 quantityButtons
+                    .accessibilityLabel("Update quantity")
+                    .accessibilityHint("Increase or decrease the quantity of the product in your cart")
+                
             } else {
                 addButton
+                    .accessibilityLabel("Add to cart")
+                    .accessibilityHint("Add this product to your shopping cart")
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)
@@ -67,10 +73,12 @@ struct ProductPriceAndCartButtonView: View {
                 Text("\(offer.convertedDiscountedPrice) / \(observableProduct.unit)")
                     .font(.system(size: 10).bold())
                     .lineLimit(2)
+                    .accessibilityLabel("\(offer.convertedDiscountedPrice) for \(observableProduct.unit)")
             } else {
                 Text("\(observableProduct.convertedPrice) / \(observableProduct.unit)")
                     .font(.system(size: 10).bold())
                     .lineLimit(2)
+                    .accessibilityLabel("\(observableProduct.convertedPrice) for \(observableProduct.unit)")
             }
         }
     }

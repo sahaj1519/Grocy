@@ -13,7 +13,7 @@ struct CheckoutView: View {
     @FocusState  var focusedField: Field?
     
     @State private var isShowOrderPlaced = false
-   
+    
     var body: some View {
         NavigationStack {
             
@@ -21,12 +21,16 @@ struct CheckoutView: View {
                 Section {
                     ForEach(cart.observableProducts) {product in
                         CheckoutProductRow(observableProduct: product)
+                            .accessibilityElement()
+                            .accessibilityLabel("Product: \(product.name), Price: \(product.convertedTotalPrice)")
                     }
                     
                 }header: {
                     Text("Products Summary")
                         .font(.subheadline)
                         .foregroundColor(.primary)
+                        .accessibilityElement()
+                        
                 }
                 
                 
@@ -58,6 +62,8 @@ struct CheckoutView: View {
                         .font(.headline)
                         .clipShape(Capsule())
                         .disabled(!user.currentUser.canPlaceOrder)
+                        .accessibilityLabel("Place Order button")
+                        .accessibilityHint("Place your order now.")
                         Spacer()
                     }
                     .tint(.green)
@@ -71,6 +77,8 @@ struct CheckoutView: View {
                     }
                     .tint(.primary)
                     .font(.caption)
+                    .accessibilityLabel("Terms and Conditions link")
+                    .accessibilityHint("Opens the terms and conditions page.")
                 }
                 
                 
@@ -87,6 +95,7 @@ struct CheckoutView: View {
                     Button("Done") {
                         focusedField = nil
                     }
+                    .accessibilityLabel("Dismiss keyboard")
                 }
             }
             

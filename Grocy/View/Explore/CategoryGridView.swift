@@ -21,11 +21,13 @@ struct CategoryGridView: View {
                 ProductImage(imageURL: imageURL)
                     .frame(width: 130, height: 100)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .accessibilityLabel(Text("\(category.name) category image"))
             } else {
                 Rectangle()
                     .fill(Color.gray.opacity(0.2))
                     .frame(width: 130, height: 100)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .accessibilityLabel(Text("Placeholder image for \(category.name) category"))
             }
             
             
@@ -35,6 +37,8 @@ struct CategoryGridView: View {
                 .frame(width: 20, height: 20)
                 .foregroundStyle(category.color, .secondary)
                 .clipShape(Circle())
+                .accessibilityLabel(Text("Category: \(category.name)"))
+                .accessibilityHint(Text("Tap to view products in \(category.name)"))
             
             Text(category.name)
                 .font(.headline)
@@ -55,6 +59,10 @@ struct CategoryGridView: View {
         .onTapGesture {
             onTap()
         }
+        .accessibilityElement()
+        .accessibilityLabel(category.name)
+        .accessibilityHint(Text("Tap to see more about \(category.name)"))
+        .accessibilityIdentifier("Explore_Category_\(category.name)")
     }
 }
 

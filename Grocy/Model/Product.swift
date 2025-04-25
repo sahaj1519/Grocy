@@ -34,9 +34,11 @@ struct Product: Identifiable, Hashable, Codable, Equatable {
         guard price > 0 else { return "0%" }
         
         let percent = (discount / price) * 100
-        let doublePercent = NSDecimalNumber(decimal: percent).doubleValue
-        return "\(Int(doublePercent.rounded()))%"
+        let roundedPercent = (percent as NSDecimalNumber).intValue  // Use NSDecimalNumber to round and get int value
+        
+        return "\(roundedPercent)%"
     }
+
 
     var convertedPrice: String {
         price.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
@@ -57,9 +59,27 @@ struct Product: Identifiable, Hashable, Codable, Equatable {
         let unitString = String(unit[unitRange])
         return (value, unitString)
     }
-
-
     
-    static let products: [Product] = Bundle.main.decode(file: "products.json")
-    static let example = products[0]
+   
+    static var example: Product {
+        Product(
+            id: UUID(),
+            name: "Example Product",
+            category: "Fruits",
+            price: 100,
+            unit: "1kg",
+            quantity: 1,
+            thumbnail: URL(string: "https://i.imgur.com/d7dzK2xt.jpg")!,
+            images: [],
+            exclusiveOffer: nil,
+            isOffer: false,
+            description: "Sample description",
+            source: "Farm",
+            seasonal: false,
+            organic: false,
+            newArrival: true,
+            bestSeller: false
+        )
+    }
+
 }

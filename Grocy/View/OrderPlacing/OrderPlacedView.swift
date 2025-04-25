@@ -32,16 +32,23 @@ struct OrderPlacedView: View {
                             scale = 1.3
                         }
                     }
+                    .accessibilityLabel(Text("Order confirmed"))
+                    .accessibilityHint(Text("This icon indicates that your order has been successfully placed"))
                 
                 Text("Your Order has been accepted!")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
+                    .accessibilityLabel(Text("Your order has been accepted"))
+                   
                 
                 Text("Great! Your order is on the way \nand will be with you soon.")
                     .font(.subheadline)
                     .foregroundColor(.primary)
                     .padding(.horizontal)
+                    .accessibilityLabel(Text("Your order is on the way"))
+                    .accessibilityHint(Text("The order will be delivered soon"))
+                    
             }
             .padding()
             .onAppear {

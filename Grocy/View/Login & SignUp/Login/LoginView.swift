@@ -9,18 +9,15 @@ import SwiftUI
 
 struct LoginView: View {
     @Bindable var user: DataModel
+    @State var viewModel = ViewModel()
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    var isLandscape: Bool {
+        verticalSizeClass == .compact
+    }
     
-    @State private var email = ""
-    @State private var password = ""
-    @State private var showHomeView = false
-    @State private var showSignUp = false
-    @State private var forgotPasswordTapped = false
-    @State private var loginErrorMessage: String?
-    @State private var isPasswordVisible = false
-    
-    private func validateLogin() -> Bool {
+    func validateLogin() -> Bool {
         if let matchedUser = user.users.first(where: {
-            $0.email.lowercased() == email.lowercased() && $0.password == password
+            $0.email.lowercased() == viewModel.email.lowercased() && $0.password == viewModel.password
         }) {
             user.optionalUser = matchedUser
             user.isLoggedIn = true
@@ -49,49 +46,60 @@ struct LoginView: View {
                 .blur(radius: 40)
                 .rotationEffect(.degrees(30))
                 .offset(x: 100, y: 250)
-            
-            VStack(spacing: 20) {
-                Image("logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .shadow(radius: 10)
-                
-                Text("Grocy")
-                    .font(.system(size: 36, weight: .bold))
-                    .foregroundColor(.white)
-                    .shadow(radius: 5)
-                
-                LoginFormView(
-                    email: $email,
-                    password: $password,
-                    isPasswordVisible: $isPasswordVisible,
-                    loginErrorMessage: $loginErrorMessage,
-                    validateLogin: validateLogin,
-                    onLoginSuccess: {
-                        user.isLoggedIn = true
-                        Task { @MainActor in 
-                            try? await user.saveUserData()
+            ScrollView(showsIndicators: false) {
+                if !isLandscape {
+                    Spacer()
+                        .frame(height: 120)
+                }
+                VStack(spacing: 20) {
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .shadow(radius: 10)
+                        .accessibilityHidden(true)
+                    
+                    Text("Grocy")
+                        .font(.system(size: 36, weight: .bold))
+                        .foregroundColor(.white)
+                        .shadow(radius: 5)
+                        .accessibilityAddTraits(.isHeader)
+                        .accessibilityLabel("Grocy app logo and name")
+                    
+                    LoginFormView(
+                        email: $viewModel.email,
+                        password: $viewModel.password,
+                        isPasswordVisible: $viewModel.isPasswordVisible,
+                        loginErrorMessage: $viewModel.loginErrorMessage,
+                        validateLogin: validateLogin,
+                        onLoginSuccess: {
+                            user.isLoggedIn = true
+                            Task { @MainActor in
+                                try? await user.saveUserData()
+                            }
+                            viewModel.showHomeView = true
                         }
-                        showHomeView = true
-                    }
-                )
-                
-                ErrorMessageView(message: loginErrorMessage)
-                
-                Button("New here? Create an account") { showSignUp = true }
-                    .foregroundColor(.blue)
-                    .padding(.bottom)
+                    )
+                    
+                    ErrorMessageView(message: viewModel.loginErrorMessage)
+                    
+                    Button("New here? Create an account") { viewModel.showSignUp = true }
+                        .foregroundColor(.blue)
+                        .padding(.bottom)
+                        .accessibilityLabel("New here? Create an account")
+                        .accessibilityHint("Opens the sign-up screen")
+                }
+                .padding()
+                .background(.ultraThinMaterial)
+                .cornerRadius(40)
+                .padding(.horizontal, 20)
+                .shadow(color: .black.opacity(0.2), radius: 20, x: 0, y: 10)
+                .fullScreenCover(isPresented: $viewModel.showSignUp) { SignUpView(user: user) }
+                .fullScreenCover(isPresented: $viewModel.showHomeView) { ContentView(user: user) }
+                .fullScreenCover(isPresented: $viewModel.forgotPasswordTapped) { ContentView(user: user) }  // Change to ForgotPasswordView later
             }
-            .padding()
-            .background(.ultraThinMaterial)
-            .cornerRadius(40)
-            .padding(.horizontal, 20)
-            .shadow(color: .black.opacity(0.2), radius: 20, x: 0, y: 10)
-            .fullScreenCover(isPresented: $showSignUp) { SignUpView(user: user) }
-            .fullScreenCover(isPresented: $showHomeView) { ContentView(user: user) }
-            .fullScreenCover(isPresented: $forgotPasswordTapped) { ContentView(user: user) }  // Change to ForgotPasswordView later
+            .padding(.top)
         }
     }
 }

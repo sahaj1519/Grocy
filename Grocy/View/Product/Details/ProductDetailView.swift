@@ -27,6 +27,7 @@ struct ProductDetailView: View {
                             .blur(radius: 100)
                             .opacity(animateDetails ? 1 : 0)
                             .animation(.easeIn(duration: 1), value: animateDetails)
+                            .accessibilityHidden(true)
                         
                         if observableProduct.isOffer {
                             OfferRibbon(observableProduct: observableProduct,showText: "off", text: "OFFER", font: .headline, fontWeight: .bold, foregroundColor: .white, backgroundColor: .red, shape: AnyShape(Capsule()), rotation: 0, offsetX: -10, offsetY: +270, shadowRadius: 2.0)
@@ -34,6 +35,8 @@ struct ProductDetailView: View {
                                 .padding(.leading, 6)
                                 .offset(x: -140, y: -45)
                                 .zIndex(1)
+                                .accessibilityLabel(Text("Offer Ribbon"))
+                                .accessibilityAddTraits(.isHeader)
                             
                             if  observableProduct.isOffer {
                                 OfferCountDown(observableProduct: observableProduct)
@@ -41,8 +44,10 @@ struct ProductDetailView: View {
                                     .padding(.leading, 6)
                                     .offset(x: +100, y: +230)
                                     .zIndex(1)
+                                    .accessibilityLabel(Text("Offer Countdown"))
+                                    .accessibilityHint(Text("Time remaining for the offer"))
                             }
-
+                            
                         }
                         
                         TabView {
@@ -50,7 +55,7 @@ struct ProductDetailView: View {
                                 ProductImage(imageURL: image)
                                     .frame(maxWidth: .infinity, maxHeight: 100)
                                     .transition(.opacity.combined(with: .scale))
-                                    
+                                    .accessibilityHidden(true)
                                 
                             }
                         }
@@ -67,6 +72,8 @@ struct ProductDetailView: View {
                         .opacity(animateDetails ? 1 : 0)
                         .offset(y: animateDetails ? 0 : 20)
                         .animation(.easeOut(duration: 0.6).delay(0.2), value: animateDetails)
+                        .accessibilityLabel(Text(observableProduct.name))
+                        .accessibilityIdentifier(observableProduct.name)
                     
                     HStack {
                         Text("Category:")
@@ -92,6 +99,9 @@ struct ProductDetailView: View {
                                 .animation(.spring(), value: isPressed)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 0)
+                                .accessibilityLabel(Text("Add to Cart"))
+                                .accessibilityHint(Text("Tap to add the product to your cart"))
+
                         }
                     }
                     .opacity(animateDetails ? 1 : 0)
@@ -122,13 +132,19 @@ struct ProductDetailView: View {
                             removal: .opacity
                         ))
                         .padding(.bottom, 50)
+                        .accessibilityLabel(Text("Product added to Cart"))
+                        .accessibilityHint(Text("Item has been successfully added to your cart"))
+                    
                 }
                 .zIndex(2)
                 .animation(.spring(response: 0.5, dampingFraction: 0.7), value: showAddedOverlay)
             }
 
         }
-        
+        .accessibilityElement()
+        .accessibilityLabel(observableProduct.name)
+        .accessibilityIdentifier("ProductDetail_\(observableProduct.name)")
+
     }
 }
 

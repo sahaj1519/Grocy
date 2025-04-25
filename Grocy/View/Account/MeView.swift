@@ -14,7 +14,7 @@ struct MeView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
-            
+                
                 Circle()
                     .fill(.green.opacity(0.3))
                     .blur(radius: 100)
@@ -39,13 +39,15 @@ struct MeView: View {
             .toolbar {
                 Button("Logout") {
                     user.logout()  // Properly clear session and UserDefaults
-
+                    
                     Task { @MainActor in
                         try? await user.saveUserData()  // Save updated user data
                     }
                 }
+                .accessibilityLabel("Logout")
+                .accessibilityHint("Logs out of your account and clears saved session.")
             }
-
+            
         }
     }
 }

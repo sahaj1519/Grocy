@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OrderDisclosureGroup: View {
-     var order: Order
+    var order: Order
     
     @State private var activeTooltipID: UUID?
     @State private var isExpanded = false
@@ -16,7 +16,7 @@ struct OrderDisclosureGroup: View {
     private let discountID = UUID()
     private let deliveryID = UUID()
     private let gstID = UUID()
-
+    
     var body: some View {
         Group {
             DisclosureGroup(isExpanded: $isExpanded) {
@@ -31,6 +31,8 @@ struct OrderDisclosureGroup: View {
                         showHelp: false,
                         helpMessage: ""
                     )
+                    .accessibilityLabel("Total number of items")
+                    .accessibilityValue("\(order.totalItems)")
                     LineItemView(
                         activeTooltipID: $activeTooltipID,
                         id: UUID(),
@@ -41,6 +43,8 @@ struct OrderDisclosureGroup: View {
                         showHelp: false,
                         helpMessage: ""
                     )
+                    .accessibilityLabel("Price of items")
+                    .accessibilityValue("\(order.convertedTotalPrice)")
                     LineItemView(
                         activeTooltipID: $activeTooltipID,
                         id: discountID,
@@ -51,6 +55,9 @@ struct OrderDisclosureGroup: View {
                         showHelp: true,
                         helpMessage: "Discounts from offers or coupons."
                     )
+                    .accessibilityLabel("Discount")
+                    .accessibilityValue("- ₹\(order.discount)")
+                    
                     LineItemView(
                         activeTooltipID: $activeTooltipID,
                         id: deliveryID,
@@ -61,6 +68,8 @@ struct OrderDisclosureGroup: View {
                         showHelp: true,
                         helpMessage: "No delivery charges on order above ₹599"
                     )
+                    .accessibilityLabel("Delivery Charges")
+                    .accessibilityValue("₹\(order.computedDeliveryCharge)")
                     LineItemView(
                         activeTooltipID: $activeTooltipID,
                         id: gstID,
@@ -71,6 +80,8 @@ struct OrderDisclosureGroup: View {
                         showHelp: true,
                         helpMessage: "GST applied to your order."
                     )
+                    .accessibilityLabel("GST")
+                    .accessibilityValue("₹\(order.taxAmount)")
                     
                     Divider()
                     
@@ -84,6 +95,8 @@ struct OrderDisclosureGroup: View {
                         showHelp: false,
                         helpMessage: ""
                     )
+                    .accessibilityLabel("Grand Total")
+                    .accessibilityValue("\(order.convertedGrandTotal)")
                 }
                 .padding()
                 .background(.ultraThinMaterial)
@@ -99,6 +112,8 @@ struct OrderDisclosureGroup: View {
                     showHelp: false,
                     helpMessage: ""
                 )
+                .accessibilityLabel("Total Paid")
+                .accessibilityValue("\(order.convertedGrandTotal)")
             }
             .tint(.primary)
         }

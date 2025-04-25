@@ -40,6 +40,8 @@ struct OrganicView: View {
                         }
                         .foregroundColor(Color(red: 0.1, green: 0.8, blue: 0.5))
                     }
+                    .accessibilityLabel(Text("See all Organic products"))
+                    .accessibilityHint(Text("Tap to explore more organic products"))
                 }
                 .padding([.horizontal,.top])
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -47,6 +49,8 @@ struct OrganicView: View {
                         ForEach(filteredProducts.prefix(10)) { product in
                             NavigationLink(value: product) {
                                 SingleProductView(observableProduct: product, cart: cart, favoriteProducts: favoriteProducts)
+                                    .accessibilityLabel(Text("Organic product: \(product.name)"))
+                                    .accessibilityHint(Text("Tap to view product details"))
                             }
                         }
                     }

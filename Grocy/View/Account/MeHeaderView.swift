@@ -18,6 +18,7 @@ struct MeHeaderView: View {
                         .scaledToFill()
                         .frame(width: 140, height: 140)
                         .clipShape(.circle)
+                        .accessibilityLabel("Your profile picture")
                 } else {
                     
                     Image(systemName: "person.slash.fill")
@@ -32,16 +33,18 @@ struct MeHeaderView: View {
                             Circle()
                                 .stroke()
                         }
+                        .accessibilityLabel("Default profile picture")
                     
                 }
                 
             }
             Text("\(user.currentUser.name)")
                 .font(.title.bold())
+                .accessibilityLabel("Name: \(user.currentUser.name)")
             
             Text("\(user.currentUser.email)")
                 .font(.title3.weight(.light))
-            
+                .accessibilityLabel("Email: \(user.currentUser.email)")
         }
         .padding(.top,30)
         .padding(.horizontal, 20)

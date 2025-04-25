@@ -76,6 +76,8 @@ struct MyDetailsHeaderView: View {
         .background(Color.white.opacity(0.8))
         .cornerRadius(16)
         .shadow(radius: 10)
+        .accessibilityLabel("Profile Picture")
+        .accessibilityHint("Tap to change profile picture")
         
     }
 }

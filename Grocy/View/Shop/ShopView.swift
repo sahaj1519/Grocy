@@ -20,16 +20,25 @@ struct ShopView: View {
                 HeaderView()
                 
                 BannersView()
+                    .accessibilityLabel(Text("Banners"))
+                    .accessibilityHint(Text("Swipe to see featured banners"))
                 
                 ExclusiveOffers(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
+                    .accessibilityLabel(Text("Exclusive offers"))
                 
                 BestSellerView(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
+                    .accessibilityLabel(Text("Best sellers"))
+                
                 
                 OrganicView(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
+                    .accessibilityLabel(Text("Organic products"))
                 
                 NewArrivalView(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
+                    .accessibilityLabel(Text("New arrivals"))
+                
                 
                 SeasonalView(observableProducts: $observableProducts, cart: cart, favoriteProducts: favoriteProducts)
+                    .accessibilityLabel(Text("Seasonal products"))
                 
             }
             .padding(0)
@@ -37,7 +46,7 @@ struct ShopView: View {
             .background(.green.opacity(0.05))
             
         }
-       
+        
     }
 }
 

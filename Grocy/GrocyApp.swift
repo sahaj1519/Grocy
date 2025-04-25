@@ -7,31 +7,18 @@
 
 import SwiftUI
 
-
 @main
 struct GrocyApp: App {
     @State private var user = DataModel()
-    
-    @AppStorage("hasLaunchedBefore") private var hasLaunchedBefore = false
-    @State private var isAppInBackground = false
-    @State private var showSplashScreen = true  // Start with splash screen visible
-    @State private var splashScreenDelay: Bool = false // Control splash screen visibility delay
+    @State private var showSplashScreen = false  // control splash visibility
+    @State private var didLaunch = false         // track first cold launch
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
             Group {
                 if showSplashScreen {
                     SplashScreenView(user: user, showSplashScreen: $showSplashScreen)
-                        .onAppear {
-                            // Delay hiding splash screen to make it visible for a reasonable time
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) { // Show splash for 4 seconds
-                                if user.isLoggedIn {
-                                    showSplashScreen = false
-                                } else {
-                                    showSplashScreen = false
-                                }
-                            }
-                        }
                 } else {
                     if user.isLoggedIn {
                         ContentView(user: user)
@@ -41,38 +28,28 @@ struct GrocyApp: App {
                 }
             }
             .onAppear {
-                // Load user data and set launch state
-                
+                // Load user data on app start
                 Task {
                     do {
                         try await user.loadUserData()
-                        
-                        if !hasLaunchedBefore {
-                            hasLaunchedBefore = true
-                        }
                     } catch {
-                        print("Error loading user data")
+                        print("Error loading user data: \(error)")
                     }
                 }
             }
-            .onChange(of: isAppInBackground) { _, newValue in
-                if newValue {
-                    // App went to background, prepare for splash on return if app was terminated
-                    showSplashScreen = true
-                }
-            }
-            .onAppear {
-                // Monitor app background/foreground state
-                NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { _ in
-                    isAppInBackground = true
-                }
-
-                NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { _ in
-                    isAppInBackground = false
-                    // If user is already logged in, don't show splash
-                    if user.isLoggedIn {
-                        showSplashScreen = false
+            .onChange(of: scenePhase) { _, newPhase in
+                switch newPhase {
+                case .active:
+                    // Show splash only on the first cold launch
+                    if !didLaunch {
+                        showSplashScreen = true
+                        didLaunch = true
                     }
+                case .background:
+                    // Hide splash when app goes to background
+                    showSplashScreen = false
+                default:
+                    break
                 }
             }
         }
