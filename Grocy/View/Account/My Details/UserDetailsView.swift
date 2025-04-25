@@ -51,13 +51,14 @@ struct UserDetailsView: View {
     private func userTextField(title: String, text: Binding<String>, contentType: UITextContentType) -> some View {
         TextField(title, text: text)
             .padding(5)
-            .background(isEdit ? Color.white : Color.clear)
+            .background(isEdit ? Color(.systemBackground) : Color.clear)
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(isEdit ? Color.green : Color.clear, lineWidth: 1)
             )
             .textContentType(contentType)
+            .foregroundStyle(.primary)
             .accessibilityLabel(title)
             .accessibilityHint("Enter your \(title.lowercased())")
             .accessibilityAddTraits(.isStaticText)
@@ -73,13 +74,14 @@ struct UserDetailsView: View {
                 }
             }
             .padding(5)
-            .background(isEdit ? Color.white : Color.clear)
+            .background(isEdit ? Color(.systemBackground) : Color.clear)
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(isEdit ? Color.green : Color.clear, lineWidth: 1)
             )
             .textContentType(.password)
+            .foregroundStyle(.primary)
             
             Button {
                 isPasswordVisible.toggle()
@@ -109,8 +111,8 @@ struct UserDetailsView: View {
             isEdit = true
             isPasswordVisible = false
         } label: {
-            actionLabel("pencil", "Edit")
-                .background(.blue)
+            actionLabel("pencil", "Edit", background: .blue)
+                
         }
         .padding(.top, 10)
     }
@@ -123,8 +125,8 @@ struct UserDetailsView: View {
                 isPasswordVisible = false
             }
         } label: {
-            actionLabel("checkmark", "Save")
-                .background(.green)
+            actionLabel("checkmark", "Save", background: .green)
+                
         }
     }
     
@@ -133,12 +135,12 @@ struct UserDetailsView: View {
             isEdit = false
             isPasswordVisible = false
         } label: {
-            actionLabel("xmark", "Cancel")
-                .background(.red)
+            actionLabel("xmark", "Cancel", background: .red)
+               
         }
     }
     
-    private func actionLabel(_ systemName: String, _ text: String) -> some View {
+    private func actionLabel(_ systemName: String, _ text: String, background: Color) -> some View {
         HStack(spacing: 4) {
             Image(systemName: systemName)
             Text(text)
@@ -147,7 +149,8 @@ struct UserDetailsView: View {
         .foregroundStyle(.white)
         .padding(.vertical, 6)
         .padding(.horizontal, 16)
-        .clipShape(Capsule())
+        .background(background)
+        .clipShape(.capsule)
     }
 }
 
