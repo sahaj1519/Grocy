@@ -32,9 +32,17 @@ struct ProductPriceAndCartButtonView: View {
     }
 
     private func toggleOverlay(_ show: Bool) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            withAnimation { showOverlay = show }
+    withAnimation {
+        showOverlay = show
+    }
+
+    if show {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+            withAnimation {
+                showOverlay = false
+            }
         }
+    }
     }
 
     private func triggerHapticFeedback() {
